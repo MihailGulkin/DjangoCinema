@@ -1,0 +1,81 @@
+:root
+{
+    --main_animation_dropdown_menu: .7s;
+}
+@media all and (min-width: 768px)
+{
+    .navbar .dropdown-menu-end
+    {
+        right: 0;
+        left: auto;
+    }
+
+    .navbar .nav-item .dropdown-menu
+    {
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--main_animation_dropdown_menu);
+        margin-top: 0;
+    }
+
+    .navbar .nav-item:hover .nav-link
+    {
+        color: #fff;
+    }
+
+    .navbar .dropdown-menu.fade-down
+    {
+        top: 80%;
+    }
+
+    .navbar .nav-item:hover .dropdown-menu
+    {
+        transition: var(--main_animation_dropdown_menu);
+        opacity: 1;
+        visibility: visible;
+        top: 100%;
+    }
+}
+
+@media all and (max-width: 768px)
+{
+    .navbar .dropdown-menu-end
+    {
+        left: 0;
+        right: auto;
+    }
+
+    .navbar .nav-item .dropdown-menu
+    {
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--main_animation_dropdown_menu);
+        margin-top: 0;
+    }
+
+    .navbar .nav-item:hover .nav-link
+    {
+        color: #fff;
+    }
+
+    .navbar .dropdown-menu.fade-down
+    {
+        top: 80%;
+        position: absolute;
+    }
+
+    .navbar .nav-item:hover .dropdown-menu
+    {
+        transition: var(--main_animation_dropdown_menu);
+        opacity: 1;
+        visibility: visible;
+        top: 100%;
+    }
+}
+
+
+/* HEADER SECTION*/
+
+/* FOOTER SECTION */

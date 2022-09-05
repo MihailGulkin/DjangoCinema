@@ -1,3 +1,66 @@
-{% extends 'web/base.html'%}
+{% extends 'web/base.html' %}
+{% load static %}
+{% load forx %}
+{% block title_style %}
+    <title>Main</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+{% endblock title_style %}
 {% block content %}
+    <section class="movies">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2>New Movies</h2>
+                </div>
+                <div class="col-12">
+                    <div class="owl-carousel owl-theme" id="slider">
+                        {% for i in 10|for_range %}
+                            <div class="card card_big">
+                                <a class="">
+                                    <img src="{% static 'image/temp.jpg' %}" alt>
+                                </a>
+                                <h4>{{ i }}</h4>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {#                <button class="section__nav section__nav--cards section__nav--prev" data-nav="#slider" type="button">#}
+                {#                </button>#}
+                {#                <button class="section__nav section__nav--cards section__nav--next" data-nav="#slider" type="button">#}
+                {#                </button>#}
+            </div>
+
+        </div>
+        </div>
+    </section>
 {% endblock content %}
+{% block script %}
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script>
+        $("#slider").owlCarousel(
+            {
+                loop: true,
+                dots: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 5,
+                        slideBy: 2,
+                    }
+                },
+            }
+        );
+
+
+
+    </script>
+{% endblock script %}

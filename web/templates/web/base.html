@@ -7,46 +7,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% bootstrap_messages %}
     {% block title_style %}
     {% endblock title_style %}
 </head>
 <body>
-<nav class="navbar navbar-expand-md bg-danger">
-    <div class="container">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<header>
+    <nav class="navbar navbar-expand-md" style="background-color: #0c63e4">
+        <div class="container">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto">
-                {% for i in 5|for_range %}
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Home</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-end fade-down" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
                     </li>
-                {% endfor %}
-                {#                <li class="nav-item">#}
-                {#                    <a class="nav-link" href="#">Link</a>#}
-                {#                </li>#}
-                {##}
-                {#                <li class="nav-item">#}
-                {#                    <a class="nav-link">Disabled</a>#}
-                {#                </li>#}
-                {#                <li class="nav-item">#}
-                {#                    <a class="nav-link">Disabled</a>#}
-                {#                </li>#}
-            </ul>
+                    {% for i in 4|for_range %}
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">Home</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
-</nav>
-</div>
+    </nav>
+</header>
 {% block content %}
 {% endblock content %}
-
-{% block scripts %}
-{% endblock scripts %}
-{% bootstrap_javascript %}
-
+{% block script %}
+{% endblock script %}
 </body>
 </html>

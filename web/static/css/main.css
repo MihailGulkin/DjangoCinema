@@ -1,0 +1,40 @@
+/* NEW MOVIES SECTION*/
+.movies
+{
+    margin-top: 100px;
+}
+
+.card_big
+{
+    margin: 0 10px;
+    border: none;
+    overflow: hidden;
+    border-radius: 16px;
+
+}
+
+.section__nav
+{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    top: 50%;
+    z-index: 4;
+    margin-top: -10px;
+    background-color: #151f30;
+}
+
+
+.section__nav--prev
+{
+    right: 80%;
+}
+.section__nav--next
+{
+    left: 80%;
+}
