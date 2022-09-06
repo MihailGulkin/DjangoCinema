@@ -2,6 +2,27 @@
 {
     --main_animation_dropdown_menu: .5s;
 }
+body
+{
+    background-color: rgb(13, 15, 22);
+}
+a
+{
+    text-decoration: none;
+}
+.navbar-brand
+{
+    color: rgb(180 178 173);
+}
+.navbar-brand:hover
+{
+        color: #2f80ed;
+}
+.nav-item > a
+{
+    color: rgb(180 178 173);
+}
+
 @media all and (min-width: 768px)
 {
     .navbar .dropdown-menu-end
@@ -21,7 +42,7 @@
 
     .navbar .nav-item:hover .nav-link
     {
-        color: #fff;
+        color: #2f80ed;
     }
 
     .navbar .dropdown-menu.fade-down
@@ -57,7 +78,7 @@
 
     .navbar .nav-item:hover .nav-link
     {
-        color: #fff;
+        color: #2f80ed;
     }
 
     .navbar .dropdown-menu.fade-down
