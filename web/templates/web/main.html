@@ -16,41 +16,49 @@
                 </div>
                 <div class="col-12">
                     <div class="owl-carousel owl-theme" id="slider">
-                        {% for i in 10|for_range %}
+                        {% for i in 6|for_range %}
                             <div class="card card_big">
                                 <a class="">
-                                    <img src="{% static 'image/temp.jpg' %}" alt>
+                                    <img class="card_img" src="{% static 'image/temp.jpg' %}" alt>
                                 </a>
-                                <h4>{{ i }}</h4>
+                                <div style='padding-top: 10px'>
+                                    <h4>{{ i }}</h4>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <a class="">
+                                    <img class="" src="{% static 'image/dune.jpg' %}" alt>
+                                </a>
+                                <div>
+                                    <h4>{{ i }}</h4>
+                                </div>
                             </div>
                         {% endfor %}
                     </div>
                 </div>
-                {#                <button class="section__nav section__nav--cards section__nav--prev" data-nav="#slider" type="button">#}
-                {#                </button>#}
-                {#                <button class="section__nav section__nav--cards section__nav--next" data-nav="#slider" type="button">#}
-                {#                </button>#}
             </div>
-
-        </div>
         </div>
     </section>
 {% endblock content %}
 {% block script %}
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
-            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="{% static 'js/jquery-3.6.1.min.js' %}"></script>
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
     <script>
         $("#slider").owlCarousel(
             {
                 loop: true,
+                margin:10,
                 dots: true,
+                nav: true,
+                navText: ["<div class='nav-btn prev-slide'></div>", "<div class='nav-btn next-slide'></div>"],
                 responsive: {
                     0: {
-                        items: 1
+                        items: 1,
+                        nav: false
                     },
                     600: {
-                        items: 3
+                        items: 3,
+                        nav: false
                     },
                     1000: {
                         items: 5,
@@ -59,8 +67,5 @@
                 },
             }
         );
-
-
-
     </script>
 {% endblock script %}

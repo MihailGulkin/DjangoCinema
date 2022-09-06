@@ -1,6 +1,6 @@
 :root
 {
-    --main_animation_dropdown_menu: .7s;
+    --main_animation_dropdown_menu: .5s;
 }
 @media all and (min-width: 768px)
 {
