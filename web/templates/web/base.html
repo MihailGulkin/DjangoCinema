@@ -19,7 +19,7 @@
     <nav class="navbar navbar-expand-md">
         <div class="container">
             <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false">
                 <span class="navbar-toggler-icon"></span>
@@ -35,10 +35,11 @@
                         </a>
 
                         <ul class="dropdown-menu dropdown-menu-end fade-down" aria-labelledby="navbarDropdown">
-                            <li class="nav_item_header"><a class="dropdown-item" href="#">Action</a></li>
-                            <li class="nav_item_header"><a class="dropdown-item" href="#">Another action</a></li>
-                            <li class="nav_item_header"><a class="dropdown-item" href="#">Something else here</a></li>
+                            {% for genre in genres %}
+                                <li class="nav_item_header"><a class="dropdown-item" href="#">{{ genre }}</a></li>
+                            {% endfor %}
                         </ul>
+
                     </li>
                     {% for i in 4|for_range %}
                         <li class="nav-item">

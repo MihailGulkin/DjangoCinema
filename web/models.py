@@ -1,13 +1,14 @@
 from django.db import models
+from django.utils.text import slugify
 
 
 class Genre(models.Model):
     name = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
+    slug = models.SlugField(unique=True, null=True)
 
     def __str__(self):
         return self.name
-
 
 class Director(models.Model):
     name = models.CharField(max_length=200)
@@ -25,7 +26,7 @@ class Movie(models.Model):
     short_intro = models.TextField(max_length=700)
 
     IMDb_RATING = models.CharField(max_length=50, default=None)
-    genre = models.ManyToManyField('Genre')
+    genre = models.ManyToManyField('Genre', default=None)
     poster = models.ImageField(upload_to='Movie/Posters/')
     movie_page_poster = models.ImageField(upload_to='Movie/Posters/MoviePage/',
                                           null=True, blank=True)

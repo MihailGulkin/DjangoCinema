@@ -1,18 +1,49 @@
 :root
 {
     --main_animation_dropdown_menu: .5s;
+    --main_color_font: rgb(212, 209, 203);
 }
 body
 {
-    background-color: rgb(13, 15, 22);
+    background-color: rgb(16, 14, 25);
+    /*background-color: rgb(41,42,48);*/
+}
+ul
+{
+    list-style: none;
 }
 a
 {
     text-decoration: none;
 }
+.dropdown-menu
+{
+    background: rgba(17, 26, 38);
+}
+ .navbar-toggler
+{
+
+    border-color: var(--main_color_font);
+}
+.custom-toggler .navbar-toggler-icon
+{
+    background-image: url(
+"data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(212, 209, 203, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+
+}
 .navbar-brand
 {
-    color: rgb(180 178 173);
+    color: var(--main_color_font);
+}
+.nav_item_header > a
+{
+    color: var(--main_color_font);
+}
+.nav_item_header:hover > a
+{
+    color: #2f80ed;
+    transition: var(--main_animation_dropdown_menu);
+    background: none;
 }
 .navbar-brand:hover
 {
@@ -20,7 +51,7 @@ a
 }
 .nav-item > a
 {
-    color: rgb(180 178 173);
+    color: var(--main_color_font);
 }
 
 @media all and (min-width: 768px)
