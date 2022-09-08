@@ -2,19 +2,17 @@
 .movies
 {
     margin-top: 100px;
-    /*background-color: darkblue;*/
 }
 
 .movies_title_head
 {
     margin-bottom: 50px;
-    color: rgb(197 195 193);
+    color: #FFFFFF;
 }
 
 .card
 {
     overflow: hidden;
-    border-radius: 16px;
     background: none;
     border: none;
 }
@@ -26,18 +24,22 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    height: 358px;
     border-radius: 16px;
     overflow: hidden;
     position: relative;
     z-index: 1;
 
+    text-align: center;
+
 }
+
 
 .card_img
 {
-    /*width: auto;*/
-    height: 358px;
+    height: 100%;
 }
+
 .card_cover:hover > img
 {
     filter: blur(4px);
@@ -51,13 +53,15 @@
     width: 50px;
     height: 50px;
     opacity: 0;
+    transform: scale(.5);
 }
+
 .card_cover:hover .card_svg_play
 {
     visibility: visible;
     transform: scale(1);
     opacity: 1;
-    transition: .7s;
+    transition: .5s;
 }
 
 .card_svg_play path
@@ -73,7 +77,7 @@
 
 .card_rating
 {
-    background-color: rgba(21,31,48,0.75);
+    background-color: rgba(21, 31, 48, 0.75);
     display: flex;
     align-content: center;
     justify-content: center;
@@ -81,8 +85,8 @@
     border-radius: 10px;
     padding: 0 10px;
     height: 30px;
-    left: 70%;
-    top: 2%;
+    left: 68%;
+    top: 3%;
     font-weight: 500;
     color: var(--main_color_font);
     align-items: center;
@@ -90,19 +94,23 @@
     z-index: 1;
     pointer-events: none;
 
+    transform: scale(.5);
+
     opacity: 0;
 }
 
-.card:hover .card_rating
+.card_cover:hover .card_rating
 {
     opacity: 1;
     transform: scale(1);
-    transition: .7s;
+    transition: .5s;
 }
+
 .card_svg_star path
 {
     fill: #2f80ed;
 }
+
 .card_svg_star
 {
     padding-right: 5px;
@@ -136,7 +144,13 @@
 
 .card_title a
 {
-    color: rgb(197 195 193);
+    color: #ffffff;
+}
+
+.card_title a:hover
+{
+    color: #2f80ed;
+    transition: .7s;
 }
 
 .card_list
@@ -146,15 +160,48 @@
 
 }
 
-.card_list_li
+.card_list_li > a
 {
     font-size: 14px;
+    color: #3593ff;
 }
-
+.card_list_li > a:hover
+{
+    color: rgba(47, 128, 237, 0.68);
+    transition: .7s;
+}
 .card_info
 {
     padding: 0;
-    color: var(--main_color_font);
+    color: #FFFFFF;
+}
+
+@media all and (max-width: 400px)
+{
+    .card_cover
+    {
+        height: 250px;
+    }
+}
+
+@media all and (max-width: 500px)
+{
+    .card_rating
+    {
+        top: 2%;
+        left: 55%;
+    }
+
+}
+
+@media all and (max-width: 320px)
+{
+    .card_rating
+    {
+        top: 2%;
+        left: 44%;
+    }
+
 }
 
 /* CAROUSEL BUTTON */
@@ -171,6 +218,7 @@
     height: 40px;
     border-radius: 50%;
     opacity: .5;
+
 }
 
 .owl-carousel .prev-slide
@@ -181,7 +229,6 @@
 
     background-color: #FFFFFF;
     background-size: 20px 20px;
-
 }
 
 .owl-carousel .next-slide
@@ -191,6 +238,7 @@
 
     background-color: #FFFFFF;
     background-size: 20px 20px;
+
 }
 
 
@@ -205,6 +253,7 @@
     opacity: .9;
     transition: .7s;
 }
+
 
 @media all and (max-width: 1024px)
 {
@@ -230,4 +279,14 @@
         background-size: 10px 10px;
     }
 
+}
+
+/* MOVIE LIST */
+.movie_list_line
+{
+    background-color: rgb(37, 34, 61);
+    width: 100%;
+    padding: 10px 20px 20px;
+    margin-bottom: 50px;
+    border-radius: 16px;
 }

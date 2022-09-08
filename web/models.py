@@ -10,6 +10,9 @@ class Genre(models.Model):
     def __str__(self):
         return self.name
 
+    id = models.AutoField(primary_key=True, unique=True)
+
+
 class Director(models.Model):
     name = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)

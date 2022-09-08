@@ -1,57 +1,29 @@
+@import url('https://rsms.me/inter/inter.css');
+
 :root
 {
     --main_animation_dropdown_menu: .5s;
     --main_color_font: rgb(212, 209, 203);
 }
+
 body
 {
+    font-family: 'Inter', sans-serif;
     background-color: rgb(16, 14, 25);
-    /*background-color: rgb(41,42,48);*/
 }
+
 ul
 {
     list-style: none;
 }
+
 a
 {
     text-decoration: none;
 }
-.dropdown-menu
+section
 {
-    background: rgba(17, 26, 38);
-}
- .navbar-toggler
-{
-
-    border-color: var(--main_color_font);
-}
-.custom-toggler .navbar-toggler-icon
-{
-    background-image: url(
-"data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(212, 209, 203, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
-
-}
-.navbar-brand
-{
-    color: var(--main_color_font);
-}
-.nav_item_header > a
-{
-    color: var(--main_color_font);
-}
-.nav_item_header:hover > a
-{
-    color: #2f80ed;
-    transition: var(--main_animation_dropdown_menu);
-    background: none;
-}
-.navbar-brand:hover
-{
-        color: #2f80ed;
-}
-.nav-item > a
-{
-    color: var(--main_color_font);
+    padding: 60px 0;
 }
 
 @media all and (min-width: 768px)
@@ -129,5 +101,73 @@ a
 
 
 /* HEADER SECTION*/
+.header
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(16, 14, 25);
+    z-index: 99;
+    transition: 0.5s, margin 0s;
+}
+.header .container
+{
+    height: 70px;
+}
+.header--fixed
+{
+    border-bottom: 1px solid transparent;
+}
+
+.header--active
+{
+    border-color: rgb(37, 34, 61);
+}
+
+.dropdown-menu
+{
+    background: rgb(37, 33, 61);
+}
+
+.navbar-toggler
+{
+
+    border-color: var(--main_color_font);
+}
+
+.custom-toggler .navbar-toggler-icon
+{
+    background-image: url(
+    "data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(212, 209, 203, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+
+}
+
+.navbar-brand
+{
+    color: var(--main_color_font);
+}
+
+.nav_item_header > a
+{
+    color: var(--main_color_font);
+}
+
+.nav_item_header:hover > a
+{
+    color: #2f80ed;
+    transition: var(--main_animation_dropdown_menu);
+    background: none;
+}
+
+.navbar-brand:hover
+{
+    color: #2f80ed;
+}
+
+.nav-item > a
+{
+    color: var(--main_color_font);
+}
 
 /* FOOTER SECTION */
