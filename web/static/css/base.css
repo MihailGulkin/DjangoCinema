@@ -21,6 +21,7 @@ a
 {
     text-decoration: none;
 }
+
 section
 {
     padding: 60px 0;
@@ -73,10 +74,17 @@ section
     .navbar .nav-item .dropdown-menu
     {
         display: block;
+
         opacity: 0;
+        height: 0;
+        overflow: hidden;
         visibility: hidden;
-        transition: var(--main_animation_dropdown_menu);
+
+
         margin-top: 0;
+
+        top: 80%;
+        position: absolute;
     }
 
     .navbar .nav-item:hover .nav-link
@@ -84,16 +92,11 @@ section
         color: #2f80ed;
     }
 
-    .navbar .dropdown-menu.fade-down
-    {
-        top: 80%;
-        position: absolute;
-    }
-
     .navbar .nav-item:hover .dropdown-menu
     {
         transition: var(--main_animation_dropdown_menu);
         opacity: 1;
+        height: auto;
         visibility: visible;
         top: 100%;
     }
@@ -107,14 +110,16 @@ section
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgb(16, 14, 25);
     z-index: 99;
+    background-color: rgb(16, 14, 25);
     transition: 0.5s, margin 0s;
 }
+
 .header .container
 {
-    height: 70px;
+    min-height: 70px;
 }
+
 .header--fixed
 {
     border-bottom: 1px solid transparent;

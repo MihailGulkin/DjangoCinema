@@ -127,7 +127,7 @@
                     <div id="movie_list_container_card" class="row">
                         {% for movie in first_page %}
                             <div class="col-12 col-md-6 col-xl-4">
-                                <div class="card">
+                                <div class="card сard_big">
                                     <a href="" class="card_cover">
                                         <img class="card_img" src="{{ movie.poster.url }}" alt="">
                                         <svg class="card_svg_play" version="1.0" xmlns="http://www.w3.org/2000/svg"
@@ -158,14 +158,15 @@
                                             </g>
                                         </svg>
                                         <span class="card_rating">
-                                    <svg class="card_svg_star" version="1.1" id="Capa_1"
-                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         x="0px"
-                                         y="0px"
-                                         width="36.09px" height="36.09px" viewBox="0 0 36.09 36.09"
-                                         style="enable-background:new 0 0 36.09 36.09;"
-                                         xml:space="preserve"
-                                    >
+                                        <svg class="card_svg_star" version="1.1" id="Capa_1"
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             x="0px"
+                                             y="0px"
+                                             width="36.09px" height="36.09px" viewBox="0 0 36.09 36.09"
+                                             style="enable-background:new 0 0 36.09 36.09;"
+                                             xml:space="preserve"
+                                        >
 <g>
 	<path d="M36.042,13.909c-0.123-0.377-0.456-0.646-0.85-0.688l-11.549-1.172L18.96,1.43c-0.16-0.36-0.519-0.596-0.915-0.596
 		s-0.755,0.234-0.915,0.598L12.446,12.05L0.899,13.221c-0.394,0.04-0.728,0.312-0.85,0.688c-0.123,0.377-0.011,0.791,0.285,1.055
@@ -207,10 +208,26 @@
 <g>
 </g>
 </svg>
-                                    {{ movie.IMDb_RATING }}
-                                </span>
+                                        {{ movie.IMDb_RATING }}
+                                        </span>
                                     </a>
-                                    <h3 class="card_title"><a href="">{{ movie.title }}</a></h3>
+                                    <div class="card_content">
+                                        <h3 class="card_title"><a href="">{{ movie.title }}</a></h3>
+                                        <h5 class="card_content_title_h5">Genres</h5>
+                                        <ul class="card_list_big">
+                                            {% for genre in movie.genre.all %}
+                                                <li class="card_list_li"><a href="">{{ genre }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                        <ul class="card_list_big">
+                                            <li class="card_list_li">Release Date : {{ movie.release_date }}</li>
+                                            <li class="card_list_li">
+                                                Director: <a class="card_director" href="">{{ movie.director }}</a>
+                                            </li>
+                                        </ul>
+                                        <p class="card_content_title_h5 card_content_p">
+                                            «{{ movie.short_intro|truncatechars:100 }}»</p>
+                                    </div>
                                 </div>
                             </div>
                         {% endfor %}
@@ -244,19 +261,32 @@
                 },
                 success: function (resp)
                 {
-                    //loop
                     $('#movie_list_container_card').html('')
                     $.each(resp.results, function (i, val)
                     {
+                        let genres
+                        for (ele of resp.film_genres)
+                        {
+                            if(ele[val.title])
+                            {
+                                genres = ele
+                            }
+                        }
+                        let html_code = ''
+                        for (genre in genres[val.title])
+                        {
+                            html_code += `<li class="card_list_li"><a href="">${genres[val.title][genre]}</a></li>`
+                        }
                         $('#movie_list_container_card').append(`
                             <div class="col-12 col-md-6 col-xl-4">
-                                <div class="card">
+                                <div class="card сard_big">
                                     <a href="" class="card_cover">
-                                        <img class="card_img" src="/media/${val.poster}" alt="">
+                                        <img class="card_img" src="media/${val.poster}" alt="">
                                         <svg class="card_svg_play" version="1.0" xmlns="http://www.w3.org/2000/svg"
                                              width="512.000000pt" height="512.000000pt"
                                              viewBox="0 0 512.000000 512.000000"
                                              preserveAspectRatio="xMidYMid meet">
+
                                             <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
                                                fill="#000000" stroke="none">
                                                 <path d="M2330 5110 c-494 -48 -950 -230 -1350 -538 -195 -150 -448 -432 -594
@@ -280,14 +310,15 @@
                                             </g>
                                         </svg>
                                         <span class="card_rating">
-                                    <svg class="card_svg_star" version="1.1" id="Capa_1"
-                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         x="0px"
-                                         y="0px"
-                                         width="36.09px" height="36.09px" viewBox="0 0 36.09 36.09"
-                                         style="enable-background:new 0 0 36.09 36.09;"
-                                         xml:space="preserve"
-                                    >
+                                        <svg class="card_svg_star" version="1.1" id="Capa_1"
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             x="0px"
+                                             y="0px"
+                                             width="36.09px" height="36.09px" viewBox="0 0 36.09 36.09"
+                                             style="enable-background:new 0 0 36.09 36.09;"
+                                             xml:space="preserve"
+                                        >
 <g>
 	<path d="M36.042,13.909c-0.123-0.377-0.456-0.646-0.85-0.688l-11.549-1.172L18.96,1.43c-0.16-0.36-0.519-0.596-0.915-0.596
 		s-0.755,0.234-0.915,0.598L12.446,12.05L0.899,13.221c-0.394,0.04-0.728,0.312-0.85,0.688c-0.123,0.377-0.011,0.791,0.285,1.055
@@ -329,14 +360,28 @@
 <g>
 </g>
 </svg>
-                                    ${val.IMDb_RATING}
-                                </span>
+                                        ${val.IMDb_RATING}
+                                        </span>
                                     </a>
-                                    <h3 class="card_title"><a href="">${val.title}</a></h3>
+                                    <div class="card_content">
+                                        <h3 class="card_title"><a href="">${val.title}</a></h3>
+                                        <h5 class="card_content_title_h5">Genres</h5>
+                                        <ul class="card_list_big">
+                                                    ${html_code}
+                                        </ul>
+                                        <ul class="card_list_big">
+                                            <li class="card_list_li">Release Date :${val.release_date}</li>
+                                            <li class="card_list_li">
+                                                Director: <a class="card_director" href="">${resp.directors[val.director_id - 1]}</a>
+                                            </li>
+                                        </ul>
+                                        <p class="card_content_title_h5 card_content_p">
+                                            «${val.short_intro.substring(0, 99)}...»</p>
+                                    </div>
                                 </div>
                             </div>`)
                     });
-
+                    start()
                 },
                 error: function ()
                 {
@@ -345,4 +390,6 @@
 
         });
     </script>
+    <script src="{% static 'js/query_p_size.js' %}"></script>
+
 {% endblock script %}

@@ -10,8 +10,6 @@ class Genre(models.Model):
     def __str__(self):
         return self.name
 
-    id = models.AutoField(primary_key=True, unique=True)
-
 
 class Director(models.Model):
     name = models.CharField(max_length=200)
@@ -36,6 +34,8 @@ class Movie(models.Model):
     summary = models.TextField(max_length=1600)
 
     created = models.DateTimeField(auto_now_add=True)
+
+    slug = models.SlugField(unique=True, null=True)
 
     def __str__(self):
         return self.title
