@@ -38,3 +38,8 @@ class MainPageView(View):
         return JsonResponse({"results": results,
                              'directors': self.directors,
                              'film_genres': self.film_genres})
+
+class MoviePageView(View):
+    template = 'web/movie_page.html'
+    def get(self, request, slug):
+        return render(request,  self.template)
