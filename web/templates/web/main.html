@@ -212,7 +212,8 @@
                                         </span>
                                     </a>
                                     <div class="card_content">
-                                        <h3 class="card_title"><a href="{% url 'movie_page' movie.slug%}">{{ movie.title }}</a></h3>
+                                        <h3 class="card_title"><a
+                                                href="{% url 'movie_page' movie.slug %}">{{ movie.title }}</a></h3>
                                         <h5 class="card_content_title_h5">Genres</h5>
                                         <ul class="card_list_big">
                                             {% for genre in movie.genre.all %}
@@ -226,7 +227,7 @@
                                             </li>
                                         </ul>
                                         <p class="card_content_title_h5 card_content_p">
-                                            «{{ movie.short_intro|truncatechars:100 }}»</p>
+                                            «{{ movie.summary|truncatechars:100 }}»</p>
                                     </div>
                                 </div>
                             </div>
@@ -236,11 +237,103 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div class="movie_list_line">
-                        <ul style="display: flex;">
+                    <div class="movie_page_line">
+                        <ul class="movie_list_page" data-number="{{ total_pages }}">
+                            <li class="movie_page_ele arrow_container_left">
+                                <a href="{{ 1 }}" class="page_number page_arrow_left">
+                                    <svg class="page_svg" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="306px" height="306px" viewBox="0 0 306 306" style="enable-background:new 0 0 306 306;" xml:space="preserve">
+<g>
+	<g id="chevron-left">
+		<polygon points="247.35,35.7 211.65,0 58.65,153 211.65,306 247.35,270.3 130.05,153 		"/>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+                                </a>
+                            </li>
                             {% for i in page_range %}
-                                <li style=" margin: 0 20px"><a class="page_number_lists" href="{{ i }}">{{ i }}</a></li>
+                                {% if i == 1 %}
+                                    <li class="movie_page_ele"><a class="page_number active_a"
+                                                                  href="{{ i }}">{{ i }}</a></li>
+                                {% else %}
+                                    <li class="movie_page_ele"><a class="page_number" href="{{ i }}">{{ i }}</a></li>
+                                {% endif %}
                             {% endfor %}
+                            <li class="movie_page_ele arrow_container_right">
+                                <a href="{{ 2 }}" class="page_number page_arrow_right">
+                                    <svg class="page_svg" color="#e0e0e0" version="1.1" id="Capa_1"
+                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                         x="0px" y="0px"
+                                         width="306px" height="306px" viewBox="0 0 306 306"
+                                         style="enable-background:new 0 0 306 306;" xml:space="preserve">
+<g>
+	<g id="keyboard-arrow-right">
+		<polygon points="58.65,267.75 175.95,153 58.65,35.7 94.35,0 247.35,153 94.35,306 		"/>
+	</g>
+</g>
+                                        <g>
+</g>
+                                        <g>
+</g>
+                                        <g>
+</g>
+                                        <g>
+</g>
+                                        <g>
+</g>
+                                        <g>
+</g>
+                                        <g>
+</g>
+                                        <g>
+</g>
+                                        <g>
+</g>
+                                        <g>
+</g>
+                                        <g>
+</g>
+                                        <g>
+</g>
+                                        <g>
+</g>
+                                        <g>
+</g>
+                                        <g>
+</g>
+</svg>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>

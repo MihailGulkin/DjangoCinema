@@ -176,3 +176,8 @@ section
 }
 
 /* FOOTER SECTION */
+.footer
+{
+    background-color: rgb(37, 34, 61);
+    height: 200px;
+}

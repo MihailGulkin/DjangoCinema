@@ -1,35 +1,30 @@
-$('.page_number_lists').click(function (event)
+function ajax_start()
 {
-    event.preventDefault();
-    var page_n = $(this).attr('href');
-    // ajax
-    $.ajax({
-        type: "POST",
-        url: '', // name of url
-        data: {
-            page_n: page_n,
-            csrfmiddlewaretoken: _getCookie('csrftoken'),
-        },
-        success: function (resp)
-        {
-            $('#movie_list_container_card').html('')
-            $.each(resp.results, function (i, val)
+    $('.page_number').click(function (event)
+    {
+        event.preventDefault();
+        var page_n = $(this).attr('href');
+
+        $.ajax({
+            type: "POST",
+            url: '',
+            data: {
+                page_n: page_n,
+                csrfmiddlewaretoken: _getCookie('csrftoken'),
+            },
+            success: function (resp)
             {
-                let genres
-                for (ele of resp.film_genres)
+                current_active_number_change(page_n)
+
+                change_pages_active(page_n)
+
+                arrow_changer(page_n)
+
+                $('#movie_list_container_card').html('')
+
+                $.each(resp.results, function (i, val)
                 {
-                    if (ele[val.title])
-                    {
-                        genres = ele
-                        break
-                    }
-                }
-                let html_code = ''
-                for (genre in genres[val.title])
-                {
-                    html_code += `<li class="card_list_li"><a href="">${genres[val.title][genre]}</a></li>`
-                }
-                $('#movie_list_container_card').append(`
+                    $('#movie_list_container_card').append(`
                             <div class="col-12 col-md-6 col-xl-4">
                                 <div class="card сard_big">
                                     <a href="" class="card_cover">
@@ -118,39 +113,143 @@ $('.page_number_lists').click(function (event)
                                         <h3 class="card_title"><a href="movie/${val.slug}">${val.title}</a></h3>
                                         <h5 class="card_content_title_h5">Genres</h5>
                                         <ul class="card_list_big">
-                                                    ${html_code}
+                                                    ${generete_html_li(resp.film_genres, val)}
                                         </ul>
                                         <ul class="card_list_big">
-                                            <li class="card_list_li">Release Date :${val.release_date}</li>
+                                            <li class="card_list_li">Release Date : ${val.release_date}</li>
                                             <li class="card_list_li">
                                                 Director: <a class="card_director" href="">${resp.directors[val.director_id - 1]}</a>
                                             </li>
                                         </ul>
                                         <p class="card_content_title_h5 card_content_p">
-                                            «${val.short_intro.substring(0, 99)}...»</p>
+                                            «${val.summary.substring(0, 99)}…»</p>
                                     </div>
                                 </div>
                             </div>`)
-            });
-            start()
-        },
-        error: function ()
-        {
-        }
-    }); //
+                });
+                start()
+            },
+            error: function ()
+            {
+            }
+        }); //
 
-});
-function _getCookie(name) {
+    })
+}
+
+ajax_start()
+
+function _getCookie(name)
+{
     let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
+    if (document.cookie && document.cookie !== '')
+    {
         const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
+        for (let i = 0; i < cookies.length; i++)
+        {
             const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            if (cookie.substring(0, name.length + 1) === (name + '='))
+            {
                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                 break;
             }
         }
     }
     return cookieValue;
+}
+
+function generete_html_li(film_genres, val)
+{
+    for (let ele of film_genres)
+    {
+        if (ele[val.title])
+        {
+            let html_code = ''
+            for (let genre of ele[val.title])
+            {
+                html_code += `<li class="card_list_li"><a href="">${genre}</a></li>`
+            }
+            return html_code
+
+        }
+    }
+
+}
+
+function find_max_number()
+{
+    return Math.max(...$.map($('.page_number'), function (val, i)
+    {
+        return parseInt(val.innerHTML) ? parseInt(val.innerHTML) : 0
+    }))
+}
+
+function find_min_number()
+{
+    return Math.min(...$.map($('.page_number'), function (val, i)
+    {
+        return parseInt(val.innerHTML) ? parseInt(val.innerHTML) : 100000
+    }))
+}
+
+function current_active_number_change(page_number)
+{
+    const number_selector = $('.active_a')[0].innerHTML
+
+    if (number_selector < page_number)
+    {
+        for (let ele of $('.page_number'))
+        {
+            if (parseInt(ele.innerHTML) && find_max_number() < $('.movie_list_page').data().number)
+            {
+                const number_plus = (parseInt(ele.innerHTML) + 1).toString()
+                set_attr(ele, number_plus)
+            }
+        }
+    }
+
+    else if(number_selector > page_number)
+    {
+        if (find_min_number() > 1)
+        {
+            for (let ele of $('.page_number'))
+            {
+                if (parseInt(ele.innerHTML))
+                {
+                    const number_minus = (parseInt(ele.innerHTML) - 1).toString()
+                    set_attr(ele, number_minus)
+                }
+            }
+        }
+
+    }
+    function set_attr(ele, number)
+    {
+        ele.innerHTML = number
+        $(ele).attr('href', number)
+    }
+}
+
+function change_pages_active(page_number)
+{
+    for (ele of $('.page_number').removeClass('active_a'))
+    {
+        if (page_number === ele.innerHTML)
+        {
+            $(ele).addClass('active_a')
+        }
+    }
+}
+
+function arrow_changer(page_number)
+{
+    const page_num = parseInt(page_number)
+    const max_number = $('.movie_list_page').data().number
+
+    const arrow_right = $('.page_arrow_right')
+    const arrow_left = $('.page_arrow_left')
+
+
+    arrow_right.attr('href', (page_num === max_number ? max_number : page_num + 1).toString() )
+    arrow_left.attr('href', (page_num === 1 ? 1 : page_num - 1).toString())
 }
