@@ -283,10 +283,10 @@
                             </li>
                             {% for i in page_range %}
                                 {% if i == 1 %}
-                                    <li class="movie_page_ele"><a class="page_number active_a"
+                                    <li class="movie_page_ele"><a tabindex="-1" onclick="this.blur()" class="page_number active_a"
                                                                   href="{{ i }}">{{ i }}</a></li>
                                 {% else %}
-                                    <li class="movie_page_ele"><a class="page_number" href="{{ i }}">{{ i }}</a></li>
+                                    <li class="movie_page_ele"><a tabindex="-1" onclick="this.blur()" class="page_number" href="{{ i }}">{{ i }}</a></li>
                                 {% endif %}
                             {% endfor %}
                             <li class="movie_page_ele arrow_container_right">

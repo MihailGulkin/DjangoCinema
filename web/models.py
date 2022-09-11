@@ -60,10 +60,11 @@ class Serial(models.Model):
 
     genre = models.ManyToManyField('Genre')
 
-    poster = models.ImageField(upload_to='Posters/')
+    poster = models.ImageField(upload_to='Movie/Posters/')
 
-    seriel_page_poster = models.ImageField(upload_to='Posters/SerialPage/',
-                                           null=True, blank=True)
+    seriel_page_poster = models.ImageField(
+        upload_to='Movie/Posters/SerialPage/',
+        null=True, blank=True)
 
     summary = models.TextField(max_length=1600)
 
@@ -72,6 +73,7 @@ class Serial(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     slug = models.SlugField(unique=True, null=True, default='slug')
+
     def __str__(self):
         return self.Serial_name
 
