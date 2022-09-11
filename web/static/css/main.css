@@ -492,4 +492,11 @@
     transition: .5s;
 }
 
+@media all and (max-width: 768px)
+{
+    .movie_page_line
+    {
+        justify-content: center;
+    }
 
+}

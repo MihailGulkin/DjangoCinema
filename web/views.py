@@ -2,7 +2,7 @@ import logging
 
 from django.shortcuts import render
 from django.views import View
-from .models import Movie, Genre, Director
+from .models import Movie, Genre, Director, Serial
 from web.service.shuffle_model import shuffle_model
 from django.core.paginator import Paginator
 from django.http import JsonResponse
@@ -13,6 +13,7 @@ class MainPageView(View):
 
     movie_model = Movie
     genres_model = Genre.objects.all()
+    serial = Serial.objects.get(pk=1)
 
     directors = [director.name for director in Director.objects.all()]
     film_genres = [{movie.title: [genre.name for genre in movie.genre.all()]}
@@ -30,7 +31,8 @@ class MainPageView(View):
                        'genres': self.genres_model,
                        'first_page': self.first_page,
                        'page_range': range(1, 4),
-                       'total_pages': len(self.page_range)})
+                       'total_pages': len(self.page_range),
+                       'serial': self.serial })
 
     def post(self, request):
         page_n = request.POST.get('page_n', None)
@@ -42,6 +44,13 @@ class MainPageView(View):
 
 
 class MoviePageView(View):
+    template = 'web/movie_page.html'
+
+    def get(self, request, slug):
+        return render(request, self.template)
+
+
+class SerialPageView(View):
     template = 'web/movie_page.html'
 
     def get(self, request, slug):

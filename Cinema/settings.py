@@ -126,5 +126,5 @@ MEDIA_URL = 'media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # USER
-
+#bol4onok.pythonanywhere.com
 AUTH_USER_MODEL = 'users.CustomUser'

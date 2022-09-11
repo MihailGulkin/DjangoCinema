@@ -2,8 +2,10 @@ function start()
 {
 
     const array_content_p = []
+
     const selector_p = $('.card_content_p')
-    for (ele of selector_p)
+
+    for (let ele of selector_p)
     {
         array_content_p.push(ele.innerText)
     }
