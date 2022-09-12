@@ -325,14 +325,6 @@
 }
 
 
-@media all and (max-width: 400px)
-{
-    .сard_big .card_cover .card_rating
-    {
-        left: 50%;
-        top: 3%;
-    }
-}
 
 @media all and (max-width: 320px)
 {
@@ -341,6 +333,11 @@
         height: 280px;
 
     }
+    .сard_big .card_cover .card_rating
+    {
+        left: 45%;
+        top: 3%;
+    }
 }
 
 @media (min-width: 320px) and (max-width: 425px)
@@ -348,6 +345,11 @@
     .сard_big .card_cover
     {
         height: 290px;
+    }
+    .сard_big .card_cover .card_rating
+    {
+        left: 55%;
+        top: 3%;
     }
 }
 

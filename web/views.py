@@ -51,7 +51,7 @@ class MoviePageView(View):
 
 
 class SerialPageView(View):
-    template = 'web/movie_page.html'
+    template = 'web/serial_page.html'
 
     def get(self, request, slug):
         return render(request, self.template)

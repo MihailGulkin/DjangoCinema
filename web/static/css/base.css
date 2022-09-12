@@ -110,11 +110,13 @@ section
     justify-content: center;
     align-content: center;
 }
-.navbar-brand  > img
+
+.navbar-brand > img
 {
     width: 125px;
     height: 40px;
 }
+
 .header
 {
     position: fixed;
@@ -189,6 +191,58 @@ section
 /* FOOTER SECTION */
 .footer
 {
-    background-color: rgb(37, 34, 61);
-    height: 100px;
+    /*background-color: rgb(37, 34, 61);*/
+    background-color: rgb(28, 26, 45);
+    height: 125px;
+}
+
+.footer_container
+{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    align-items: center;
+}
+.footer_img
+{
+    width: 150px;
+    height: 50px;
+}
+.footer_img > img
+{
+    width: 100%;
+    height: 100%;
+}
+
+.footer_svg
+{
+    fill: #C5C3C1;
+    width: 35px;
+    height: 35px;
+}
+.footer_icons_container
+{
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+}
+.footer_svg path
+{
+    fill: #C5C3C1;
+}
+
+.bi-github:hover path
+{
+    fill: rgba(227, 14, 14, 0.65) ;
+    transition: .7s;
+}
+.bi-telegram:hover path
+{
+    fill: rgba(42, 170, 236, 0.89);
+    transition: .7s;
+}
+.wk_svg:hover path
+{
+    fill: rgb(43, 92, 189);
+    transition: .7s;
 }
