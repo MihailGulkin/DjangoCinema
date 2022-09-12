@@ -6,6 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{#    <link rel="icon" type="image/"#}
+{#          href="{% static 'image/LOGO.gif' %}" sizes="32x32"/>#}
     <link rel="shortcut icon" type="image/x-icon"
           href="{% static 'image/django.ico' %}"/>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap"
@@ -20,7 +22,8 @@
 <header class="header header--fixed">
     <nav class="navbar navbar-expand-md">
         <div class="container">
-            <a class="navbar-brand" href="#">Navbar</a>
+{#            <a class="navbar-brand" href="#">Navbar</a>#}
+            <a class="navbar-brand" href="#"><img src="{% static 'image/LOGO.gif' %}" alt></a>
             <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false">

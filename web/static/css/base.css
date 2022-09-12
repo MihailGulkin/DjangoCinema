@@ -104,6 +104,17 @@ section
 
 
 /* HEADER SECTION*/
+.navbar-brand
+{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.navbar-brand  > img
+{
+    width: 125px;
+    height: 40px;
+}
 .header
 {
     position: fixed;
@@ -179,5 +190,5 @@ section
 .footer
 {
     background-color: rgb(37, 34, 61);
-    height: 200px;
+    height: 100px;
 }
