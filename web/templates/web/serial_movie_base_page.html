@@ -18,10 +18,11 @@
                 </div>
                 <div class="col-8">
                     <h4 class="mov_ser_title">
-                        {% if content.tile %}
+                        {% if content.title %}
                             {{ content.title }}
+                        {% else %}
+                            {{ content.Serial_name }}
                         {% endif %}
-                        {{ content.Serial_name }}
                     </h4>
                 </div>
             </div>

@@ -14,28 +14,60 @@ class Genre(models.Model):
 class Director(models.Model):
     name = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
+    poster = models.ImageField(upload_to='Directors/')
+    born_place = models.CharField(max_length=100)
+    born_date = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
 
 
+mpa_rating_system = [('G', 'G'),
+                     ('PG', 'PG'),
+                     ('PG-13', 'PG-13'),
+                     ('R', 'R'),
+                     ('NC-17', 'NC-17')
+                     ]
+
+age_rating_system = [('0', '0'),
+                     ('6+', '6+'),
+                     ('12+', '12+'),
+                     ('16+', '16+'),
+                     ('18+', '18+')]
+
+
 class Movie(models.Model):
     title = models.CharField(max_length=200)
+
     director = models.ForeignKey('Director', on_delete=models.CASCADE,
                                  default=None)
+
     release_date = models.CharField(max_length=70, default='None')
+
     short_intro = models.TextField(max_length=700)
 
     IMDb_RATING = models.CharField(max_length=50, default=None)
+
     genre = models.ManyToManyField('Genre', default=None)
+
     poster = models.ImageField(upload_to='Movie/Posters/')
+
     movie_page_poster = models.ImageField(upload_to='Movie/Posters/MoviePage/',
                                           null=True, blank=True)
     summary = models.TextField(max_length=1600)
 
+    country = models.CharField(max_length=100, default='Russia')
+
     created = models.DateTimeField(auto_now_add=True)
 
     slug = models.SlugField(unique=True, null=True)
+
+    time_minute = models.PositiveIntegerField(default=1)
+
+    age_rating_sys = models.CharField(max_length=100,
+                                      choices=age_rating_system)
+    mpa_rating_sys = models.CharField(max_length=100,
+                                      choices=mpa_rating_system)
 
     def __str__(self):
         return self.title
@@ -48,7 +80,7 @@ class Movie(models.Model):
 
 
 class Serial(models.Model):
-    Serial_name = models.CharField(max_length=200)
+    serial_name = models.CharField(max_length=200)
 
     director = models.ForeignKey('Director', on_delete=models.CASCADE,
                                  default=None)
@@ -75,10 +107,19 @@ class Serial(models.Model):
 
     created = models.DateTimeField(auto_now_add=True)
 
+    country = models.CharField(max_length=100, default='Russia')
+
+    time_minute = models.PositiveIntegerField(default=1)
+
     slug = models.SlugField(unique=True, null=True, default='slug')
 
+    age_rating_sys = models.CharField(max_length=100,
+                                      choices=age_rating_system)
+    mpa_rating_sys = models.CharField(max_length=100,
+                                      choices=mpa_rating_system)
+
     def __str__(self):
-        return self.Serial_name
+        return self.serial_name
 
     class Meta:
         ordering = ['-created']

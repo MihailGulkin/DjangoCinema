@@ -432,7 +432,7 @@
                                 </span>
                                 </a>
 
-                                <h3 class="card_title"><a href="{% url 'serial_page' serial.slug %}">{{ serial.Serial_name }}</a></h3>
+                                <h3 class="card_title"><a href="{% url 'serial_page' serial.slug %}">{{ serial.serial_name }}</a></h3>
                                 <ul class="card_list">
                                     {% for genre in serial.genre.all %}
                                         <li class="card_list_li"><a href="">{{ genre }}</a></li>
