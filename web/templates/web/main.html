@@ -350,7 +350,7 @@
                     <div class="owl-carousel owl-theme" id="serial_slider">
                         {% for i in  10|for_range%}
                             <div class="card">
-                                <a href="{% url 'movie_page' serial.slug%}" class="card_cover">
+                                <a href="{% url 'serial_page' serial.slug%}" class="card_cover">
                                     <img class="card_img" src="{{ serial.poster.url }}" alt="">
                                     <svg class="card_svg_play" version="1.0" xmlns="http://www.w3.org/2000/svg"
                                          width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
@@ -432,7 +432,7 @@
                                 </span>
                                 </a>
 
-                                <h3 class="card_title"><a href="">{{ serial.Serial_name }}</a></h3>
+                                <h3 class="card_title"><a href="{% url 'serial_page' serial.slug %}">{{ serial.Serial_name }}</a></h3>
                                 <ul class="card_list">
                                     {% for genre in serial.genre.all %}
                                         <li class="card_list_li"><a href="">{{ genre }}</a></li>

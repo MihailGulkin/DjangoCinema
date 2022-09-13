@@ -32,7 +32,7 @@ class MainPageView(View):
                        'first_page': self.first_page,
                        'page_range': range(1, 4),
                        'total_pages': len(self.page_range),
-                       'serial': self.serial })
+                       'serial': self.serial})
 
     def post(self, request):
         page_n = request.POST.get('page_n', None)
@@ -45,13 +45,17 @@ class MainPageView(View):
 
 class MoviePageView(View):
     template = 'web/movie_page.html'
+    movie = Movie
 
     def get(self, request, slug):
-        return render(request, self.template)
+        return render(request, self.template,
+                      {'content': self.movie.objects.get(slug=slug)})
 
 
 class SerialPageView(View):
     template = 'web/serial_page.html'
+    serial = Serial
 
     def get(self, request, slug):
-        return render(request, self.template)
+        return render(request, self.template,
+                      {'content': self.serial.objects.get(slug=slug)})

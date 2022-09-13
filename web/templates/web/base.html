@@ -2,7 +2,7 @@
 {% load bootstrap5 %}
 {% load forx %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +18,7 @@
     {% block title_style %}
     {% endblock title_style %}
 </head>
-<body>
+<body class="d-flex flex-column h-100">
 <header class="header header--fixed">
     <nav class="navbar navbar-expand-md">
         <div class="container">
@@ -58,7 +58,7 @@
 </header>
 {% block content %}
 {% endblock content %}
-<footer class="footer">
+<footer class="footer mt-auto py-3">
     <div class="container">
         <div class="row">
             <div class="col-12 text-center">

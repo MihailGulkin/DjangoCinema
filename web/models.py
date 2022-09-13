@@ -5,7 +5,7 @@ from django.utils.text import slugify
 class Genre(models.Model):
     name = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
-    slug = models.SlugField(unique=True, null=True)
+    slug = models.SlugField(unique=True, null=True, )
 
     def __str__(self):
         return self.name
@@ -43,6 +43,9 @@ class Movie(models.Model):
     class Meta:
         ordering = ['-created']
 
+    def get_model_name(self):
+        return 'Movies'
+
 
 class Serial(models.Model):
     Serial_name = models.CharField(max_length=200)
@@ -62,7 +65,7 @@ class Serial(models.Model):
 
     poster = models.ImageField(upload_to='Movie/Posters/')
 
-    seriel_page_poster = models.ImageField(
+    serial_page_poster = models.ImageField(
         upload_to='Movie/Posters/SerialPage/',
         null=True, blank=True)
 
@@ -79,6 +82,9 @@ class Serial(models.Model):
 
     class Meta:
         ordering = ['-created']
+
+    def get_model_name(self):
+        return f'Serials'
 
 
 # Season - Serial
