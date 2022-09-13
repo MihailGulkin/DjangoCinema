@@ -12,16 +12,17 @@
                     <h2 class="mov_ser_title">{{ content.get_model_name }}</h2>
                 </div>
             </div>
-            <div class="row flex-row">
-                <div class="col-4">
+            <div class="row">
+                <div class="col-lg-3">
                     <img class="mov_ser_img" src="{{ content.poster.url }}" alt>
                 </div>
-                <div class="col-8">
+                <div class="col-lg-9">
                     <h4 class="mov_ser_title">
+                        Title:
                         {% if content.title %}
                             {{ content.title }}
                         {% else %}
-                            {{ content.Serial_name }}
+                            {{ content.serial_name }}
                         {% endif %}
                     </h4>
                 </div>
