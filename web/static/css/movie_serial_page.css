@@ -2,12 +2,43 @@
 {
     margin-top: 50px;
 }
+
 .mov_ser_title
 {
     color: rgb(197, 195, 193);
+    font-weight: 400;
+    font-family: 'Rubik', sans-serif;
+}
+.header_block_film_serial
+{
+    margin-bottom: 25px;
 }
 .mov_ser_img
 {
     height: 450px;
     width: 300px;
+    border-radius: 7px;
+}
+
+.svg_star_container
+{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.svg_star_mark
+{
+    width: 20px;
+    height: 20px;
+    fill: #2f80ed !important;
+}
+
+@media all and (max-width: 768px)
+{
+    .centered_block
+    {
+        display: flex;
+        justify-content: center;
+    }
 }

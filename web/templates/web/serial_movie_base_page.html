@@ -1,5 +1,6 @@
 {% extends 'web/base.html' %}
 {% load static %}
+{% load minute_to_hours_convertor %}
 {% block title_style %}
     <link rel="stylesheet" href="{% static 'css/movie_serial_page.css' %}">
 {% endblock title_style %}
@@ -7,27 +8,141 @@
 {% block content %}
     <section class="main_movie_serial_section">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="mov_ser_title">{{ content.get_model_name }}</h2>
+            <div class="row header_block_film_serial">
+                <div class="col-9">
+                    <h2 class="mov_ser_title my-0">{{ content.get_model_name | capfirst }}</h2>
                 </div>
+                <div class="col-3 d-flex justify-content-end">
+                    <h2 class="mov_ser_title my-0">{{ content.IMDb_RATING }}/10</h2>
+                    <span class="svg_star_container">
+                        <svg class="svg_star_mark" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                         width="940.688px" height="940.688px" viewBox="0 0 940.688 940.688"
+                         style="enable-background:new 0 0 940.688 940.688;"
+                         xml:space="preserve">
+<g>
+	<path d="M885.344,319.071l-258-3.8l-102.7-264.399c-19.8-48.801-88.899-48.801-108.6,0l-102.7,264.399l-258,3.8
+		c-53.4,3.101-75.1,70.2-33.7,103.9l209.2,181.4l-71.3,247.7c-14,50.899,41.1,92.899,86.5,65.899l224.3-122.7l224.3,122.601
+		c45.4,27,100.5-15,86.5-65.9l-71.3-247.7l209.2-181.399C960.443,389.172,938.744,322.071,885.344,319.071z"/>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg></div>
+                    </span>
             </div>
-            <div class="row">
-                <div class="col-lg-3">
+            <div class="row centered_block">
+                <div class="col-auto">
                     <img class="mov_ser_img" src="{{ content.poster.url }}" alt>
                 </div>
-                <div class="col-lg-9">
-                    <h4 class="mov_ser_title">
-                        Title:
-                        {% if content.title %}
-                            {{ content.title }}
-                        {% else %}
-                            {{ content.serial_name }}
-                        {% endif %}
-                    </h4>
+                <div class="col-auto">
+                    <div class="left_block">
+                        <div class="name_film_block">
+                            <h4 class="mov_ser_title">
+                                {% if content.title %}
+                                    {{ content.title }}
+                                {% else %}
+                                    {{ content.serial_name }}
+                                {% endif %}
+                            </h4>
+                        </div>
+                        <div class="about_film_block">
+                            <h5 class="mov_ser_title">
+                                About
+                                {% if content.title %}
+                                    Film
+                                {% else %}
+                                    Serial
+                                {% endif %}
+                            </h5>
+                            <ul class="px-0">
+                                <li class="d-flex">
+                                    <div>Release date</div>
+                                    <div>{{ content.release_date }}</div>
+                                </li>
+                                <li class="d-flex">
+                                    <div>Genre</div>
+                                    {% for genre in content.genre.all %}
+                                        <div>{{ genre }}</div>
+                                    {% endfor %}
+                                </li>
+                                <li class="d-flex">
+                                    <div>Country</div>
+                                    <div>{{ content.country }}</div>
+                                </li>
+                                <li class="d-flex">
+                                    <div>Director</div>
+                                    <div>{{ content.director }}</div>
+                                </li>
+                                <li class="d-flex">
+                                    <div>Time</div>
+                                    {% if content.title %}
+                                        <div>{{ content.time_minute }}
+                                            / {{ content.time_minute | hours_convertor }}</div>
+                                    {% else %}
+                                        <div>
+                                            {{ content.time_minute }}
+                                        </div>
+                                    {% endif %}
+                                </li>
+                                <li class="d-flex">
+                                    <div>
+                                        Age
+                                    </div>
+                                    <div>
+                                        {{ content.age_rating_sys }}
+                                    </div>
+                                </li>
+                                <li class="d-flex">
+                                    <div>
+                                        Rating MPAA
+                                    </div>
+                                    <div>
+                                        {{ content.mpa_rating_sys }}
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-
+            <div class="row">
+                <div class="col-12">
+                    <h2>Synopsis</h2>
+                </div>
+                <div class="col-12">
+                    <div class="synopsys_block">
+                        {{ content.summary }}
+                    </div>
+                </div>
+            </div>
         </div>
 
     </section>

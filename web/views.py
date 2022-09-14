@@ -46,16 +46,20 @@ class MainPageView(View):
 class MoviePageView(View):
     template = 'web/movie_page.html'
     movie = Movie
+    genres_model = Genre.objects.all()
 
     def get(self, request, slug):
         return render(request, self.template,
-                      {'content': self.movie.objects.get(slug=slug)})
+                      {'content': self.movie.objects.get(slug=slug),
+                       'genres': self.genres_model})
 
 
 class SerialPageView(View):
     template = 'web/serial_page.html'
     serial = Serial
+    genres_model = Genre.objects.all()
 
     def get(self, request, slug):
         return render(request, self.template,
-                      {'content': self.serial.objects.get(slug=slug)})
+                      {'content': self.serial.objects.get(slug=slug),
+                       'genres': self.genres_model})

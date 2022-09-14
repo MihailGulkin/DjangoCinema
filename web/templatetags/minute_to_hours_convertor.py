@@ -1,0 +1,9 @@
+from django import template
+import time
+
+register = template.Library()
+
+
+@register.filter(name='hours_convertor')
+def hours_conv(min_time: int):
+    return time.strftime('%H:%M', time.gmtime(min_time * 60))

@@ -78,7 +78,7 @@ class Movie(models.Model):
         ordering = ['-created']
 
     def get_model_name(self):
-        return 'Movies'
+        return self._meta.model_name
 
 
 class Serial(models.Model):
@@ -127,13 +127,14 @@ class Serial(models.Model):
         ordering = ['-created']
 
     def get_model_name(self):
-        return f'Serials'
+        return self._meta.model_name
 
 
 # Season - Serial
 class Season(models.Model):
     season_name = models.CharField(max_length=50, default='S01 - Serial Name')
     Episodes = models.ManyToManyField('Episode', default=None)
+    number_episodes = models.PositiveIntegerField(default=1)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
