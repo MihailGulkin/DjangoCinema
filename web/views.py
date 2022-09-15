@@ -8,6 +8,7 @@ from django.core.paginator import Paginator
 from django.http import JsonResponse
 
 
+
 class MainPageView(View):
     template = 'web/main.html'
 
@@ -40,7 +41,8 @@ class MainPageView(View):
             self.paginator.page(page_n).object_list.values())
         return JsonResponse({"results": results,
                              'directors': self.directors,
-                             'film_genres': self.film_genres})
+                             'film_genres': self.film_genres,
+                             })
 
 
 class MoviePageView(View):

@@ -232,7 +232,7 @@ function current_active_number_change(page_number)
 
 function change_pages_active(page_number)
 {
-    for (ele of $('.page_number').removeClass('active_a'))
+    for (let ele of $('.page_number').removeClass('active_a'))
     {
         if (page_number === ele.innerHTML)
         {

@@ -5,12 +5,30 @@
     --main_animation_dropdown_menu: .5s;
     --main_color_font: rgb(212, 209, 203);
 }
+
 /*html*/
 /*{*/
 /*    position: relative;*/
 /*    min-height: 100%;*/
 /*    scroll-behavior: smooth;*/
 /*}*/
+body::-webkit-scrollbar
+{
+    width: 5px;
+}
+
+body::-webkit-scrollbar-track
+{
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb
+{
+    background-color: rgba(28, 26, 45, 0.73);
+    border-radius: 16px;
+}
+
+
 body
 {
     font-family: 'Inter', sans-serif;
@@ -213,11 +231,13 @@ section
     flex-direction: column;
     align-items: center;
 }
+
 .footer_img
 {
     width: 150px;
     height: 50px;
 }
+
 .footer_img > img
 {
     width: 100%;
@@ -230,12 +250,15 @@ section
     width: 35px;
     height: 35px;
 }
+
 .footer_icons_container
 {
     width: 150px;
+    margin-right: 25px;
     display: flex;
     justify-content: space-between;
 }
+
 .footer_svg path
 {
     fill: #C5C3C1;
@@ -243,14 +266,16 @@ section
 
 .bi-github:hover path
 {
-    fill: rgba(227, 14, 14, 0.65) ;
+    fill: rgba(227, 14, 14, 0.65);
     transition: .7s;
 }
+
 .bi-telegram:hover path
 {
     fill: rgba(42, 170, 236, 0.89);
     transition: .7s;
 }
+
 .wk_svg:hover path
 {
     fill: rgb(43, 92, 189);
