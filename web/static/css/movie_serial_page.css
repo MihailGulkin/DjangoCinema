@@ -132,15 +132,45 @@
 {
     .svg_star_mark
     {
-        width: 15px;
-        height: 15px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .many_star_container
+    {
+        margin-right: 15px;
     }
 }
-@media all and (max-width: 375px)
+
+@media all and (max-width: 425px)
 {
     .svg_star_mark
     {
-        width: 10px;
-        height: 10px;
+        width: 15px;
+        height: 15px;
+    }
+
+    .many_star_container
+    {
+        margin-right: 15px;
+    }
+
+    .about_film_attribute
+    {
+        width: 120px;
+    }
+}
+
+@media all and (max-width: 340px)
+{
+    .svg_star_mark
+    {
+        width: 12px;
+        height: 12px;
+    }
+
+    .many_star_container
+    {
+        margin-right: 15px;
     }
 }
