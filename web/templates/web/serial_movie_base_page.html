@@ -1,5 +1,6 @@
 {% extends 'web/base.html' %}
 {% load static %}
+{% load forx %}
 {% load minute_to_hours_convertor %}
 {% block title_style %}
     <link rel="stylesheet" href="{% static 'css/movie_serial_page.css' %}">
@@ -9,124 +10,95 @@
     <section class="main_movie_serial_section">
         <div class="container">
             <div class="row header_block_film_serial">
-                <div class="col-9">
-                    <h2 class="mov_ser_title my-0">{{ content.get_model_name | capfirst }}</h2>
-                </div>
-                <div class="col-3 d-flex justify-content-end">
-                    <h2 class="mov_ser_title my-0">{{ content.IMDb_RATING }}/10</h2>
-                    <div class="svg_star_container">
-                        <svg class="svg_star_mark" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                             width="940.688px" height="940.688px" viewBox="0 0 940.688 940.688"
-                             style="enable-background:new 0 0 940.688 940.688;"
-                             xml:space="preserve">
-<g>
-	<path d="M885.344,319.071l-258-3.8l-102.7-264.399c-19.8-48.801-88.899-48.801-108.6,0l-102.7,264.399l-258,3.8
-		c-53.4,3.101-75.1,70.2-33.7,103.9l209.2,181.4l-71.3,247.7c-14,50.899,41.1,92.899,86.5,65.899l224.3-122.7l224.3,122.601
-		c45.4,27,100.5-15,86.5-65.9l-71.3-247.7l209.2-181.399C960.443,389.172,938.744,322.071,885.344,319.071z"/>
-</g>
-                            <g>
-</g>
-                            <g>
-</g>
-                            <g>
-</g>
-                            <g>
-</g>
-                            <g>
-</g>
-                            <g>
-</g>
-                            <g>
-</g>
-                            <g>
-</g>
-                            <g>
-</g>
-                            <g>
-</g>
-                            <g>
-</g>
-                            <g>
-</g>
-                            <g>
-</g>
-                            <g>
-</g>
-                            <g>
-</g>
-</svg>
-                    </div>
+                <div class="col-12">
+                    <h2 class="mov_ser_text my-0">{{ content.get_model_name | capfirst }}</h2>
                 </div>
             </div>
             <div class="row centered_block">
-                <div class="col-auto">
+                <div class="col-lg-auto col-md-12">
                     <img class="mov_ser_img" src="{{ content.poster.url }}" alt>
                 </div>
-                <div class="col-auto">
+                <div class="col-lg-auto col-md-12">
                     <div class="left_block">
                         <div class="name_film_block">
-                            <h1 class="mov_ser_title">
+                            <h1 class="mov_ser_text">
                                 {% if content.title %}
                                     {{ content.title }}
                                 {% else %}
                                     {{ content.serial_name }}
                                 {% endif %}
                             </h1>
-                            <h5 class="mov_ser_title">
+                            <h3 class="mov_ser_text">
                                 About
                                 {% if content.title %}
                                     Film
                                 {% else %}
                                     Serial
                                 {% endif %}
-                            </h5>
+                            </h3>
                         </div>
                         <div class="about_film_block">
-                            <ul class="px-0">
-                                <li class="d-flex">
-                                    <div>Release date</div>
-                                    <div>{{ content.release_date }}</div>
+                            <ul class="px-0 ">
+                                <li class="d-flex about_film_block_container_li">
+                                    <div class="about_film_attribute">
+                                        <h4>Release date</h4>
+                                    </div>
+                                    <div class="about_film_attribute_content">
+                                        <h4>{{ content.release_date }}</h4>
+                                    </div>
                                 </li>
-                                <li class="d-flex">
-                                    <div>Genre</div>
-                                    {% for genre in content.genre.all %}
-                                        <div>{{ genre }}</div>
-                                    {% endfor %}
+                                <li class="d-flex about_film_block_container_li">
+                                    <div class="about_film_attribute">
+                                        <h4>Genre</h4>
+                                    </div>
+                                    <div class="about_film_attribute_content">
+                                        <h4>{{ content.genre.all|join:", " }}</h4>
+                                    </div>
                                 </li>
-                                <li class="d-flex">
-                                    <div>Country</div>
-                                    <div>{{ content.country }}</div>
+                                <li class="d-flex about_film_block_container_li">
+                                    <div class="about_film_attribute">
+                                        <h4>Country</h4>
+                                    </div>
+                                    <div class="about_film_attribute_content">
+                                        <h4>{{ content.country }}</h4>
+                                    </div>
                                 </li>
-                                <li class="d-flex">
-                                    <div>Director</div>
-                                    <div>{{ content.director }}</div>
+                                <li class="d-flex about_film_block_container_li">
+                                    <div class="about_film_attribute"><h4>Director</h4></div>
+                                    <div class="about_film_attribute_content">
+                                        <h4>{{ content.director }}</h4>
+                                    </div>
                                 </li>
-                                <li class="d-flex">
-                                    <div>Time</div>
+                                <li class="d-flex about_film_block_container_li">
+                                    <div class="about_film_attribute"><h4>Time</h4></div>
                                     {% if content.title %}
-                                        <div>{{ content.time_minute }}
-                                            / {{ content.time_minute | hours_convertor }}</div>
+                                        <div class="about_film_attribute_content">
+                                            <h4>
+                                                {{ content.time_minute }}
+                                                / {{ content.time_minute | hours_convertor }}
+                                            </h4>
+                                        </div>
                                     {% else %}
-                                        <div>
-                                            {{ content.time_minute }}
+                                        <div class="about_film_attribute_content">
+                                            <h4>{{ content.time_minute }}</h4>
                                         </div>
                                     {% endif %}
                                 </li>
-                                <li class="d-flex">
-                                    <div>
-                                        Age
+                                <li class="d-flex about_film_block_container_li">
+                                    <div class="about_film_attribute">
+                                        <h4>Age</h4>
                                     </div>
-                                    <div>
-                                        {{ content.age_rating_sys }}
+                                    <div class="about_film_attribute_content">
+                                        <h4 class="film_serial_rating_sys">{{ content.age_rating_sys }}</h4>
                                     </div>
                                 </li>
-                                <li class="d-flex">
-                                    <div>
-                                        Rating MPAA
+                                <li class="d-flex about_film_block_container_li">
+                                    <div class="about_film_attribute">
+                                        <h4>Rating MPAA</h4>
                                     </div>
-                                    <div>
-                                        {{ content.mpa_rating_sys }}
+                                    <div class="about_film_attribute_content">
+                                        <h4 class="film_serial_rating_sys"
+                                            style="padding: 3px 4px">{{ content.mpa_rating_sys }}</h4>
                                     </div>
                                 </li>
                             </ul>
@@ -135,12 +107,42 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12">
-                    <h2>Synopsis</h2>
+                <div class="сol-12 d-flex rating_bar">
+                    <div class="many_star_container d-flex">
+                        {% for i in 10|for_range %}
+                            <div class="one_star_div">
+                                <a name="{{ i }}" class="one_star_container d-flex" href="#">
+                                    <div class="svg_star_container">
+                                        <svg class="svg_star_mark" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                             width="940.688px" height="940.688px" viewBox="0 0 940.688 940.688"
+                                             style="enable-background:new 0 0 940.688 940.688;"
+                                             xml:space="preserve">
+                                        <defs>
+                                            <lineargradient id="grad_{{ i }}">
+                                                <stop offset="50%" stop-color="yellow"></stop>
+                                                <stop offset="50%" stop-color="grey"></stop>
+                                            </lineargradient>
+                                       </defs>
+                                        <path d="M885.344,319.071l-258-3.8l-102.7-264.399c-19.8-48.801-88.899-48.801-108.6,0l-102.7,264.399l-258,3.8
+                                                    c-53.4,3.101-75.1,70.2-33.7,103.9l209.2,181.4l-71.3,247.7c-14,50.899,41.1,92.899,86.5,65.899l224.3-122.7l224.3,122.601
+                                                    c45.4,27,100.5-15,86.5-65.9l-71.3-247.7l209.2-181.399C960.443,389.172,938.744,322.071,885.344,319.071z"/>
+                                    </svg>
+                                    </div>
+                                    <p class="my-0 p_star_text">{{ i |add:1 }}</p>
+                                </a>
+                            </div>
+
+                        {% endfor %}
+                    </div>
+                    <h2 class="mov_ser_text mov_rating_text my-0">{{ content.IMDb_RATING }}</h2>
+                </div>
+                <div class="col-12 synopsys_container">
+                    <h2 class="mov_ser_text">Synopsis</h2>
                 </div>
                 <div class="col-12">
                     <div class="synopsys_block">
-                        {{ content.summary }}
+                        <p class="mov_ser_text p_star_text">{{ content.summary }}</p>
                     </div>
                 </div>
             </div>
@@ -151,5 +153,6 @@
 
 
 {% block script %}
-
+    <script src="{% static 'js/star_fill.js' %}"></script>
+    <script src="{% static 'js/change_p_text_size.js' %}"></script>
 {% endblock script %}

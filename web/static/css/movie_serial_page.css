@@ -3,45 +3,144 @@
     margin-top: 50px;
 }
 
-.mov_ser_title
+.mov_ser_text
 {
     color: rgb(197, 195, 193);
     font-weight: 400;
     font-family: 'Rubik', sans-serif;
 }
+
 .header_block_film_serial
 {
     margin-bottom: 25px;
 }
+
 .mov_ser_img
 {
     height: 450px;
     width: 300px;
     border-radius: 7px;
+    margin-right: 20px;
 }
 
 .svg_star_container
 {
     display: flex;
     align-items: center;
-    margin-left: 10px;
 }
 
 .svg_star_mark
 {
-    width: 20px;
-    height: 20px;
-    fill: #2f80ed !important;
+    width: 32px;
+    height: 32px;
+    fill: rgb(147, 145, 145);
 }
+
 .name_film_block
 {
-    margin-bottom: 15px;
+    margin-bottom: 40px;
 }
+
+.about_film_attribute
+{
+    width: 200px;
+}
+
+.about_film_attribute > h4
+{
+    color: rgb(147, 145, 145);
+}
+
+.about_film_attribute_content > h4
+{
+    color: rgb(197, 195, 193);
+
+}
+
+.rating_bar
+{
+    margin-top: 50px;
+}
+
+.many_star_container
+{
+    margin-right: 35px;
+}
+
+.mov_rating_text
+{
+    text-align: center;
+    padding-bottom: 7px;
+}
+
+.one_star_container
+{
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-right: 10px;
+}
+
+.active_star_fill .svg_star_container .svg_star_mark
+{
+    fill: rgba(26, 19, 231, 0.72) !important;
+    transition: .5s;
+}
+
+.active_star_fill .p_star_text
+{
+    color: #3593ff;
+    transition: .5s;
+}
+
+.about_film_block_container_li
+{
+    margin-bottom: 20px;
+}
+
+.film_serial_rating_sys
+{
+    outline: 1px solid rgb(159, 157, 157);
+    border-radius: 4px;
+}
+
+.p_star_text
+{
+    padding-top: 5px;
+    color: rgb(147, 145, 145);
+}
+
+.synopsys_container
+{
+    margin-top: 25px;
+}
+
+.synopsys_block p
+{
+    font-size: 20px;
+}
+
+@media all and (max-width: 992px)
+{
+    .name_film_block
+    {
+        margin-top: 30px;
+    }
+}
+
 @media all and (max-width: 768px)
 {
-    .centered_block
+    .svg_star_mark
     {
-        display: flex;
-        justify-content: center;
+        width: 15px;
+        height: 15px;
+    }
+}
+@media all and (max-width: 375px)
+{
+    .svg_star_mark
+    {
+        width: 10px;
+        height: 10px;
     }
 }

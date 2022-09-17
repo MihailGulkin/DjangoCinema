@@ -3,7 +3,7 @@ function ajax_start()
     $('.page_number').click(function (event)
     {
         event.preventDefault();
-        var page_n = $(this).attr('href');
+        let page_n = $(this).attr('href');
 
         $.ajax({
             type: "POST",
