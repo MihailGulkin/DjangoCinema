@@ -6,7 +6,7 @@ from .models import Movie, Genre, Director, Serial
 from web.service.shuffle_model import shuffle_model
 from django.core.paginator import Paginator
 from django.http import JsonResponse
-
+from web.service.return_model_query import return_query
 
 
 class MainPageView(View):
@@ -39,6 +39,7 @@ class MainPageView(View):
         page_n = request.POST.get('page_n', None)
         results = list(
             self.paginator.page(page_n).object_list.values())
+        logging.error(self.paginator.page(page_n).object_list)
         return JsonResponse({"results": results,
                              'directors': self.directors,
                              'film_genres': self.film_genres,
@@ -65,3 +66,21 @@ class SerialPageView(View):
         return render(request, self.template,
                       {'content': self.serial.objects.get(slug=slug),
                        'genres': self.genres_model})
+
+
+class SearchAjaxView(View):
+    def post(self, request):
+        if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+
+            query = request.POST.get('query')
+
+            query_film = Movie.objects.filter(title__contains=query)
+            query_se = Serial.objects.filter(serial_name__contains=query)
+
+            if (len(query_film) or len(query_se)) and len(query):
+                return JsonResponse(
+                    {'data': return_query(list(query_se.values()),
+                                          list(query_film.values()),
+                                          number_element=3)})
+            return JsonResponse({'data': 'No result :('})
+        return JsonResponse({})

@@ -21,7 +21,7 @@
                 <div class="col-lg-auto col-md-12">
                     <div class="left_block">
                         <div class="name_film_block">
-                            <h1 class="mov_ser_text">
+                            <h1 class="mov_ser_text title_margin_btm">
                                 {% if content.title %}
                                     {{ content.title }}
                                 {% else %}
@@ -99,7 +99,7 @@
                                         <h4>Age</h4>
                                     </div>
                                     <div class="about_film_attribute_content">
-                                        <h4 class="film_serial_rating_sys">{{ content.age_rating_sys }}</h4>
+                                        <h4 class="film_serial_rating_sys mpa_age_rating">{{ content.age_rating_sys }}</h4>
                                     </div>
                                 </li>
                                 <li class="d-flex about_film_block_container_li">
@@ -107,8 +107,7 @@
                                         <h4>Rating MPAA</h4>
                                     </div>
                                     <div class="about_film_attribute_content">
-                                        <h4 class="film_serial_rating_sys"
-                                            style="padding: 3px 4px">{{ content.mpa_rating_sys }}</h4>
+                                        <h4 class="film_serial_rating_sys mpa_age_rating">{{ content.mpa_rating_sys }}</h4>
                                     </div>
                                 </li>
                             </ul>
@@ -147,7 +146,7 @@
                     </div>
                     <h2 class="mov_ser_text mov_rating_text my-0">{{ content.IMDb_RATING }}</h2>
                 </div>
-                <div class="col-12 synopsys_container">
+                <div class="col-12 synopsys_title">
                     <h2 class="mov_ser_text">Synopsis</h2>
                 </div>
                 <div class="col-12">

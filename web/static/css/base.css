@@ -3,7 +3,7 @@
 :root
 {
     --main_animation_dropdown_menu: .5s;
-    --main_color_font: rgb(212, 209, 203);
+    --main_color_font: rgb(201, 201, 198);
 }
 
 /*html*/
@@ -280,4 +280,92 @@ section
 {
     fill: rgb(43, 92, 189);
     transition: .7s;
+}
+
+
+
+/*BLOCK_SEARCH_STYLE*/
+.not_visible
+{
+    display: none !important;
+}
+#search_form .form-control
+{
+    border: none !important;
+    /*outline: none !important;*/
+    margin-bottom: 5px;
+}
+
+#search_input
+{
+
+    color: var(--main_color_font);
+    /*background-color: #212529;*/
+    background: rgb(37, 33, 61);
+    box-shadow: -5px 0 5px -5px rgba(0, 0, 0, .5);
+}
+
+#search_input:focus
+{
+    box-shadow: 0 0 0 1px rgba(51, 28, 152, 0.25)
+
+}
+
+.block_ul_search
+{
+    /*margin-right: 8px;*/
+    padding-top: 20px;
+    padding-bottom: 0;
+    /*background-color: #212529;*/
+
+}
+
+.block_li_search
+{
+    margin-bottom: 20px;
+    padding-left: 10px;
+}
+
+.img_search
+{
+    padding-right: 10px;
+}
+
+.img_search > img
+{
+
+    width: 50px;
+    height: 75px;
+    border-radius: 8px;
+}
+
+.text_search
+{
+    padding-right: 20px;
+    padding-left: 10px;
+}
+
+.text_search p
+{
+    color: var(--main_color_font);
+    font-family: 'Rubik', sans-serif;
+}
+
+.text_search p:hover
+{
+    color: rgb(47, 128, 237);
+    transition: .7s;
+}
+
+.search_text_error
+{
+    width: 100%;
+    text-align: center;
+}
+
+.search_text_error h1
+{
+    color: var(--main_color_font);
+    font-family: 'Rubik', sans-serif;
+    font-size: 30px;
 }

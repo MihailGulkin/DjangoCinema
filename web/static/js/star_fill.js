@@ -67,7 +67,6 @@ class Fill_Star
 
     _hover_all_star_before_active_deactivate(selector, flag)
     {
-
         for (let ele of this.star_arr)
         {
             if (Number(ele.name) <= Number(selector.name) && flag)
