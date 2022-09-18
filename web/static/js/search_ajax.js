@@ -21,12 +21,12 @@ function start_query_search()
                     {
                         $(result_box).append(`
                             <li class="block_li_search">
-                                <a href='movie/${element.slug}' class="d-flex row">
+                                <a href='${element.title ? 'movie/':'serial/'}${element.slug}' class="d-flex row">
                                     <div class="col-3 img_search">
-                                        <img src=/media/${element.poster}>
+                                        <img src=/media/${element.poster} alt>
                                     </div>
                                     <div class="col-9 text_search">
-                                        <p>${element.title}</p>
+                                        <p>${element.title ? element.title : element.serial_name}</p>
                                     </div>
                                 </a>
                             </li>

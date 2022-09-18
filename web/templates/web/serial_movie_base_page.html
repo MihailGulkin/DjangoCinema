@@ -4,6 +4,13 @@
 {% load minute_to_hours_convertor %}
 {% block title_style %}
     <link rel="stylesheet" href="{% static 'css/movie_serial_page.css' %}">
+    <title>
+        {% if content.title %}
+            {{ content.title }}
+        {% else %}
+            {{ content.serial_name }}
+        {% endif %}
+    </title>
 {% endblock title_style %}
 
 {% block content %}
