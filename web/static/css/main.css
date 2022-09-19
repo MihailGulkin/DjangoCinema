@@ -7,7 +7,7 @@
 .movies_title_head
 {
     margin-bottom: 50px;
-    color: rgb(197, 195, 193);;
+    color: rgb(197, 195, 193);
 }
 
 .card
@@ -515,7 +515,6 @@ a:visited
         transition: .5s;
     }
 }
-
 
 
 @media all and (max-width: 768px)

@@ -95,7 +95,7 @@
 .active_star_fill .svg_star_container .svg_star_mark
 {
     fill: rgba(26, 19, 231, 0.72) !important;
-    transition: .5s;
+    /*transition: .5s;*/
 }
 
 .active_star_fill .p_star_text
@@ -106,6 +106,7 @@
 
 .mov_rating_text
 {
+    color: rgb(197, 195, 193);
     text-align: center;
     padding-bottom: 7px;
 }

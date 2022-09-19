@@ -30,12 +30,15 @@
 
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown  me-2">
-                        <form onkeypress="return event.keyCode != 13;" class="m-0 d-flex h-100" id="search_form" method="post" autocomplete="off">
+                        <form onkeypress="return event.keyCode != 13;" class="m-0 d-flex h-100" id="search_form"
+                              method="post" autocomplete="off">
                             {% csrf_token %}
                             <input id="search_input" class="form-control" type="text" placeholder="Search"
-                                   aria-label="Search">
+                                   aria-label="Search"
+                                   onPaste="return false">
                         </form>
-                        <ul class="dropdown-menu w-100 not_visible block_ul_search" aria-labelledby="navbarSearch" id="result_box">
+                        <ul class="dropdown-menu w-100 not_visible block_ul_search" aria-labelledby="navbarSearch"
+                            id="result_box">
 
                         </ul>
 

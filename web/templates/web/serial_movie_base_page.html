@@ -151,7 +151,7 @@
 
                         {% endfor %}
                     </div>
-                    <h2 class="mov_ser_text mov_rating_text my-0">{{ content.IMDb_RATING }}</h2>
+                    <h2 class="mov_rating_text my-0">{{ content.IMDb_RATING }}</h2>
                 </div>
                 <div class="col-12 synopsys_title">
                     <h2 class="mov_ser_text">Synopsis</h2>
@@ -171,4 +171,5 @@
 {% block script %}
     <script src="{% static 'js/star_fill.js' %}"></script>
     <script src="{% static 'js/change_p_text_size.js' %}"></script>
+    <script src="{% static 'js/rating_color_changer.js' %}"></script>
 {% endblock script %}

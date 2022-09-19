@@ -51,7 +51,7 @@ function start_query_search()
             },
             error: (err) =>
             {
-                console.log(err)
+                // console.log(err)
             }
         })
     }

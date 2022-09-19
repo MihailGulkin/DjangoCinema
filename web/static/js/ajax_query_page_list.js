@@ -132,7 +132,7 @@ function ajax_start()
             error: function ()
             {
             }
-        }); //
+        });
 
     })
 }
