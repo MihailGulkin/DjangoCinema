@@ -39,7 +39,6 @@ class MainPageView(View):
         page_n = request.POST.get('page_n', None)
         results = list(
             self.paginator.page(page_n).object_list.values())
-        logging.error(self.paginator.page(page_n).object_list)
         return JsonResponse({"results": results,
                              'directors': self.directors,
                              'film_genres': self.film_genres,

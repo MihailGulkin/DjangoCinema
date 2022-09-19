@@ -351,7 +351,7 @@ section
     font-family: 'Rubik', sans-serif;
 }
 
-.text_search p:hover
+.text_search:hover p
 {
     color: rgb(47, 128, 237);
     transition: .7s;

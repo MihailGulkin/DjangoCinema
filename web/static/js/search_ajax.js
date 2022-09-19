@@ -21,7 +21,7 @@ function start_query_search()
                     {
                         $(result_box).append(`
                             <li class="block_li_search">
-                                <a href='${element.title ? 'movie/':'serial/'}${element.slug}' class="d-flex row">
+                                <a href='${element.title ? '/movie/' : '/serial/'}${element.slug}' class="d-flex row">
                                     <div class="col-3 img_search">
                                         <img src=/media/${element.poster} alt>
                                     </div>
@@ -36,7 +36,7 @@ function start_query_search()
                 {
                     if ($(search_input).val())
                     {
-                        $(result_box).html(  `
+                        $(result_box).html(`
                               <div class="w-100 search_text_error">
                                 <h1>
                                     ${data}
@@ -59,20 +59,26 @@ function start_query_search()
     // const search_form = document.getElementById('search_form')
 
     const search_input = $('#search_input')
-    console.log($(search_input).val())
 
     const result_box = $('#result_box')
 
     const csrf = $('[name="csrfmiddlewaretoken"]')[0].value
 
-    search_input.keyup(function (event)
+
+    $(search_input).on('input', function (event)
         {
+            if (!(/[A-Za-zА-Яа-я\d :]/.test($(search_input).val().at(-1))))
+            {
+                $(search_input).val($(search_input).val().substring(0, $(search_input).val().length - 1))
+                return
+            }
+
             if ($(result_box).hasClass('not_visible') && event.target.value)
             {
                 $(result_box).removeClass('not_visible')
             }
-
             sendSearchData(event.target.value)
+
         }
     )
 }
