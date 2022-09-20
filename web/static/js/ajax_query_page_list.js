@@ -110,7 +110,7 @@ function ajax_start()
                                         </span>
                                     </a>
                                     <div class="card_content">
-                                        <h3 class="card_title"><a href="movie/${val.slug}/">${val.title}</a></h3>
+                                        <h3 class="card_title_word_wrap card_title_wrap"><a href="movie/${val.slug}/">${val.title}</a></h3>
                                         <h5 class="card_content_title_h5">Genres</h5>
                                         <ul class="card_list_big">
                                                     ${generete_html_li(resp.film_genres, val)}

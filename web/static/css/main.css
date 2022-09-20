@@ -120,7 +120,7 @@
 }
 
 
-.card_title
+.card_title_word_wrap
 {
     font-family: 'Rubik', sans-serif;
     font-weight: 300;
@@ -134,6 +134,10 @@
     display: block;
     width: 100%;
 
+}
+
+.card_title_wrap
+{
     overflow: hidden;
     white-space: nowrap;
 
@@ -143,12 +147,12 @@
     word-wrap: break-word;
 }
 
-.card_title a
+.card_title_word_wrap a
 {
     color: rgb(197, 195, 193);;
 }
 
-.card_title a:hover
+.card_title_word_wrap a:hover
 {
     color: #2f80ed;
     transition: .7s;
