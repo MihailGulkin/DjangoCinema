@@ -6,7 +6,9 @@
     --main_color_font: rgb(201, 201, 198);
 }
 
-
+.nav-link:focus, .nav-link:hover {
+     color: var(--main_color_font);
+}
 body::-webkit-scrollbar
 {
     width: 5px;
@@ -166,12 +168,17 @@ section
 
 .header--active
 {
-    border-color: rgb(37, 34, 61);
+    /*border-color: rgb(37, 34, 61);*/
+    border-color: rgb(49, 45, 80);
+    /*box-shadow: 0 4px 6px -6px #222;*/
+
 }
 
 .dropdown-menu
 {
-    background: rgb(37, 33, 61);
+    /*background: rgb(37, 33, 61);*/
+    background: linear-gradient(90deg, rgba(28, 26, 45, 1) 50%, rgba(30, 28, 56, 1) 80%);
+
 }
 
 .navbar-toggler
@@ -221,7 +228,7 @@ section
     /*background-color: rgb(28, 26, 45);*/
     background: rgb(28, 26, 45);
     background: linear-gradient(90deg, rgba(28, 26, 45, 1) 29%, rgba(30, 28, 56, 1) 50%, rgba(41, 37, 85, 1) 88%);
-        height: 125px;
+    height: 125px;
 
     /*position: absolute;*/
     /*bottom: 0;*/
@@ -304,7 +311,9 @@ section
 
     color: var(--main_color_font);
     /*background-color: #212529;*/
-    background: rgb(37, 33, 61);
+    /*background: rgb(37, 33, 61);*/
+    background: linear-gradient(90deg, rgba(28, 26, 45, 1) 50%, rgba(30, 28, 56, 1) 80%);
+
     box-shadow: -5px 0 5px -5px rgba(0, 0, 0, .5);
 }
 
@@ -319,6 +328,9 @@ section
     /*margin-right: 8px;*/
     padding-top: 20px;
     padding-bottom: 0;
+    border: none;
+    background: linear-gradient(90deg, rgba(28, 26, 45, 1) 50%, rgba(30, 28, 56, 1) 80%);
+
     /*background-color: #212529;*/
 
 }
