@@ -50,9 +50,9 @@ class MoviePageView(View):
     movie = Movie
     genres_model = Genre.objects.all()
 
-    def get(self, request, slug):
+    def get(self, request, movie_name):
         return render(request, self.template,
-                      {'content': self.movie.objects.get(slug=slug),
+                      {'content': self.movie.objects.get(slug=movie_name),
                        'genres': self.genres_model})
 
 
@@ -61,10 +61,19 @@ class SerialPageView(View):
     serial = Serial
     genres_model = Genre.objects.all()
 
-    def get(self, request, slug):
+    def get(self, request, serial_name):
         return render(request, self.template,
-                      {'content': self.serial.objects.get(slug=slug),
+                      {'content': self.serial.objects.get(slug=serial_name),
                        'genres': self.genres_model})
+
+
+class GenrePageView(View):
+    template = 'web/genre.html'
+    genres_model = Genre.objects.all()
+
+    def get(self, request, genre_name):
+        return render(request, self.template,
+                      {'genres': self.genres_model})
 
 
 class SearchAjaxView(View):

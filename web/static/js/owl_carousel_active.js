@@ -10,15 +10,20 @@ $("#movie_slider").owlCarousel(
             0: {
                 items: 2,
                 nav: false,
+                dots: true,
             },
             500:
                 {
                     items: 2,
                     nav: false,
+                    dots: true,
+
                 },
             768: {
                 items: 3,
                 nav: false,
+                dots: true,
+
             },
             1000: {
                 items: 4,
@@ -40,18 +45,23 @@ $("#serial_slider").owlCarousel(
         dots: false,
         navText: ["<div class='nav-btn prev-slide'></div>", "<div class='nav-btn next-slide'></div>"],
         responsive: {
-            0: {
+           0: {
                 items: 2,
                 nav: false,
+                dots: true,
             },
             500:
                 {
                     items: 2,
                     nav: false,
+                    dots: true,
+
                 },
             768: {
                 items: 3,
                 nav: false,
+                dots: true,
+
             },
             1000: {
                 items: 4,

@@ -223,7 +223,11 @@ section
 {
     color: #2f80ed;
 }
-
+.dropdown-item:focus
+{
+    color: var(--main_color_font); !important;
+    background: linear-gradient(90deg, rgba(28, 26, 45, 1) 50%, rgba(30, 28, 56, 1) 80%) !important;
+}
 .nav-item > a
 {
     color: var(--main_color_font);

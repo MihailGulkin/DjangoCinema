@@ -1,12 +1,14 @@
 from django.urls import path, include
-from .views import MainPageView, MoviePageView, SerialPageView, SearchAjaxView
+from .views import MainPageView, MoviePageView, SerialPageView, SearchAjaxView, \
+    GenrePageView
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views.generic.base import RedirectView
 
 urlpatterns = [
     path('', MainPageView.as_view(), name='main_page'),
-    path('movie/<slug:slug>/', MoviePageView.as_view(), name='movie_page'),
-    path('serial/<slug:slug>/', SerialPageView.as_view(), name='serial_page'),
+    path('movie/<slug:movie_name>/', MoviePageView.as_view(), name='movie_page'),
+    path('serial/<slug:serial_name>/', SerialPageView.as_view(), name='serial_page'),
+    path('<slug:genre_name>/', GenrePageView.as_view(), name='genre_page'),
     path('search_search_url_search_token/', SearchAjaxView.as_view(),
          name='search_form'),
 

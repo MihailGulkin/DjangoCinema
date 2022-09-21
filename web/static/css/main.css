@@ -291,6 +291,57 @@
 
 }
 
+/*DOTS OWL STYL*/
+.owl-dots
+{
+    display: flex;
+}
+
+.owl-dot
+{
+    margin-right: 10px;
+}
+
+.owl-dot:last-child
+{
+    margin-right: 0;
+}
+
+.col-12 .owl-theme .owl-dots .owl-dot span
+{
+    display: block;
+    height: 4px;
+    width: 10px;
+    border-radius: 3px;
+
+    background-color: rgba(34, 125, 248, 0.5);
+    transition: 0.5s;
+    border: none !important;
+}
+
+.col-12 .owl-theme .owl-dots span
+{
+    background-color: rgba(34, 125, 248, 0.5) !important;
+}
+
+.col-12 .owl-theme .owl-dots .active span
+{
+    width: 20px;
+    background-color: #2f80ed !important;
+
+}
+
+.col-12 .owl-theme .owl-dots, .owl-dot:hover, .owl-dot:active, .owl-dot:focus
+{
+
+    border: none !important;
+}
+.col-12 .owl-theme, .owl-dots:hover, .owl-dots:active, .owl-dots:focus
+{
+
+    border: none !important;
+}
+
 /* MOVIE LIST */
 .movie_list_line
 {

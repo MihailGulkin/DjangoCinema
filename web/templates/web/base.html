@@ -56,7 +56,9 @@
 
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             {% for genre in genres %}
-                                <li class="nav_item_header"><a class="dropdown-item" href="#">{{ genre }}</a></li>
+                                <li class="nav_item_header"><a class="dropdown-item"
+                                                               href="{% url 'genre_page' genre.slug %}">{{ genre }}</a>
+                                </li>
                             {% endfor %}
                         </ul>
 
