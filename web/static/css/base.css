@@ -6,9 +6,11 @@
     --main_color_font: rgb(201, 201, 198);
 }
 
-.nav-link:focus, .nav-link:hover {
-     color: var(--main_color_font);
+.nav-link:focus, .nav-link:hover
+{
+    color: var(--main_color_font);
 }
+
 body::-webkit-scrollbar
 {
     width: 5px;
@@ -186,6 +188,11 @@ section
 {
 
     border-color: var(--main_color_font);
+}
+
+.navbar-toggler:focus
+{
+    box-shadow: 0 0 0 0 !important;
 }
 
 .custom-toggler .navbar-toggler-icon
