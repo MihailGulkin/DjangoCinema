@@ -9,7 +9,7 @@ urlpatterns = [
     path('movie/<slug:movie_name>/', MoviePageView.as_view(), name='movie_page'),
     path('serial/<slug:serial_name>/', SerialPageView.as_view(), name='serial_page'),
     path('<slug:genre_name>/', GenrePageView.as_view(), name='genre_page'),
-    path('search_search_url_search_token/', SearchAjaxView.as_view(),
+    path('search_search_url_search_token', SearchAjaxView.as_view(),
          name='search_form'),
 
     path('favicon.ico', RedirectView.as_view(

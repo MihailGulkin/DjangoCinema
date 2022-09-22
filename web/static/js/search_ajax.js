@@ -4,7 +4,7 @@ function start_query_search()
     {
         $.ajax({
             type: 'POST',
-            url: '/search_search_url_search_token/',
+            url: '/search_search_url_search_token',
             data: {
                 'csrfmiddlewaretoken': csrf,
                 'query': query

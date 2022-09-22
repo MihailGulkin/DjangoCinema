@@ -103,7 +103,7 @@
                                 <h3 class="card_title_word_wrap"><a href="{% url 'movie_page' movie.slug %}">{{ movie.title }}</a></h3>
                                 <ul class="card_list">
                                     {% for genre in movie.genre.all %}
-                                        <li class="card_list_li"><a href="">{{ genre }}</a></li>
+                                        <li class="card_list_li"><a href="{% url 'genre_page' genre.slug %}">{{ genre }}</a></li>
                                     {% endfor %}
                                 </ul>
                                 <ul class="card_info">
@@ -217,7 +217,7 @@
                                         <h5 class="card_content_title_h5">Genres</h5>
                                         <ul class="card_list_big">
                                             {% for genre in movie.genre.all %}
-                                                <li class="card_list_li"><a href="">{{ genre }}</a></li>
+                                                <li class="card_list_li"><a href="{% url 'genre_page' genre.slug %}">{{ genre }}</a></li>
                                             {% endfor %}
                                         </ul>
                                         <ul class="card_list_big">
@@ -435,7 +435,7 @@
                                 <h3 class="card_title_word_wrap"><a href="{% url 'serial_page' serial.slug %}">{{ serial.serial_name }}</a></h3>
                                 <ul class="card_list">
                                     {% for genre in serial.genre.all %}
-                                        <li class="card_list_li"><a href="">{{ genre }}</a></li>
+                                        <li class="card_list_li"><a href="{% url 'genre_page' genre.slug %}">{{ genre }}</a></li>
                                     {% endfor %}
                                 </ul>
                                 <ul class="card_info">
