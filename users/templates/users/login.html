@@ -1,0 +1,11 @@
+{% extends 'users/register_login_base.html' %}
+{% load widget_tweaks %}
+{% block form %}
+    <div class="field_group">
+        {{ user_form.username|add_class:'form_input'|append_attr:'placeholder:Email'|append_attr:'id=email'|append_attr:'data-value=true'|append_attr:'autocomplete=nope' }}
+    </div>
+    <div class="field_group">
+        {{ user_form.password|add_class:'form_input'|append_attr:'placeholder:Password'|append_attr:'id=pwd'|append_attr:'data-value=true'|append_attr:'autocomplete=nope'}}
+    </div>
+    <button class="sign_login_btn" id="login_btn" type="button">Отправить</button>
+{% endblock form %}

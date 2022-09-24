@@ -1,0 +1,30 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% load  widget_tweaks %}
+{% block title_style %}
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="{% static 'css/register_login.css' %}">
+{% endblock title_style %}
+{% block content %}
+    <section class="registration">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form_container">
+                        <form method="post" class="form_post" onkeypress="return event.keyCode != 13;">
+                            {% csrf_token %}
+                            <a class="login_icon" href="{% url 'main_page' %}">
+                                <img src="{% static 'image/LOGO.gif' %}">
+                            </a>
+                            {% block form %}
+                            {% endblock form %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+{% block script %}
+    <script src="{% static 'js/registration_form_checker.js' %}"></script>
+{% endblock script %}

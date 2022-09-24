@@ -19,7 +19,7 @@ function form_validation_check()
 
                 if (res.errors.username !== undefined)
                 {
-                    $(username).after(`<h4 id="error_username">${res.errors.username}</h4>
+                    $(username).after(`<h4 class="error_field" id="error_username">${res.errors.username}</h4>
                          `)
                     $(username).attr('data-value', false)
 
@@ -27,14 +27,14 @@ function form_validation_check()
                 if (res.errors.email !== undefined)
                 {
                     $(email).after(
-                        `<h4 id="error_email">${res.errors.email}</h4>`
+                        `<h4 class="error_field" id="error_email">${res.errors.email}</h4>`
                     )
                     $(email).attr('data-value', false)
                 }
                 if (res.errors.password2 !== undefined)
                 {
                     $(pwd2).after(
-                        `<h4 id="error_pwd2">${res.errors.password2}</h4>`
+                        `<h4 class="error_field" id="error_pwd2">${res.errors.password2}</h4>`
                     )
                     $(pwd2).attr('data-value', false)
                 }
@@ -61,8 +61,18 @@ function form_validation_check()
                 sendSearchData()
             }
         )
+        $(ele).attr('OnPaste', 'return false')
     }
-
+    function set_regex_on_input()
+    {
+        $(username).on('input', function ()
+        {
+             if (!(/[A-Za-z\d]/.test($(username).val().at(-1))))
+            {
+                $(username).val($(username).val().substring(0, $(username).val().length - 1))
+            }
+        })
+    }
     function get_data()
     {
         return {
@@ -111,6 +121,7 @@ function form_validation_check()
 
         }
     }
+    set_regex_on_input()
 }
 
 form_validation_check()

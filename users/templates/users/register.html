@@ -1,42 +1,17 @@
-{% extends 'web/base.html' %}
-{% load static %}
-{% load  widget_tweaks %}
-{% block title_style %}
-    <title>Registration Page</title>
-    <link rel="stylesheet" href="{% static 'css/register_login.css' %}">
-{% endblock title_style %}
-{% block content %}
-    <section class="registration">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="form_container">
-                        <form method="post" class="d-flex flex-column justify-content-center align-items-center">
-                            {% csrf_token %}
-                            <div class="sign__group">
-                                <label class="label_text">Username</label>
-                                {{ user_form.username|add_class:'form_input'|append_attr:'placeholder:Name'|append_attr:'id=username'|append_attr:'data-value=true'|append_attr:'autocomplete=off' }}
-                            </div>
-                            <div class="sign__group">
-                                <label class="label_text">Email</label>
-                                {{ user_form.email|add_class:'form_input'|append_attr:'placeholder:Email'|append_attr:'id=email'|append_attr:'data-value=true'|append_attr:'autocomplete=off'  }}
-                            </div>
-                            <div class="sign__group">
-                                <label class="label_text">Password</label>
-                                {{ user_form.password1|add_class:'form_input'|append_attr:'placeholder:Password'|append_attr:'id=pwd1'|append_attr:'autocomplete=off'  }}
-                            </div>
-                            <div class="sign__group">
-                                <label class="label_text">Password confirmation</label>
-                                {{ user_form.password2|add_class:'form_input'|append_attr:'placeholder:Confirm Password'|append_attr:'id=pwd2'|append_attr:'data-value=true'|append_attr:'autocomplete=off'  }}
-                            </div>
-                            <button class="disable_btn" id="submit_btn" type="submit">Отправить</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-{% endblock content %}
-{% block script %}
-    <script src="{% static 'js/registration_form_checker.js' %}"></script>
-{% endblock script %}
+{% extends 'users/register_login_base.html' %}
+{% load widget_tweaks %}
+{% block form %}
+    <div class="field_group">
+        {{ user_form.username|add_class:'form_input'|append_attr:'placeholder:Name'|append_attr:'id=username'|append_attr:'data-value=true'|append_attr:'autocomplete=off' }}
+    </div>
+    <div class="field_group">
+        {{ user_form.email|add_class:'form_input'|append_attr:'placeholder:Email'|append_attr:'id=email'|append_attr:'data-value=true'|append_attr:'autocomplete=nope' }}
+    </div>
+    <div class="field_group">
+        {{ user_form.password1|add_class:'form_input'|append_attr:'placeholder:Password'|append_attr:'id=pwd1' }}
+    </div>
+    <div class="field_group">
+        {{ user_form.password2|add_class:'form_input'|append_attr:'placeholder:Confirm Password'|append_attr:'id=pwd2'|append_attr:'data-value=true' }}
+    </div>
+    <button class="disable_btn sign_login_btn" id="submit_btn" type="submit">Отправить</button>
+{% endblock form %}
