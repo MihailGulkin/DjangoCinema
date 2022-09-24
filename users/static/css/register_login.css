@@ -1,0 +1,17 @@
+.registration
+{
+    margin-top: 100px;
+}
+
+.label_text
+{
+    color: #3593ff;
+}
+
+.disable_btn
+{
+    box-shadow: none;
+    cursor: not-allowed;
+    opacity: 0.5;
+    pointer-events: none;
+}

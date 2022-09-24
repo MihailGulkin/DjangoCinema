@@ -100,10 +100,12 @@
                                 </span>
                                 </a>
 
-                                <h3 class="card_title_word_wrap"><a href="{% url 'movie_page' movie.slug %}">{{ movie.title }}</a></h3>
+                                <a class="card_title_word_wrap"
+                                   href="{% url 'movie_page' movie.slug %}">{{ movie.title }}</a>
                                 <ul class="card_list">
                                     {% for genre in movie.genre.all %}
-                                        <li class="card_list_li"><a href="{% url 'genre_page' genre.slug %}">{{ genre }}</a></li>
+                                        <li class="card_list_li"><a
+                                                href="{% url 'genre_page' genre.slug %}">{{ genre }}</a></li>
                                     {% endfor %}
                                 </ul>
                                 <ul class="card_info">
@@ -127,7 +129,7 @@
                     <div id="movie_list_container_card" class="row">
                         {% for movie in first_page %}
                             <div class="col-12 col-md-6 col-xl-4">
-                                <div class="card сard_big">
+                                <div class="card animate__animated сard_big animate__bounceInDown">
                                     <a href="{% url 'movie_page' movie.slug %}" class="card_cover">
                                         <img class="card_img" src="{{ movie.poster.url }}" alt="">
                                         <svg class="card_svg_play" version="1.0" xmlns="http://www.w3.org/2000/svg"
@@ -212,12 +214,13 @@
                                         </span>
                                     </a>
                                     <div class="card_content">
-                                        <h3 class="card_title_word_wrap card_title_wrap"><a
-                                                href="{% url 'movie_page' movie.slug %}">{{ movie.title }}</a></h3>
+                                        <a class="card_title_word_wrap card_title_wrap"
+                                           href="{% url 'movie_page' movie.slug %}">{{ movie.title }}</a>
                                         <h5 class="card_content_title_h5">Genres</h5>
                                         <ul class="card_list_big">
                                             {% for genre in movie.genre.all %}
-                                                <li class="card_list_li"><a href="{% url 'genre_page' genre.slug %}">{{ genre }}</a></li>
+                                                <li class="card_list_li"><a
+                                                        href="{% url 'genre_page' genre.slug %}">{{ genre }}</a></li>
                                             {% endfor %}
                                         </ul>
                                         <ul class="card_list_big">
@@ -241,42 +244,44 @@
                         <ul class="movie_list_page" data-number="{{ total_pages }}">
                             <li class="movie_page_ele arrow_container_left">
                                 <a href="{{ 1 }}" class="page_number page_arrow_left">
-                                    <svg class="page_svg" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="306px" height="306px" viewBox="0 0 306 306" style="enable-background:new 0 0 306 306;" xml:space="preserve">
+                                    <svg class="page_svg" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         width="306px" height="306px" viewBox="0 0 306 306"
+                                         style="enable-background:new 0 0 306 306;" xml:space="preserve">
 <g>
 	<g id="chevron-left">
 		<polygon points="247.35,35.7 211.65,0 58.65,153 211.65,306 247.35,270.3 130.05,153 		"/>
 	</g>
 </g>
-<g>
+                                        <g>
 </g>
-<g>
+                                        <g>
 </g>
-<g>
+                                        <g>
 </g>
-<g>
+                                        <g>
 </g>
-<g>
+                                        <g>
 </g>
-<g>
+                                        <g>
 </g>
-<g>
+                                        <g>
 </g>
-<g>
+                                        <g>
 </g>
-<g>
+                                        <g>
 </g>
-<g>
+                                        <g>
 </g>
-<g>
+                                        <g>
 </g>
-<g>
+                                        <g>
 </g>
-<g>
+                                        <g>
 </g>
-<g>
+                                        <g>
 </g>
-<g>
+                                        <g>
 </g>
 </svg>
                                 </a>
@@ -340,7 +345,7 @@
             </div>
         </div>
     </section>
-     <section class="serials">
+    <section class="serials">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -348,9 +353,9 @@
                 </div>
                 <div class="col-12">
                     <div class="owl-carousel owl-theme" id="serial_slider">
-                        {% for i in  10|for_range%}
+                        {% for i in  10|for_range %}
                             <div class="card">
-                                <a href="{% url 'serial_page' serial.slug%}" class="card_cover">
+                                <a href="{% url 'serial_page' serial.slug %}" class="card_cover">
                                     <img class="card_img" src="{{ serial.poster.url }}" alt="">
                                     <svg class="card_svg_play" version="1.0" xmlns="http://www.w3.org/2000/svg"
                                          width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
@@ -432,10 +437,12 @@
                                 </span>
                                 </a>
 
-                                <h3 class="card_title_word_wrap"><a href="{% url 'serial_page' serial.slug %}">{{ serial.serial_name }}</a></h3>
+                                <a class="card_title_word_wrap"
+                                   href="{% url 'serial_page' serial.slug %}">{{ serial.serial_name }}</a>
                                 <ul class="card_list">
                                     {% for genre in serial.genre.all %}
-                                        <li class="card_list_li"><a href="{% url 'genre_page' genre.slug %}">{{ genre }}</a></li>
+                                        <li class="card_list_li"><a
+                                                href="{% url 'genre_page' genre.slug %}">{{ genre }}</a></li>
                                     {% endfor %}
                                 </ul>
                                 <ul class="card_info">

@@ -376,7 +376,7 @@
 .сard_big .card_cover
 {
     min-height: 280px;
-    height: 310px;
+    /*height: 310px;*/
     width: 50%;
 }
 

@@ -54,8 +54,6 @@ class Movie(models.Model):
 
     poster = models.ImageField(upload_to='Movie/Posters/')
 
-    movie_page_poster = models.ImageField(upload_to='Movie/Posters/MoviePage/',
-                                          null=True, blank=True)
     summary = models.TextField(max_length=1600)
 
     country = models.CharField(max_length=100, default='Russia')
@@ -98,10 +96,6 @@ class Serial(models.Model):
     genre = models.ManyToManyField('Genre')
 
     poster = models.ImageField(upload_to='Movie/Posters/')
-
-    serial_page_poster = models.ImageField(
-        upload_to='Movie/Posters/SerialPage/',
-        null=True, blank=True)
 
     summary = models.TextField(max_length=1600)
 

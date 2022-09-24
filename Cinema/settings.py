@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'users',
     'web',
 
-    'bootstrap5'
+    'bootstrap5',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -104,8 +105,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'ru-ru'
-
+# LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
@@ -121,7 +122,7 @@ STATIC_URL = 'static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Cinema/static/media')
 MEDIA_URL = 'media/'
-
+LOGOUT_REDIRECT_URL = 'main_page'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
