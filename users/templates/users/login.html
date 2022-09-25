@@ -1,11 +1,15 @@
 {% extends 'users/register_login_base.html' %}
+{% load static %}
 {% load widget_tweaks %}
 {% block form %}
     <div class="field_group">
-        {{ user_form.username|add_class:'form_input'|append_attr:'placeholder:Email'|append_attr:'id=email'|append_attr:'data-value=true'|append_attr:'autocomplete=nope' }}
+        {{ user_form.username|add_class:'form_input form_input_log'|append_attr:'placeholder:Email'|append_attr:'id=email_log'|append_attr:'data-value=true'|append_attr:'autocomplete=nope' }}
     </div>
     <div class="field_group">
-        {{ user_form.password|add_class:'form_input'|append_attr:'placeholder:Password'|append_attr:'id=pwd'|append_attr:'data-value=true'|append_attr:'autocomplete=nope'}}
+        {{ user_form.password|add_class:'form_input form_input_log'|append_attr:'placeholder:Password'|append_attr:'id=pwd_log'|append_attr:'data-value=true'|append_attr:'autocomplete=nope'}}
     </div>
-    <button class="sign_login_btn" id="login_btn" type="button">Отправить</button>
+    <button class="sign_login_btn " id="login_btn" type="button">Отправить</button>
 {% endblock form %}
+{% block script %}
+    <script src="{% static 'js/login_form_checker.js' %}"></script>
+{% endblock script %}

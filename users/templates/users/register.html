@@ -1,17 +1,21 @@
 {% extends 'users/register_login_base.html' %}
+{% load static %}
 {% load widget_tweaks %}
 {% block form %}
     <div class="field_group">
-        {{ user_form.username|add_class:'form_input'|append_attr:'placeholder:Name'|append_attr:'id=username'|append_attr:'data-value=true'|append_attr:'autocomplete=off' }}
+        {{ user_form.username|add_class:'form_input form_input_reg'|remove_attr:'maxlength'|append_attr:'maxlength=40'|append_attr:'placeholder:Name'|append_attr:'id=username_reg'|append_attr:'data-value=true'|append_attr:'autocomplete=off' }}
     </div>
     <div class="field_group">
-        {{ user_form.email|add_class:'form_input'|append_attr:'placeholder:Email'|append_attr:'id=email'|append_attr:'data-value=true'|append_attr:'autocomplete=nope' }}
+        {{ user_form.email|add_class:'form_input form_input_reg'|append_attr:'placeholder:Email'|append_attr:'id=email_reg'|append_attr:'data-value=true'|append_attr:'autocomplete=nope' }}
     </div>
     <div class="field_group">
-        {{ user_form.password1|add_class:'form_input'|append_attr:'placeholder:Password'|append_attr:'id=pwd1' }}
+        {{ user_form.password1|append_attr:'maxlength=40'|add_class:'form_input form_input_reg'|append_attr:'placeholder:Password'|append_attr:'id=pwd1_reg' }}
     </div>
     <div class="field_group">
-        {{ user_form.password2|add_class:'form_input'|append_attr:'placeholder:Confirm Password'|append_attr:'id=pwd2'|append_attr:'data-value=true' }}
+        {{ user_form.password2|append_attr:'maxlength=50'|add_class:'form_input form_input_reg'|append_attr:'placeholder:Confirm Password'|append_attr:'id=pwd2_reg'|append_attr:'data-value=true' }}
     </div>
     <button class="disable_btn sign_login_btn" id="submit_btn" type="submit">Отправить</button>
 {% endblock form %}
+{% block script %}
+    <script src="{% static 'js/registration_form_checker.js' %}"></script>
+{% endblock script %}

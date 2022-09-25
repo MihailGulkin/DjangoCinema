@@ -1,6 +1,6 @@
 function form_validation_check()
 {
-    const sendSearchData = () =>
+    const sendRegData = () =>
     {
         $.ajax({
             type: 'POST',
@@ -46,33 +46,34 @@ function form_validation_check()
         })
     }
 
-    box_form = $('.form_input')
+    const box_form = $('.form_input_reg')
 
-    username = $('#username')
-    email = $('#email')
-    pwd1 = $('#pwd1')
-    pwd2 = $('#pwd2')
+    const username = $('#username_reg')
+    const email = $('#email_reg')
+    const pwd1 = $('#pwd1_reg')
+    const pwd2 = $('#pwd2_reg')
 
 
     for (let ele of box_form)
     {
         $(ele).keyup(function ()
             {
-                sendSearchData()
+                sendRegData()
             }
         )
-        $(ele).attr('OnPaste', 'return false')
     }
+
     function set_regex_on_input()
     {
         $(username).on('input', function ()
         {
-             if (!(/[A-Za-z\d]/.test($(username).val().at(-1))))
+            if (!(/[A-Za-z\d]/.test($(username).val().at(-1))))
             {
                 $(username).val($(username).val().substring(0, $(username).val().length - 1))
             }
         })
     }
+
     function get_data()
     {
         return {
@@ -81,31 +82,6 @@ function form_validation_check()
             'email': $(email).val(),
             'password1': $(pwd1).val(),
             'password2': $(pwd2).val()
-        }
-    }
-
-    function check_value_fill()
-    {
-        const temp = Array()
-        for (let ele of box_form)
-        {
-            temp.push(!!$(ele).val())
-        }
-        return temp.every(function (value)
-        {
-            return value
-        })
-    }
-
-    function check_data_value()
-    {
-        return parse_string_boolean(username.attr('data-value')) &&
-            parse_string_boolean(email.attr('data-value')) &&
-            parse_string_boolean(pwd2.attr('data-value'))
-
-        function parse_string_boolean(element)
-        {
-            return element === 'false' ? false : true
         }
     }
 
@@ -120,7 +96,33 @@ function form_validation_check()
             $('#submit_btn').addClass('disable_btn')
 
         }
+
+        function check_value_fill()
+        {
+            const temp = Array()
+            for (let ele of box_form)
+            {
+                temp.push(!!$(ele).val())
+            }
+            return temp.every(function (value)
+            {
+                return value
+            })
+        }
+
+        function check_data_value()
+        {
+            return parse_string_boolean(username.attr('data-value')) &&
+                parse_string_boolean(email.attr('data-value')) &&
+                parse_string_boolean(pwd2.attr('data-value'))
+
+            function parse_string_boolean(element)
+            {
+                return element !== 'false'
+            }
+        }
     }
+
     set_regex_on_input()
 }
 
