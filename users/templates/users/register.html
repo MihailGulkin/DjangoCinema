@@ -14,7 +14,7 @@
     <div class="field_group">
         {{ user_form.password2|append_attr:'maxlength=50'|add_class:'form_input form_input_reg'|append_attr:'placeholder:Confirm Password'|append_attr:'id=pwd2_reg'|append_attr:'data-value=true' }}
     </div>
-    <button class="disable_btn sign_login_btn" id="submit_btn" type="submit">Отправить</button>
+    <button class="disable_btn sign_login_btn" id="submit_btn" type="submit">Send</button>
 {% endblock form %}
 {% block script %}
     <script src="{% static 'js/registration_form_checker.js' %}"></script>

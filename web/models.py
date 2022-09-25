@@ -1,7 +1,4 @@
-import logging
-
 from django.db import models
-from django.utils.text import slugify
 
 
 class Genre(models.Model):
@@ -77,6 +74,16 @@ class Movie(models.Model):
 
     def get_model_name(self):
         return self._meta.model_name
+
+
+class FavoriteMovie(models.Model):
+    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
+                             default=None)
+    movie = models.ForeignKey('Movie', on_delete=models.CASCADE,
+                              default=None)
+
+    def __str__(self):
+        return f'{self.user.username} - {self.movie}'
 
 
 class Serial(models.Model):

@@ -70,18 +70,6 @@ function form_validation_check()
         sendLoginData()
     })
 
-    function set_regex_on_input()
-    {
-        $(username).on('input', function ()
-        {
-            if (!(/[A-Za-z\d@\.]/.test($(username).val().at(-1))))
-            {
-                $(username).val($(username).val().substring(0, $(username).val().length - 1))
-            }
-        })
-    }
-
-
     function get_data()
     {
         return {
@@ -90,8 +78,6 @@ function form_validation_check()
             'password': $(pwd).val()
         }
     }
-
-    set_regex_on_input()
 }
 
 form_validation_check()

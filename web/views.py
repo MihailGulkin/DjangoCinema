@@ -2,11 +2,13 @@ import logging
 
 from django.shortcuts import render
 from django.views import View
-from .models import Movie, Genre, Director, Serial
+from .models import Movie, Genre, Director, Serial, FavoriteMovie
+from users.models import CustomUser
 from web.service.shuffle_model import shuffle_model
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from web.service.return_model_query import return_query
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class MainPageView(View):
@@ -39,10 +41,17 @@ class MainPageView(View):
         page_n = request.POST.get('page_n', None)
         results = list(
             self.paginator.page(page_n).object_list.values())
+
         return JsonResponse({"results": results,
                              'directors': self.directors,
                              'film_genres': self.film_genres,
-                             })
+                             'favorite': self._favorite_movie(request,
+                                                               page_n)})
+
+    def _favorite_movie(self, request, page_n):
+        return [FavoriteMovie.objects.filter(movie=film,
+                                             user=request.user).exists()
+                for film in self.paginator.page(page_n).object_list]
 
 
 class MoviePageView(View):
@@ -92,3 +101,26 @@ class SearchAjaxView(View):
                                           number_element=3)})
             return JsonResponse({'data': 'No result :('})
         return JsonResponse({})
+
+
+class FavoriteView(View):
+
+    def post(self, request):
+        if not request.user.is_authenticated:
+            return JsonResponse(
+                {'url': f'{request.build_absolute_uri("register/")}'})
+
+        if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            slug_movie = request.POST.get('slug')
+            movie_obj = Movie.objects.get(slug=slug_movie)
+            if FavoriteMovie.objects.filter(user=request.user,
+                                            movie=movie_obj).exists():
+                FavoriteMovie.objects.get(user=request.user,
+                                          movie=movie_obj).delete()
+                return JsonResponse({'dataRemove': {'slug': slug_movie}})
+            FavoriteMovie.objects.create(user=request.user,
+                                         movie=Movie.objects.get(
+                                             slug=slug_movie))
+
+            return JsonResponse(
+                {'dataAdd': {'slug': slug_movie}})
