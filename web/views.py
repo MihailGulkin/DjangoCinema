@@ -49,10 +49,11 @@ class MainPageView(View):
                                                                page_n)})
 
     def _favorite_movie(self, request, page_n):
-        return [FavoriteMovie.objects.filter(movie=film,
-                                             user=request.user).exists()
-                for film in self.paginator.page(page_n).object_list]
-
+        if request.user.is_authenticated:
+            return [FavoriteMovie.objects.filter(movie=film,
+                                                 user=request.user).exists()
+                    for film in self.paginator.page(page_n).object_list]
+        return [False for _ in range(len(page_n))]
 
 class MoviePageView(View):
     template = 'web/movie_page.html'
