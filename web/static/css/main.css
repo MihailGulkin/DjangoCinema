@@ -486,6 +486,36 @@
     margin-bottom: 3px;
 }
 
+.card_test_some
+{
+    overflow: hidden;
+    text-overflow: ellipsis !important;
+    white-space: nowrap;
+}
+
+.card_test_some > a
+{
+    font-size: 12px;
+    color: #3593ff;
+    display: inline;
+
+}
+
+.card_test_some > a:last-child
+{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.span_color_card
+{
+    color: #3593ff;
+}
+.card_test_some > a:hover
+{
+    color: rgba(47, 128, 237, 0.68);
+    transition: .7s;
+}
 .card_list_big .card_list_li
 {
     color: #C5C3C1;

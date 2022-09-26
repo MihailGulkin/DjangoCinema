@@ -1,4 +1,7 @@
-const ele = $('#navbarDropdownGenres')
+`
+Add genres on navbar when page loading
+`
+
 const csrf = $('[name="csrfmiddlewaretoken"]')[0].value
 const dropdown_menu = $('#dropdown_genres_menu')
 

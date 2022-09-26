@@ -1,3 +1,7 @@
+`
+Many page list on one page without loading
+`
+
 function ajax_start()
 {
     $('.page_number').click(function (event)
@@ -10,7 +14,7 @@ function ajax_start()
             url: '',
             data: {
                 'page_n': page_n,
-                'csrfmiddlewaretoken':$('[name="csrfmiddlewaretoken"]')[0].value,
+                'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]')[0].value,
             },
             success: function (resp)
             {
@@ -111,7 +115,7 @@ function ajax_start()
         </svg>
                                                     ${val.IMDb_RATING}
                                                 </span>
-                                                <div data-value="${val.slug}" class="svg_heart_container ${val.slug}_cls">
+                                                <div data-value="${val.slug}" data-value-type="film" class="svg_heart_container ${val.slug}_cls">
                                                     ${generate_html_svg_heart(resp.favorite[i])}
                                    
                                                 </div>
@@ -120,7 +124,7 @@ function ajax_start()
                                     <div class="card_content">
                                         <h3 class="card_title_word_wrap card_title_wrap"><a href="movie/${val.slug}/">${val.title}</a></h3>
                                         <h5 class="card_content_title_h5">Genres</h5>
-                                        <ul class="card_list_big">
+                                        <ul class="card_list_big card_test_some flex-row">
                                                     ${generate_html_li(resp.film_genres, val)}
                                         </ul>
                                         <ul class="card_list_big">
@@ -189,7 +193,17 @@ function generate_html_li(film_genres, val)
             let html_code = ''
             for (let genre of ele[val.title])
             {
-                html_code += `<li class="card_list_li"><a href="">${genre}</a></li>`
+                if (ele[val.title].indexOf(genre) === 0)
+                {
+                    html_code += `<a href="/${genre.slug}">${genre}</a>
+`
+                }
+                else if (ele[val.title].indexOf(genre) < 3)
+                {
+
+                    html_code += `<a href="/${genre.slug}"><span
+                                                            class="span_color_card">, </span>${genre}</a>`
+                }
             }
             return html_code
 

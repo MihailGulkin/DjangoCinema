@@ -16,11 +16,6 @@
 {% block content %}
     <section class="main_movie_serial_section">
         <div class="container">
-            <div class="row header_block_film_serial">
-                <div class="col-12">
-                    <h2 class="mov_ser_text my-0">{{ content.get_model_name | capfirst }}</h2>
-                </div>
-            </div>
             <div class="row centered_block">
                 <div class="col-lg-auto col-md-12">
                     <img class="mov_ser_img" src="{{ content.poster.url }}" alt>

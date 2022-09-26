@@ -82,6 +82,7 @@ class GenrePageView(View):
         return render(request, self.template)
 
 
+# ajax web view only
 class SearchAjaxView(View):
     def post(self, request):
         if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
@@ -116,7 +117,6 @@ class FavoriteView(View):
                 {'url': f'{request.build_absolute_uri("register/")}'})
 
         if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-            logging.error(request.POST)
             slug = request.POST.get('slug')
             if request.POST.get('cinema_type') == 'film':
                 movie_obj = Movie.objects.get(slug=slug)

@@ -1,3 +1,6 @@
+`
+Favorite film/serial heart_svg
+`
 function ajax_favoriteFilm()
 {
     const elems = $('.svg_heart_container')
