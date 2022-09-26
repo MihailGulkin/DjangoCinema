@@ -104,7 +104,7 @@
     </svg>
                                                 {{ movie.IMDb_RATING }}
                                             </span>
-                                            <div data-value="{{ movie.slug }}" class="svg_heart_container {{ movie.slug }}_cls">
+                                            <div data-value="{{ movie.slug }}" data-value-type="film" class="svg_heart_container {{ movie.slug }}_cls">
                                                  {% if movie|favorite_movie:request %}
                                                      <svg class="card_svg_heart favourite_film" version="1.1"
                                                           id="Capa_1"
@@ -253,7 +253,7 @@
     </svg>
                                                 {{ movie.IMDb_RATING }}
                                             </span>
-                                            <div data-value="{{ movie.slug }}" class="svg_heart_container {{ movie.slug }}_cls">
+                                            <div data-value="{{ movie.slug }}" data-value-type="film" class="svg_heart_container {{ movie.slug }}_cls">
                                                  {% if movie|favorite_movie:request %}
                                                      <svg class="card_svg_heart favourite_film" version="1.1"
                                                           id="Capa_1"
@@ -514,7 +514,7 @@
     </svg>
                                                 {{ serial.IMDb_RATING }}
                                             </span>
-                                            <div data-value="{{ serial.slug }}" class="svg_heart_container {{ serial.slug }}_cls">
+                                            <div data-value="{{ serial.slug }}" data-value-type="serial" class="svg_heart_container {{ serial.slug }}_cls">
                                                  {% if serial|favorite_serial:request %}
                                                      <svg class="card_svg_heart favourite_film" version="1.1"
                                                           id="Capa_1"
@@ -571,6 +571,6 @@
 {% block script %}
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'js/owl_carousel_active.js' %}"></script>
-    <script src="{% static 'js/favoriteFilm.js' %}"></script>
+    <script src="{% static 'js/ajax_favoriteFilm.js' %}"></script>
     <script src="{% static 'js/ajax_query_page_list.js' %}"></script>
 {% endblock script %}

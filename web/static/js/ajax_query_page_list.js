@@ -9,8 +9,8 @@ function ajax_start()
             type: "POST",
             url: '',
             data: {
-                page_n: page_n,
-                csrfmiddlewaretoken:$('[name="csrfmiddlewaretoken"]')[0].value,
+                'page_n': page_n,
+                'csrfmiddlewaretoken':$('[name="csrfmiddlewaretoken"]')[0].value,
             },
             success: function (resp)
             {
@@ -136,7 +136,7 @@ function ajax_start()
                             </div>`)
                 });
                 start()
-                favoriteFilm()
+                ajax_favoriteFilm()
             },
             error: function ()
             {
@@ -146,7 +146,7 @@ function ajax_start()
     })
 }
 
-favoriteFilm()
+ajax_favoriteFilm()
 ajax_start()
 
 function generate_html_svg_heart(bool)

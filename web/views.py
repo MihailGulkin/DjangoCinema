@@ -116,9 +116,9 @@ class FavoriteView(View):
                 {'url': f'{request.build_absolute_uri("register/")}'})
 
         if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-
+            logging.error(request.POST)
             slug = request.POST.get('slug')
-            if request.POST.get('type') == 'movie':
+            if request.POST.get('cinema_type') == 'film':
                 movie_obj = Movie.objects.get(slug=slug)
                 if FavoriteMovie.objects.filter(user=request.user,
                                                 movie=movie_obj).exists():

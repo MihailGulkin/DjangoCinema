@@ -2,7 +2,7 @@ const ele = $('#navbarDropdownGenres')
 const csrf = $('[name="csrfmiddlewaretoken"]')[0].value
 const dropdown_menu = $('#dropdown_genres_menu')
 
-$(ele).hover(function ()
+$(document).ready(function ()
 {
     sendGenresData()
 })
@@ -16,7 +16,6 @@ const sendGenresData = () =>
         },
         success: function (resp)
         {
-            console.log($(dropdown_menu).children())
             if (!$(dropdown_menu).children().length)
             {
 

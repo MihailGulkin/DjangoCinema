@@ -1,4 +1,4 @@
-function favoriteFilm()
+function ajax_favoriteFilm()
 {
     const elems = $('.svg_heart_container')
     const csrf = $('[name="csrfmiddlewaretoken"]')[0].value
@@ -7,17 +7,18 @@ function favoriteFilm()
         $(ele).children('svg').on('click', function (event)
         {
             event.preventDefault()
-            sendFavoriteData($(ele).attr('data-value'))
+            sendFavoriteData($(ele).attr('data-value'), $(ele).attr('data-value-type'))
         })
     }
-    const sendFavoriteData = (query) =>
+    const sendFavoriteData = (query, cinema_type) =>
     {
         $.ajax({
             type: 'POST',
             url: '/favorite_film',
             data: {
                 'csrfmiddlewaretoken': csrf,
-                'slug': query
+                'slug': query,
+                'cinema_type': cinema_type,
             },
             success: (res) =>
             {
