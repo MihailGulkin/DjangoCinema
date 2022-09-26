@@ -31,7 +31,7 @@
 
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown  me-2">
-                        <form onkeypress="return event.keyCode != 13;" class="m-0 d-flex h-100" id="search_form"
+                        <form onkeypress="return event.keyCode != 13;" class="m-0" id="search_form"
                               method="post" autocomplete="off">
                             {% csrf_token %}
                             <input id="search_input" class="form-control" type="text" placeholder="Search"
@@ -65,17 +65,12 @@
                         </li>
                     {% endif %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownGenres" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             Genres
                         </a>
 
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            {% for genre in genres %}
-                                <li class="nav_item_header"><a class="dropdown-item"
-                                                               href="{% url 'genre_page' genre.slug %}">{{ genre }}</a>
-                                </li>
-                            {% endfor %}
+                        <ul id="dropdown_genres_menu" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownGenres">
                         </ul>
 
                     </li>
@@ -124,6 +119,7 @@
 {% bootstrap_javascript %}
 <script src="{% static 'js/search_ajax.js' %}"></script>
 <script src="{% static 'js/query_p_size.js' %}"></script>
+<script src="{% static 'js/ajax_genre_list_add.js' %}"></script>
 {% block script %}
 {% endblock script %}
 </body>

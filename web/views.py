@@ -2,7 +2,8 @@ import logging
 
 from django.shortcuts import render
 from django.views import View
-from .models import Movie, Genre, Director, Serial, FavoriteMovie
+from .models import Movie, Genre, Director, Serial, FavoriteMovie, \
+    FavoriteSerial
 from users.models import CustomUser
 from web.service.shuffle_model import shuffle_model
 from django.core.paginator import Paginator
@@ -15,7 +16,6 @@ class MainPageView(View):
     template = 'web/main.html'
 
     movie_model = Movie
-    genres_model = Genre.objects.all()
     serial = Serial.objects.get(pk=1)
 
     directors = [director.name for director in Director.objects.all()]
@@ -31,7 +31,6 @@ class MainPageView(View):
             shuffle_model(self.movie_model, 10)
         return render(request, self.template,
                       {"popular_movies": popular_movie_model_objects,
-                       'genres': self.genres_model,
                        'first_page': self.first_page,
                        'page_range': range(1, 4),
                        'total_pages': len(self.page_range),
@@ -46,7 +45,7 @@ class MainPageView(View):
                              'directors': self.directors,
                              'film_genres': self.film_genres,
                              'favorite': self._favorite_movie(request,
-                                                               page_n)})
+                                                              page_n)})
 
     def _favorite_movie(self, request, page_n):
         if request.user.is_authenticated:
@@ -55,35 +54,32 @@ class MainPageView(View):
                     for film in self.paginator.page(page_n).object_list]
         return [False for _ in range(len(page_n))]
 
+
 class MoviePageView(View):
     template = 'web/movie_page.html'
     movie = Movie
-    genres_model = Genre.objects.all()
 
     def get(self, request, movie_name):
         return render(request, self.template,
                       {'content': self.movie.objects.get(slug=movie_name),
-                       'genres': self.genres_model})
+                       })
 
 
 class SerialPageView(View):
     template = 'web/serial_page.html'
     serial = Serial
-    genres_model = Genre.objects.all()
 
     def get(self, request, serial_name):
         return render(request, self.template,
                       {'content': self.serial.objects.get(slug=serial_name),
-                       'genres': self.genres_model})
+                       })
 
 
 class GenrePageView(View):
     template = 'web/genre.html'
-    genres_model = Genre.objects.all()
 
     def get(self, request, genre_name):
-        return render(request, self.template,
-                      {'genres': self.genres_model})
+        return render(request, self.template)
 
 
 class SearchAjaxView(View):
@@ -104,6 +100,14 @@ class SearchAjaxView(View):
         return JsonResponse({})
 
 
+class GenresNavView(View):
+    genres_model = Genre.objects.all()
+
+    def post(self, request):
+        if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            return JsonResponse({'data': list(self.genres_model.values())})
+
+
 class FavoriteView(View):
 
     def post(self, request):
@@ -112,16 +116,29 @@ class FavoriteView(View):
                 {'url': f'{request.build_absolute_uri("register/")}'})
 
         if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-            slug_movie = request.POST.get('slug')
-            movie_obj = Movie.objects.get(slug=slug_movie)
-            if FavoriteMovie.objects.filter(user=request.user,
-                                            movie=movie_obj).exists():
-                FavoriteMovie.objects.get(user=request.user,
-                                          movie=movie_obj).delete()
-                return JsonResponse({'dataRemove': {'slug': slug_movie}})
-            FavoriteMovie.objects.create(user=request.user,
-                                         movie=Movie.objects.get(
-                                             slug=slug_movie))
 
+            slug = request.POST.get('slug')
+            if request.POST.get('type') == 'movie':
+                movie_obj = Movie.objects.get(slug=slug)
+                if FavoriteMovie.objects.filter(user=request.user,
+                                                movie=movie_obj).exists():
+                    FavoriteMovie.objects.get(user=request.user,
+                                              movie=movie_obj).delete()
+                    return JsonResponse({'dataRemove': {'slug': slug}})
+                FavoriteMovie.objects.create(user=request.user,
+                                             movie=Movie.objects.get(
+                                                 slug=slug))
+
+                return JsonResponse(
+                    {'dataAdd': {'slug': slug}})
+
+            serial_obj = Serial.objects.get(slug=slug)
+            if FavoriteSerial.objects.filter(user=request.user,
+                                             serial=serial_obj).exists():
+                FavoriteSerial.objects.get(user=request.user,
+                                           serial=serial_obj).delete()
+                return JsonResponse({'dataRemove': {'slug': slug}})
+            FavoriteSerial.objects.create(user=request.user,
+                                          serial=serial_obj)
             return JsonResponse(
-                {'dataAdd': {'slug': slug_movie}})
+                {'dataAdd': {'slug': slug}})

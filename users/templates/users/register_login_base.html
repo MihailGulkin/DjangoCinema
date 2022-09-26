@@ -11,14 +11,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="form_container">
-                        <form method="post" class="form_post" onkeypress="return event.keyCode != 13;">
-                            {% csrf_token %}
-                            <a class="login_icon" href="{% url 'main_page' %}">
-                                <img src="{% static 'image/LOGO.gif' %}">
-                            </a>
-                            {% block form %}
-                            {% endblock form %}
-                        </form>
+                        {% block form %}
+                        {% endblock form %}
                     </div>
                 </div>
             </div>

@@ -86,6 +86,16 @@ class FavoriteMovie(models.Model):
         return f'{self.user.username} - {self.movie}'
 
 
+class FavoriteSerial(models.Model):
+    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
+                             default=None)
+    serial = models.ForeignKey('Serial', on_delete=models.CASCADE,
+                               default=None)
+
+    def __str__(self):
+        return f'{self.user.username} - {self.serial}'
+
+
 class Serial(models.Model):
     serial_name = models.CharField(max_length=200)
 

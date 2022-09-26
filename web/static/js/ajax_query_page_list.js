@@ -10,7 +10,7 @@ function ajax_start()
             url: '',
             data: {
                 page_n: page_n,
-                csrfmiddlewaretoken: _getCookie('csrftoken'),
+                csrfmiddlewaretoken:$('[name="csrfmiddlewaretoken"]')[0].value,
             },
             success: function (resp)
             {
@@ -148,25 +148,6 @@ function ajax_start()
 
 favoriteFilm()
 ajax_start()
-
-function _getCookie(name)
-{
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '')
-    {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++)
-        {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '='))
-            {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
 
 function generate_html_svg_heart(bool)
 {

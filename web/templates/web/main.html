@@ -1,7 +1,7 @@
 {% extends 'web/base.html' %}
 {% load static %}
 {% load forx %}
-{% load check_favoriet_movie %}
+{% load check_favorite %}
 {% block title_style %}
     <title>Main</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
@@ -105,7 +105,7 @@
                                                 {{ movie.IMDb_RATING }}
                                             </span>
                                             <div data-value="{{ movie.slug }}" class="svg_heart_container {{ movie.slug }}_cls">
-                                                 {% if movie|favorite %}
+                                                 {% if movie|favorite_movie:request %}
                                                      <svg class="card_svg_heart favourite_film" version="1.1"
                                                           id="Capa_1"
 
@@ -254,7 +254,7 @@
                                                 {{ movie.IMDb_RATING }}
                                             </span>
                                             <div data-value="{{ movie.slug }}" class="svg_heart_container {{ movie.slug }}_cls">
-                                                 {% if movie|favorite %}
+                                                 {% if movie|favorite_movie:request %}
                                                      <svg class="card_svg_heart favourite_film" version="1.1"
                                                           id="Capa_1"
 
@@ -430,14 +430,16 @@
                         {% for i in  10|for_range %}
                             <div class="card">
                                 <a href="{% url 'serial_page' serial.slug %}" class="card_cover">
-                                    <img class="card_img" src="{{ serial.poster.url }}" alt="">
-                                    <svg class="card_svg_play" version="1.0" xmlns="http://www.w3.org/2000/svg"
-                                         width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
-                                         preserveAspectRatio="xMidYMid meet">
+                                       <img class="card_img" src="{{ serial.poster.url }}" alt="">
 
-                                        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-                                           fill="#000000" stroke="none">
-                                            <path d="M2330 5110 c-494 -48 -950 -230 -1350 -538 -195 -150 -448 -432 -594
+                                        <svg class="card_svg_play" version="1.0" xmlns="http://www.w3.org/2000/svg"
+                                             width="512.000000pt" height="512.000000pt"
+                                             viewBox="0 0 512.000000 512.000000"
+                                             preserveAspectRatio="xMidYMid meet">
+
+                                            <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                                               fill="#000000" stroke="none">
+                                                <path d="M2330 5110 c-494 -48 -950 -230 -1350 -538 -195 -150 -448 -432 -594
 -662 -63 -99 -186 -351 -230 -471 -49 -134 -102 -340 -128 -499 -31 -195 -31
 -565 0 -760 45 -276 116 -498 237 -745 132 -269 269 -460 489 -681 221 -220
 412 -357 681 -489 247 -121 469 -192 745 -237 195 -31 565 -31 760 0 276 45
@@ -450,14 +452,15 @@
 -942 -579 -246 -79 -438 -108 -713 -108 -275 0 -467 29 -713 108 -371 120
 -663 300 -942 579 -374 373 -589 803 -670 1340 -23 151 -23 479 0 630 54 355
 169 667 353 955 161 253 449 541 702 702 475 303 1045 429 1590 352z"/>
-                                            <path d="M1983 3616 c-66 -30 -63 28 -63 -1058 0 -952 1 -984 19 -1014 28 -47
+                                                <path d="M1983 3616 c-66 -30 -63 28 -63 -1058 0 -952 1 -984 19 -1014 28 -47
 78 -61 130 -37 78 35 1529 976 1542 1000 16 29 16 77 0 106 -10 18 -1218 806
 -1496 976 -64 38 -92 44 -132 27z m751 -676 c322 -206 585 -377 585 -380 0 -5
 -1162 -752 -1179 -758 -6 -2 -10 280 -10 758 0 478 4 760 10 758 5 -1 272
 -172 594 -378z"/>
-                                        </g>
-                                    </svg>
-                                    <span class="navbar_rating_hover">
+                                            </g>
+                                        </svg>
+
+                                        <span class="navbar_rating_hover">
                                             <span class="card_rating">
                                                 <svg class="card_svg_star" version="1.1" id="Capa_1"
                                                      xmlns="http://www.w3.org/2000/svg"
@@ -511,13 +514,15 @@
     </svg>
                                                 {{ serial.IMDb_RATING }}
                                             </span>
-                                            <div class="svg_heart_container">
-                                                <svg class="card_svg_heart" version="1.1" id="Capa_1"
+                                            <div data-value="{{ serial.slug }}" class="svg_heart_container {{ serial.slug }}_cls">
+                                                 {% if serial|favorite_serial:request %}
+                                                     <svg class="card_svg_heart favourite_film" version="1.1"
+                                                          id="Capa_1"
 
-                                                     xmlns="http://www.w3.org/2000/svg"
-                                                     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                                     width="45.743px" height="45.743px" viewBox="0 0 45.743 45.743"
-                                                     xml:space="preserve">
+                                                          xmlns="http://www.w3.org/2000/svg"
+                                                          xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                          width="45.743px" height="45.743px" viewBox="0 0 45.743 45.743"
+                                                          xml:space="preserve">
                                                 <g>
                                                     <path d="M34.199,3.83c-3.944,0-7.428,1.98-9.51,4.997c0,0-0.703,1.052-1.818,1.052c-1.114,0-1.817-1.052-1.817-1.052
                                                         c-2.083-3.017-5.565-4.997-9.51-4.997C5.168,3.83,0,8.998,0,15.376c0,1.506,0.296,2.939,0.82,4.258
@@ -525,6 +530,21 @@
                                                         C45.743,8.998,40.575,3.83,34.199,3.83z"/>
                                                 </g>
                                             </svg>
+                                                 {% else %}
+                                                     <svg class="card_svg_heart" version="1.1" id="Capa_1"
+
+                                                          xmlns="http://www.w3.org/2000/svg"
+                                                          xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                          width="45.743px" height="45.743px" viewBox="0 0 45.743 45.743"
+                                                          xml:space="preserve">
+                                                <g>
+                                                    <path d="M34.199,3.83c-3.944,0-7.428,1.98-9.51,4.997c0,0-0.703,1.052-1.818,1.052c-1.114,0-1.817-1.052-1.817-1.052
+                                                        c-2.083-3.017-5.565-4.997-9.51-4.997C5.168,3.83,0,8.998,0,15.376c0,1.506,0.296,2.939,0.82,4.258
+                                                        c3.234,10.042,17.698,21.848,22.051,22.279c4.354-0.431,18.816-12.237,22.052-22.279c0.524-1.318,0.82-2.752,0.82-4.258
+                                                        C45.743,8.998,40.575,3.83,34.199,3.83z"/>
+                                                </g>
+                                            </svg>
+                                                 {% endif %}
                                             </div>
                                         </span>
                                 </a>
