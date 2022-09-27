@@ -79,21 +79,21 @@ class Movie(models.Model):
 class FavoriteMovie(models.Model):
     user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
                              default=None)
-    movie = models.ForeignKey('Movie', on_delete=models.CASCADE,
-                              default=None)
+    cinema_type = models.ForeignKey('Movie', on_delete=models.CASCADE,
+                                    default=None)
 
     def __str__(self):
-        return f'{self.user.username} - {self.movie}'
+        return f'{self.user.username} - {self.cinema_type}'
 
 
 class FavoriteSerial(models.Model):
     user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
                              default=None)
-    serial = models.ForeignKey('Serial', on_delete=models.CASCADE,
-                               default=None)
+    cinema_type = models.ForeignKey('Serial', on_delete=models.CASCADE,
+                                    default=None)
 
     def __str__(self):
-        return f'{self.user.username} - {self.serial}'
+        return f'{self.user.username} - {self.cinema_type}'
 
 
 class Serial(models.Model):
