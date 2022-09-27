@@ -1,9 +1,9 @@
 `
-Favorite film/serial heart_svg
+Later film/serial bookmark_svg
 `
-function ajax_favoriteFilm()
+function ajax_lateFilm()
 {
-    const elems = $('.svg_heart_container')
+    const elems = $('.svg_bookmark_container')
     for (let ele of elems)
     {
         $(ele).children('svg').on('click', function (event)
@@ -16,7 +16,7 @@ function ajax_favoriteFilm()
     {
         $.ajax({
             type: 'POST',
-            url: '/favorite_film',
+            url: '/later_film',
             data: {
                 'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]')[0].value,
                 'slug': query,
@@ -30,16 +30,16 @@ function ajax_favoriteFilm()
                 }
                 if (res.dataAdd)
                 {
-                    for (let ele of $(`.${res.dataAdd.slug}_cls_favorite`))
+                    for (let ele of $(`.${res.dataAdd.slug}_cls_bookmark`))
                     {
-                        $(ele).children('svg').addClass('favourite_film')
+                        $(ele).children('svg').addClass('later_film')
                     }
                 }
                 if (res.dataRemove)
                 {
-                    for (let ele of $(`.${res.dataRemove.slug}_cls_favorite`))
+                    for (let ele of $(`.${res.dataRemove.slug}_cls_bookmark`))
                     {
-                        $(ele).children('svg').removeClass('favourite_film')
+                        $(ele).children('svg').removeClass('later_film')
                     }
 
                 }

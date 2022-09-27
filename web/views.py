@@ -1,3 +1,5 @@
+import logging
+
 from django.shortcuts import render
 from django.views import View
 from .models import Movie, Genre, Director, Serial, ActionsWithMovie, \
@@ -6,6 +8,8 @@ from web.service.shuffle_model import shuffle_model
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from web.service.return_model_query import return_query
+from web.service.create_serial_film_model import \
+    create_serial_film_model_response
 
 
 class MainPageView(View):
@@ -40,14 +44,18 @@ class MainPageView(View):
         return JsonResponse({"results": results,
                              'directors': self.directors,
                              'film_genres': self.film_genres,
-                             'favorite': self._favorite_movie(request,
-                                                              page_n)})
+                             'favorite': self._favorite_later_movie(request,
+                                                                    page_n,
+                                                                    'Favorite'),
+                             'later': self._favorite_later_movie(request,
+                                                                 page_n,
+                                                                 'Later')})
 
-    def _favorite_movie(self, request, page_n):
+    def _favorite_later_movie(self, request, page_n, choose):
         if request.user.is_authenticated:
             return [ActionsWithMovie.objects.filter(cinema_type=film,
-                                                 user=request.user,
-                                                 choose_favorite_later='Favorite').exists()
+                                                    user=request.user,
+                                                    choose_favorite_later=choose).exists()
                     for film in self.paginator.page(page_n).object_list]
         return [False for _ in range(len(page_n))]
 
@@ -114,25 +122,30 @@ class FavoriteView(View):
                 {'url': f'{request.build_absolute_uri("register/")}'})
 
         if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-            self.slug = request.POST.get('slug')
+            slug = request.POST.get('slug')
             if request.POST.get('cinema_type') == 'film':
-                return self._create_serial_film_model(Movie, ActionsWithMovie,
-                                                      request)
-            return self._create_serial_film_model(Serial, ActionsWithSerial,
-                                                  request)
+                return create_serial_film_model_response(Movie,
+                                                         ActionsWithMovie,
+                                                         'Favorite',
+                                                         request, slug)
+            return create_serial_film_model_response(Serial, ActionsWithSerial,
+                                                     'Favorite',
+                                                     request, slug)
 
-    def _create_serial_film_model(self, model_cinema, favorite_cinema,
-                                  request):
-        _obj = model_cinema.objects.get(slug=self.slug)
-        if favorite_cinema.objects.filter(user=request.user,
-                                          cinema_type=_obj,
-                                          choose_favorite_later='Favorite').exists():
-            favorite_cinema.objects.get(user=request.user,
-                                        cinema_type=_obj,
-                                        choose_favorite_later='Favorite').delete()
-            return JsonResponse({'dataRemove': {'slug': self.slug}})
-        favorite_cinema.objects.create(user=request.user,
-                                       cinema_type=_obj,
-                                       choose_favorite_later='Favorite')
 
-        return JsonResponse({'dataAdd': {'slug': self.slug}})
+class LaterView(View):
+    def post(self, request):
+        if not request.user.is_authenticated:
+            return JsonResponse(
+                {'url': f'{request.build_absolute_uri("register/")}'})
+
+        if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            slug = request.POST.get('slug')
+            if request.POST.get('cinema_type') == 'film':
+                return create_serial_film_model_response(Movie,
+                                                         ActionsWithMovie,
+                                                         'Later',
+                                                         request, slug)
+            return create_serial_film_model_response(Serial, ActionsWithSerial,
+                                                     'Later',
+                                                     request, slug)

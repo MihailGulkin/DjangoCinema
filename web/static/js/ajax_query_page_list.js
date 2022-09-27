@@ -115,8 +115,12 @@ function ajax_start()
         </svg>
                                                     ${val.IMDb_RATING}
                                                 </span>
-                                                <div data-value="${val.slug}" data-value-type="film" class="svg_heart_container ${val.slug}_cls">
+                                                <div data-value="${val.slug}" data-value-type="film" class="svg_heart_container ${val.slug}_cls_favorite">
                                                     ${generate_html_svg_heart(resp.favorite[i])}
+                                   
+                                                </div>
+                                                <div data-value="${val.slug}" data-value-type="film" class="svg_bookmark_container ${val.slug}_cls_bookmark">
+                                                    ${generate_html_svg_book(resp.later[i])}
                                    
                                                 </div>
                                             </span>
@@ -141,6 +145,7 @@ function ajax_start()
                 });
                 start()
                 ajax_favoriteFilm()
+                ajax_lateFilm()
             },
             error: function ()
             {
@@ -150,13 +155,14 @@ function ajax_start()
     })
 }
 
+ajax_lateFilm()
 ajax_favoriteFilm()
 ajax_start()
 
 function generate_html_svg_heart(bool)
 {
     return bool
-        ? `<svg class="card_svg_heart favourite_film" version="1.1"
+        ? `<svg class="card_svg_actions_with_film favourite_film" version="1.1"
                                                      id="Capa_1"
                                                      xmlns="http://www.w3.org/2000/svg"
                                                      xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -169,7 +175,7 @@ function generate_html_svg_heart(bool)
                                                             C45.743,8.998,40.575,3.83,34.199,3.83z"/>
                                                     </g>
                                                 </svg>`
-        : `<svg class="card_svg_heart" version="1.1"
+        : `<svg class="card_svg_actions_with_film" version="1.1"
                                                      id="Capa_1"
                                                      xmlns="http://www.w3.org/2000/svg"
                                                      xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -183,7 +189,38 @@ function generate_html_svg_heart(bool)
                                                     </g>
                                                 </svg>`
 }
+function generate_html_svg_book(bool)
+{
+    return bool
+    ? `<svg class="card_svg_actions_with_film later_film" version="1.1"
+                                                          id="Capa_1"
+                                                          xmlns="http://www.w3.org/2000/svg"
+                                                          xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                          width="459px" height="459px" viewBox="0 0 459 459"
+                                                          style="enable-background:new 0 0 459 459;"
+                                                          xml:space="preserve">
+                                                        <g>
+                                                            <g id="bookmark">
+                                                                <path d="M357,0H102C73.95,0,51,22.95,51,51v408l178.5-76.5L408,459V51C408,22.95,385.05,0,357,0z"/>
+                                                            </g>
+                                                        </g>
+                                                        </svg>`
+    : `<svg class="card_svg_actions_with_film" version="1.1"
+                                                          id="Capa_1"
+                                                          xmlns="http://www.w3.org/2000/svg"
+                                                          xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                          width="459px" height="459px" viewBox="0 0 459 459"
+                                                          style="enable-background:new 0 0 459 459;"
+                                                          xml:space="preserve">
+                                                        <g>
+                                                            <g id="bookmark">
+                                                                <path d="M357,0H102C73.95,0,51,22.95,51,51v408l178.5-76.5L408,459V51C408,22.95,385.05,0,357,0z"/>
+                                                            </g>
+                                                        </g>
+                                                        </svg>
+`
 
+}
 function generate_html_li(film_genres, val)
 {
     for (let ele of film_genres)

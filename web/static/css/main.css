@@ -115,7 +115,7 @@
     transition: .5s;
 }
 
-.card_cover:hover .card_svg_heart
+.card_cover:hover .card_svg_actions_with_film
 {
     opacity: 1;
     transform: scale(1);
@@ -134,7 +134,7 @@
     height: 20px;
 }
 
-.card_svg_heart
+.card_svg_actions_with_film
 {
     margin-top: 10px;
     width: 35px;
@@ -146,7 +146,7 @@
     opacity: 0;
 }
 
-.card_svg_heart path
+.card_svg_actions_with_film path
 {
     fill: #7e7e7e;
     transition: .5s;
@@ -158,8 +158,12 @@
     fill: #ee4381 !important;
     transition: .5s;
 }
-
-.card_svg_heart:hover path
+.later_film path
+{
+    fill: #3593ff !important;
+    transition: .5s;
+}
+.card_svg_actions_with_film:hover path
 {
     opacity: 1;
 }
