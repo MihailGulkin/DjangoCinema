@@ -1,5 +1,21 @@
 from django.db import models
 
+mpa_rating_system = [('G', 'G'),
+                     ('PG', 'PG'),
+                     ('PG-13', 'PG-13'),
+                     ('R', 'R'),
+                     ('NC-17', 'NC-17')
+                     ]
+
+age_rating_system = [('0', '0'),
+                     ('6+', '6+'),
+                     ('12+', '12+'),
+                     ('16+', '16+'),
+                     ('18+', '18+')]
+
+favorite_later_cinema = [('Later', 'Later'),
+                         ('Favorite', 'Favorite')]
+
 
 class Genre(models.Model):
     name = models.CharField(max_length=200)
@@ -19,20 +35,6 @@ class Director(models.Model):
 
     def __str__(self):
         return self.name
-
-
-mpa_rating_system = [('G', 'G'),
-                     ('PG', 'PG'),
-                     ('PG-13', 'PG-13'),
-                     ('R', 'R'),
-                     ('NC-17', 'NC-17')
-                     ]
-
-age_rating_system = [('0', '0'),
-                     ('6+', '6+'),
-                     ('12+', '12+'),
-                     ('16+', '16+'),
-                     ('18+', '18+')]
 
 
 class Movie(models.Model):
@@ -76,21 +78,27 @@ class Movie(models.Model):
         return self._meta.model_name
 
 
-class FavoriteMovie(models.Model):
+class ActionsWithMovie(models.Model):
     user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
                              default=None)
     cinema_type = models.ForeignKey('Movie', on_delete=models.CASCADE,
                                     default=None)
+    choose_favorite_later = models.CharField(max_length=100,
+                                             choices=favorite_later_cinema,
+                                             default='F')
 
     def __str__(self):
         return f'{self.user.username} - {self.cinema_type}'
 
 
-class FavoriteSerial(models.Model):
+class ActionsWithSerial(models.Model):
     user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
                              default=None)
     cinema_type = models.ForeignKey('Serial', on_delete=models.CASCADE,
                                     default=None)
+    choose_favorite_later = models.CharField(max_length=100,
+                                             choices=favorite_later_cinema,
+                                             default='F')
 
     def __str__(self):
         return f'{self.user.username} - {self.cinema_type}'

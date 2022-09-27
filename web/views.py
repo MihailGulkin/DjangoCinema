@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
-from .models import Movie, Genre, Director, Serial, FavoriteMovie, \
-    FavoriteSerial
+from .models import Movie, Genre, Director, Serial, ActionsWithMovie, \
+    ActionsWithSerial
 from web.service.shuffle_model import shuffle_model
 from django.core.paginator import Paginator
 from django.http import JsonResponse
@@ -45,8 +45,9 @@ class MainPageView(View):
 
     def _favorite_movie(self, request, page_n):
         if request.user.is_authenticated:
-            return [FavoriteMovie.objects.filter(cinema_type=film,
-                                                 user=request.user).exists()
+            return [ActionsWithMovie.objects.filter(cinema_type=film,
+                                                 user=request.user,
+                                                 choose_favorite_later='Favorite').exists()
                     for film in self.paginator.page(page_n).object_list]
         return [False for _ in range(len(page_n))]
 
@@ -115,20 +116,23 @@ class FavoriteView(View):
         if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
             self.slug = request.POST.get('slug')
             if request.POST.get('cinema_type') == 'film':
-                return self._create_serial_film_model(Movie, FavoriteMovie,
+                return self._create_serial_film_model(Movie, ActionsWithMovie,
                                                       request)
-            return self._create_serial_film_model(Serial, FavoriteSerial,
+            return self._create_serial_film_model(Serial, ActionsWithSerial,
                                                   request)
 
     def _create_serial_film_model(self, model_cinema, favorite_cinema,
                                   request):
         _obj = model_cinema.objects.get(slug=self.slug)
         if favorite_cinema.objects.filter(user=request.user,
-                                          cinema_type=_obj).exists():
+                                          cinema_type=_obj,
+                                          choose_favorite_later='Favorite').exists():
             favorite_cinema.objects.get(user=request.user,
-                                        cinema_type=_obj).delete()
+                                        cinema_type=_obj,
+                                        choose_favorite_later='Favorite').delete()
             return JsonResponse({'dataRemove': {'slug': self.slug}})
         favorite_cinema.objects.create(user=request.user,
-                                       cinema_type=_obj)
+                                       cinema_type=_obj,
+                                       choose_favorite_later='Favorite')
 
         return JsonResponse({'dataAdd': {'slug': self.slug}})
