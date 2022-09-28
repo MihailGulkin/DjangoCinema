@@ -180,5 +180,6 @@ class ActionsWithSerial(models.Model):
 class UserRatingMovie(models.Model):
     user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
                              default=None)
-
+    movie = models.ForeignKey('Movie', on_delete=models.CASCADE,
+                              default=None)
     rating = models.PositiveSmallIntegerField(default=1)

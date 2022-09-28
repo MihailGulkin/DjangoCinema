@@ -3,7 +3,7 @@ import logging
 from django.shortcuts import render
 from django.views import View
 from .models import Movie, Genre, Director, Serial, ActionsWithMovie, \
-    ActionsWithSerial
+    ActionsWithSerial, UserRatingMovie
 from web.service.shuffle_model import shuffle_model
 from django.core.paginator import Paginator
 from django.http import JsonResponse
@@ -63,11 +63,16 @@ class MainPageView(View):
 class MoviePageView(View):
     template = 'web/movie_page.html'
     movie = Movie
+    movie_rating = UserRatingMovie
 
     def get(self, request, movie_name):
+        movie_obj = self.movie.objects.get(slug=movie_name)
+        if self.movie_rating.objects.filter(user=request.user,
+                                            movie=movie_obj):
+            pass
         return render(request, self.template,
                       {'content': self.movie.objects.get(slug=movie_name),
-                       })
+                       'rating': UserRatingMovie})
 
     def post(self, request, movie_name):
         logging.error(request.POST)
