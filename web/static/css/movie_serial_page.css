@@ -91,7 +91,10 @@
     flex-direction: column;
     padding-right: 10px;
 }
-
+.one_star_container:hover
+{
+    cursor: pointer;
+}
 .active_star_fill .svg_star_container .svg_star_mark
 {
     fill: rgba(26, 19, 231, 0.72) !important;

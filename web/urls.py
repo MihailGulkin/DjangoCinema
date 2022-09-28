@@ -14,6 +14,7 @@ urlpatterns = [
          name='serial_page'),
     path('<slug:genre_name>/', GenrePageView.as_view(), name='genre_page'),
 
+    # ajaxed path for only post view
     path('later_film', LaterView.as_view(), name='later_click'),
     path('search_search_url_search_token', SearchAjaxView.as_view(),
          name='search_form'),

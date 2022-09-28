@@ -9,10 +9,10 @@ function ajax_lateFilm()
         $(ele).children('svg').on('click', function (event)
         {
             event.preventDefault()
-            sendFavoriteData($(ele).attr('data-value'), $(ele).attr('data-value-type'))
+            sendLaterData($(ele).attr('data-value'), $(ele).attr('data-value-type'))
         })
     }
-    const sendFavoriteData = (query, cinema_type) =>
+    const sendLaterData = (query, cinema_type) =>
     {
         $.ajax({
             type: 'POST',

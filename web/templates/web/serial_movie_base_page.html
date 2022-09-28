@@ -14,6 +14,7 @@
 {% endblock title_style %}
 
 {% block content %}
+    {% csrf_token %}
     <section class="main_movie_serial_section">
         <div class="container">
             <div class="row centered_block">
@@ -120,9 +121,10 @@
             <div class="row">
                 <div class="сol-12 d-flex rating_bar">
                     <div class="many_star_container d-flex">
+
                         {% for i in 10|for_range %}
                             <div class="one_star_div">
-                                <a name="{{ i }}" class="one_star_container d-flex" href="#">
+                                <a name="{{ i| add:1}}" class="one_star_container d-flex">
                                     <div class="svg_star_container">
                                         <svg class="svg_star_mark" version="1.1" xmlns="http://www.w3.org/2000/svg"
                                              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -154,7 +156,7 @@
                 <div class="col-12">
                     <div class="synopsys_block">
                         <p class="mov_ser_text p_star_text">{{ content.summary }}</p>
-                    </div>
+                    </div>4
                 </div>
             </div>
         </div>
@@ -167,4 +169,5 @@
     <script src="{% static 'js/star_fill.js' %}"></script>
     <script src="{% static 'js/change_p_text_size.js' %}"></script>
     <script src="{% static 'js/rating_color_changer.js' %}"></script>
+    <script src="{% static 'js/ajax_rating_star_put.js' %}"></script>
 {% endblock script %}

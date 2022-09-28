@@ -69,6 +69,11 @@ class MoviePageView(View):
                       {'content': self.movie.objects.get(slug=movie_name),
                        })
 
+    def post(self, request, movie_name):
+        logging.error(request.POST)
+        logging.error(movie_name)
+        return JsonResponse({'some': 'info'})
+
 
 class SerialPageView(View):
     template = 'web/serial_page.html'

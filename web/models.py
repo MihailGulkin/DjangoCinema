@@ -78,32 +78,6 @@ class Movie(models.Model):
         return self._meta.model_name
 
 
-class ActionsWithMovie(models.Model):
-    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
-                             default=None)
-    cinema_type = models.ForeignKey('Movie', on_delete=models.CASCADE,
-                                    default=None)
-    choose_favorite_later = models.CharField(max_length=100,
-                                             choices=favorite_later_cinema,
-                                             default='F')
-
-    def __str__(self):
-        return f'{self.user.username} - {self.cinema_type}'
-
-
-class ActionsWithSerial(models.Model):
-    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
-                             default=None)
-    cinema_type = models.ForeignKey('Serial', on_delete=models.CASCADE,
-                                    default=None)
-    choose_favorite_later = models.CharField(max_length=100,
-                                             choices=favorite_later_cinema,
-                                             default='F')
-
-    def __str__(self):
-        return f'{self.user.username} - {self.cinema_type}'
-
-
 class Serial(models.Model):
     serial_name = models.CharField(max_length=200)
 
@@ -175,3 +149,36 @@ class Episode(models.Model):
 
     def __str__(self):
         return self.episode_number
+
+
+class ActionsWithMovie(models.Model):
+    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
+                             default=None)
+    cinema_type = models.ForeignKey('Movie', on_delete=models.CASCADE,
+                                    default=None)
+    choose_favorite_later = models.CharField(max_length=100,
+                                             choices=favorite_later_cinema,
+                                             default='F')
+
+    def __str__(self):
+        return f'{self.user.username} - {self.cinema_type}'
+
+
+class ActionsWithSerial(models.Model):
+    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
+                             default=None)
+    cinema_type = models.ForeignKey('Serial', on_delete=models.CASCADE,
+                                    default=None)
+    choose_favorite_later = models.CharField(max_length=100,
+                                             choices=favorite_later_cinema,
+                                             default='F')
+
+    def __str__(self):
+        return f'{self.user.username} - {self.cinema_type}'
+
+
+class UserRatingMovie(models.Model):
+    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
+                             default=None)
+
+    rating = models.PositiveSmallIntegerField(default=1)
