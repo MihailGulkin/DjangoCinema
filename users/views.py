@@ -50,5 +50,5 @@ class LoginPageView(View):
 class ProfilePageView(View):
     template = 'users/profile.html'
 
-    def get(self, request):
+    def get(self, request, username):
         return render(request, self.template)

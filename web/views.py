@@ -67,17 +67,39 @@ class MoviePageView(View):
 
     def get(self, request, movie_name):
         movie_obj = self.movie.objects.get(slug=movie_name)
-        if self.movie_rating.objects.filter(user=request.user,
-                                            movie=movie_obj):
-            pass
+        if not request.user.is_authenticated:
+            return render(request, self.template,
+                          {'content': movie_obj,
+                           'rating': movie_obj.IMDb_RATING})
+
         return render(request, self.template,
-                      {'content': self.movie.objects.get(slug=movie_name),
-                       'rating': UserRatingMovie})
+                      {'content': movie_obj,
+                       'rating':
+                           self.movie_rating.objects.get(user=request.user,
+                                                         movie=movie_obj)
+                           if self.movie_rating.objects.filter(
+                               user=request.user,
+                               movie=movie_obj).exists()
+                           else movie_obj.IMDb_RATING})
 
     def post(self, request, movie_name):
-        logging.error(request.POST)
-        logging.error(movie_name)
-        return JsonResponse({'some': 'info'})
+        if not request.user.is_authenticated:
+            return JsonResponse(
+                {'url': f'{request.build_absolute_uri("/register/")}'})
+
+        if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            movie_obj = self.movie.objects.get(slug=movie_name)
+            if rating_obj := self.movie_rating.objects.filter(
+                    user=request.user,
+                    movie=movie_obj).first():
+                rating_obj.rating = request.POST['rating']
+                rating_obj.save()
+            else:
+                self.movie_rating.objects.create(user=request.user,
+                                                 movie=movie_obj,
+                                                 rating=request.POST['rating'])
+
+            return JsonResponse({'rating': request.POST['rating']})
 
 
 class SerialPageView(View):
@@ -159,3 +181,10 @@ class LaterView(View):
             return create_serial_film_model_response(Serial, ActionsWithSerial,
                                                      'Later',
                                                      request, slug)
+
+
+class DeleteRatingUserView(View):
+    def post(self, request):
+        if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            logging.error(request.POST)
+            return JsonResponse({'some': 'info'})

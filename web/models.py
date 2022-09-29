@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 
 mpa_rating_system = [('G', 'G'),
@@ -159,6 +161,8 @@ class ActionsWithMovie(models.Model):
     choose_favorite_later = models.CharField(max_length=100,
                                              choices=favorite_later_cinema,
                                              default='F')
+    created = models.DateTimeField(auto_now_add=True,
+                                   null=True)
 
     def __str__(self):
         return f'{self.user.username} - {self.cinema_type}'
@@ -172,6 +176,8 @@ class ActionsWithSerial(models.Model):
     choose_favorite_later = models.CharField(max_length=100,
                                              choices=favorite_later_cinema,
                                              default='F')
+    created = models.DateTimeField(auto_now_add=True,
+                                   null=True)
 
     def __str__(self):
         return f'{self.user.username} - {self.cinema_type}'
@@ -183,3 +189,8 @@ class UserRatingMovie(models.Model):
     movie = models.ForeignKey('Movie', on_delete=models.CASCADE,
                               default=None)
     rating = models.PositiveSmallIntegerField(default=1)
+    created = models.DateTimeField(auto_now_add=True,
+                                   null=True)
+
+    def __str__(self):
+        return f'{self.user.username} - {self.movie.title} - {self.rating}'

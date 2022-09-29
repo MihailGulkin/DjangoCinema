@@ -8,7 +8,7 @@ function change_p_size()
 
     function set_rating_font_size()
     {
-        $('.mov_rating_text').css('font-size', '0').css("font-size",
+        $('#true_rating_cinema').css('font-size', '0').css("font-size",
             `${$('.one_star_container').first().height() - 5}`)
     }
 }

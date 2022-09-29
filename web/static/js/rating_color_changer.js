@@ -1,10 +1,10 @@
 function rating_color_change()
 {
-    const select = $('.mov_rating_text')
-    const value = $(select).text()
+    const select = $('.rating_cinema_color')
     select.each(function ()
     {
-        if (value > 7)
+        const value = $(this).text()
+        if (value >= 7)
         {
             $(this).css('color', 'rgb(47, 128, 237)')
         } else if (value >= 5)
