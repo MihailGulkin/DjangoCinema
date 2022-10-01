@@ -1,5 +1,6 @@
 class Fill_Star
 {
+    name = 23;
     constructor()
     {
         this.svg_star_marks = $('.svg_star_mark')

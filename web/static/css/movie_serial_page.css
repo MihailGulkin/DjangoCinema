@@ -187,3 +187,24 @@
         margin-right: 15px;
     }
 }
+/* RATING BAR SECTION*/
+.font_class_style_rating
+{
+    font-family: 'Rubik', sans-serif;
+    font-size: 25px;
+    padding: 0;
+    padding-right: 10px;
+}
+.time_styles
+{
+    text-align: start;
+    font-family: 'Iter', sans-serif;
+}
+
+@media all and (max-width: 768px)
+{
+    .font_class_style_rating
+    {
+        font-size: 16px;
+    }
+}

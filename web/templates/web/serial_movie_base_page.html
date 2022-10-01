@@ -24,21 +24,8 @@
                 <div class="col-lg-auto col-md-12">
                     <div class="left_block">
                         <div class="name_film_block">
-                            <h1 class="mov_ser_text title_margin_btm">
-                                {% if content.title %}
-                                    {{ content.title }}
-                                {% else %}
-                                    {{ content.serial_name }}
-                                {% endif %}
-                            </h1>
-                            <h3 class="mov_ser_text">
-                                About
-                                {% if content.title %}
-                                    Film
-                                {% else %}
-                                    Serial
-                                {% endif %}
-                            </h3>
+                            {% block name_film_serial %}
+                            {% endblock name_film_serial %}
                         </div>
                         <div class="about_film_block">
                             <ul class="px-0 ">
@@ -151,21 +138,21 @@
                         </div>
                         {% if not rating.rating %}
                             <h2 id="true_rating_cinema" name="{{ content.IMDb_RATING }}"
-                                class="mov_rating_text my-0">{{ content.IMDb_RATING }}</h2>
+                                class="rating_cinema_color mov_rating_text my-0">{{ content.IMDb_RATING }}</h2>
                         {% else %}
-                            <h2 name="{{ rating.rating }}"
+                            <h2 id="true_rating_cinema" name="{{ rating.rating }}"
                                 class="rating_cinema_color mov_rating_text my-0">{{ content.IMDb_RATING }}</h2>
                         {% endif %}
                     </div>
                     {% if rating.rating %}
                         <div class="d-flex flex-column" id="user_rating">
                             <div class="d-flex justify-content-start align-content-center align-items-center">
-                                <h4 class="m-0 mov_rating_text">Your
-                                    evaluation </h4>
-                                <span class="rating_cinema_color">{{ rating.rating }}</span>
-                                <a name="{{ content.title }}" id="delete_user_rating" data-type="cinema" class="mov_rating_text" href="">Delete</a>
+                                <h4 class="m-0 mov_rating_text font_class_style_rating">Your evaluation </h4>
+                                <p class="m-0 rating_cinema_color font_class_style_rating">{{ rating.rating }}</p>
+                                {% block data_type_serial_film %}
+                                {% endblock data_type_serial_film %}
                             </div>
-                            <p class="mov_rating_text" style="text-align: start">{{ rating.created }}</p>
+                            <p class="font_class_style_rating time_styles mov_rating_text">{{ rating.created|date:'Y-m-d H:i' }}</p>
                         </div>
                     {% endif %}
                 </div>

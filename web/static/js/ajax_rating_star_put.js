@@ -1,6 +1,6 @@
 // one_star_container
 `
-Favorite film/serial heart_svg
+Ajax rating put film/serial
 `
 
 function ajax_rating_put()
@@ -32,10 +32,10 @@ function ajax_rating_put()
                     window.location = res.url
 
                 }
-                if (res.rating)
+                if (res.data)
                 {
                     colors.number = {
-                        integer: parseInt(res.rating),
+                        integer: parseInt(res.data.rating),
                         fraction: 0,
                     }
                     colors.star_fill_change()
@@ -44,17 +44,18 @@ function ajax_rating_put()
                     {
                         $(ele).html('')
                         $(ele).append(`
-                        <h4 class="my-5 mov_rating_text">Your evaluation <span class="rating_cinema_color">${res.rating}</span></h4>
+                            ${generate_html_rating_code(res)}
                         `
                         )
                     } else
                     {
                         $('#cinema_bar_rating_system').after(`
-                        <div class="d-flex justify-content-start" id="user_rating">
-                            <h2 class="mov_rating_text">Your evaluation<span class="rating_cinema_color">${res.rating}</h2>
+                        <div class="d-flex flex-column" id="user_rating">
+                            ${generate_html_rating_code(res)} 
                         </div>`)
                     }
                     rating_color_change()
+                    ajax_delete_rating()
 
                 }
             },
@@ -64,6 +65,17 @@ function ajax_rating_put()
             }
         })
     }
+}
+
+function generate_html_rating_code(res)
+{
+    return `<div class="d-flex justify-content-start align-content-center align-items-center">
+                                <h4 class="m-0 mov_rating_text font_class_style_rating">Your evaluation </h4>
+                                <p class="m-0 rating_cinema_color font_class_style_rating">${res.data.rating}</p>
+                                <a name="${res.data.name}" id="delete_user_rating" data-type="${res.data.type}"
+                                    class="font_class_style_rating mov_rating_text" href="">Delete</a>
+                            </div>
+                            <p class="font_class_style_rating time_styles mov_rating_text">${res.data.create}</p>`
 }
 
 ajax_rating_put()

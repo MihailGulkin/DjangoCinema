@@ -194,3 +194,16 @@ class UserRatingMovie(models.Model):
 
     def __str__(self):
         return f'{self.user.username} - {self.movie.title} - {self.rating}'
+
+
+class UserRatingSerial(models.Model):
+    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
+                             default=None)
+    serial = models.ForeignKey('Serial', on_delete=models.CASCADE,
+                               default=None)
+    rating = models.PositiveSmallIntegerField(default=1)
+    created = models.DateTimeField(auto_now_add=True,
+                                   null=True)
+
+    def __str__(self):
+        return f'{self.user.username} - {self.serial.serial_name} - {self.rating}'

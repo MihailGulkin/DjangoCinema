@@ -1,14 +1,14 @@
 // one_star_container
 `
-Favorite film/serial heart_svg
+Delete User Rating
 `
 
-function ajax_rating_put()
+function ajax_delete_rating()
 {
     const ele = $('#delete_user_rating')
-    if(ele)
+    if (ele)
     {
-         $(ele).on('click', function (event)
+        $(ele).on('click', function (event)
         {
             event.preventDefault()
             sendDeleteData($(ele).attr('name'), $(ele).attr('data-type'))
@@ -23,11 +23,14 @@ function ajax_rating_put()
             data: {
                 'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]')[0].value,
                 'name': cinema_name,
-                'type':type,
+                'type': type,
 
             },
             success: (res) =>
             {
+                $('#user_rating').html('')
+                colors.number = colors._get_two_numbers($('.mov_rating_text').attr('name'))
+                colors.star_fill_change()
 
             },
             error: (err) =>
@@ -38,4 +41,4 @@ function ajax_rating_put()
     }
 }
 
-ajax_rating_put()
+ajax_delete_rating()

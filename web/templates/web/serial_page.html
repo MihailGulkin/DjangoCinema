@@ -1,1 +1,9 @@
 {% extends 'web/serial_movie_base_page.html' %}
+{% block name_film_serial %}
+    <h1 class="mov_ser_text title_margin_btm">{{ content.serial_name }}</h1>
+    <h3 class="mov_ser_text">About Serial</h3>
+{% endblock name_film_serial %}
+{% block data_type_serial_film %}
+    <a name="{{ content.serial_name }}" id="delete_user_rating" data-type="serial"
+       class="font_class_style_rating mov_rating_text" href="">Delete</a>
+{% endblock data_type_serial_film %}

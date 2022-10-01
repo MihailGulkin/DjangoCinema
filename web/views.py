@@ -2,14 +2,15 @@ import logging
 
 from django.shortcuts import render
 from django.views import View
-from .models import Movie, Genre, Director, Serial, ActionsWithMovie, \
-    ActionsWithSerial, UserRatingMovie
+from .models import (Movie, Genre, Director, Serial, ActionsWithMovie,
+                     ActionsWithSerial, UserRatingMovie, UserRatingSerial)
 from web.service.shuffle_model import shuffle_model
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from web.service.return_model_query import return_query
 from web.service.create_serial_film_model import \
     create_serial_film_model_response
+from web.service.response_film_serial_page import GetResponseMixin
 
 
 class MainPageView(View):
@@ -44,72 +45,74 @@ class MainPageView(View):
         return JsonResponse({"results": results,
                              'directors': self.directors,
                              'film_genres': self.film_genres,
-                             'favorite': self._favorite_later_movie(request,
-                                                                    page_n,
-                                                                    'Favorite'),
-                             'later': self._favorite_later_movie(request,
-                                                                 page_n,
-                                                                 'Later')})
+                             'favorite': self._favorite_later_movie(
+                                 request,
+                                 page_n,
+                                 'Favorite'
+                             ),
+                             'later': self._favorite_later_movie(
+                                 request,
+                                 page_n,
+                                 'Later')})
 
     def _favorite_later_movie(self, request, page_n, choose):
         if request.user.is_authenticated:
-            return [ActionsWithMovie.objects.filter(cinema_type=film,
-                                                    user=request.user,
-                                                    choose_favorite_later=choose).exists()
+            return [ActionsWithMovie.objects.filter(
+                cinema_type=film,
+                user=request.user,
+                choose_favorite_later=choose).exists()
                     for film in self.paginator.page(page_n).object_list]
         return [False for _ in range(len(page_n))]
 
 
-class MoviePageView(View):
+class MoviePageView(View, GetResponseMixin):
     template = 'web/movie_page.html'
-    movie = Movie
-    movie_rating = UserRatingMovie
+    model_obj = Movie
+    rating = UserRatingMovie
+    _type = 'film'
 
     def get(self, request, movie_name):
-        movie_obj = self.movie.objects.get(slug=movie_name)
-        if not request.user.is_authenticated:
-            return render(request, self.template,
-                          {'content': movie_obj,
-                           'rating': movie_obj.IMDb_RATING})
-
-        return render(request, self.template,
-                      {'content': movie_obj,
-                       'rating':
-                           self.movie_rating.objects.get(user=request.user,
-                                                         movie=movie_obj)
-                           if self.movie_rating.objects.filter(
-                               user=request.user,
-                               movie=movie_obj).exists()
-                           else movie_obj.IMDb_RATING})
+        model_obj = self.model_obj.objects.get(slug=movie_name)
+        filter_rating = self.rating.objects.filter(movie=model_obj)
+        return self.get_response_film_serial(request, model_obj, filter_rating)
 
     def post(self, request, movie_name):
-        if not request.user.is_authenticated:
-            return JsonResponse(
-                {'url': f'{request.build_absolute_uri("/register/")}'})
+        model_obj = self.model_obj.objects.get(slug=movie_name)
+        filter_rating = self.rating.objects.filter(movie=model_obj)
+        return self.post_response_film_serial(request, model_obj,
+                                              filter_rating)
 
-        if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-            movie_obj = self.movie.objects.get(slug=movie_name)
-            if rating_obj := self.movie_rating.objects.filter(
-                    user=request.user,
-                    movie=movie_obj).first():
-                rating_obj.rating = request.POST['rating']
-                rating_obj.save()
-            else:
-                self.movie_rating.objects.create(user=request.user,
-                                                 movie=movie_obj,
-                                                 rating=request.POST['rating'])
-
-            return JsonResponse({'rating': request.POST['rating']})
+    def _create_rating_model(self, request, model_obj):
+        rating_obj = self.rating.objects.create(
+            user=request.user,
+            movie=model_obj,
+            rating=request.POST['rating'])
+        return rating_obj
 
 
-class SerialPageView(View):
+class SerialPageView(View, GetResponseMixin):
     template = 'web/serial_page.html'
-    serial = Serial
+    model_obj = Serial
+    rating = UserRatingSerial
+    _type = 'serial'
 
     def get(self, request, serial_name):
-        return render(request, self.template,
-                      {'content': self.serial.objects.get(slug=serial_name),
-                       })
+        model_obj = self.model_obj.objects.get(slug=serial_name)
+        filter_rating = self.rating.objects.filter(serial=model_obj)
+        return self.get_response_film_serial(request, model_obj, filter_rating)
+
+    def post(self, request, serial_name):
+        model_obj = self.model_obj.objects.get(slug=serial_name)
+        filter_rating = self.rating.objects.filter(serial=model_obj)
+        return self.post_response_film_serial(request, model_obj,
+                                              filter_rating)
+
+    def _create_rating_model(self, request, model_obj):
+        rating_obj = self.rating.objects.create(
+            user=request.user,
+            serial=model_obj,
+            rating=request.POST['rating'])
+        return rating_obj
 
 
 class GenrePageView(View):
@@ -186,5 +189,14 @@ class LaterView(View):
 class DeleteRatingUserView(View):
     def post(self, request):
         if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-            logging.error(request.POST)
-            return JsonResponse({'some': 'info'})
+            if request.POST['type'] == 'film':
+                movie_obj = Movie.objects.get(title=request.POST['name'])
+                if x := UserRatingMovie.objects.filter(user=request.user,
+                                                       movie=movie_obj).first():
+                    x.delete()
+                return JsonResponse({})
+            serial_obj = Serial.objects.get(serial_name=request.POST['name'])
+            if x := UserRatingSerial.objects.filter(user=request.user,
+                                                    serial=serial_obj).first():
+                x.delete()
+            return JsonResponse({})
