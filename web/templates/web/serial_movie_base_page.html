@@ -1,8 +1,10 @@
 {% extends 'web/base.html' %}
 {% load static %}
+{% load check_favorite %}
 {% load forx %}
 {% load minute_to_hours_convertor %}
 {% block title_style %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/movie_serial_page.css' %}">
     <title>
         {% if content.title %}
@@ -19,7 +21,80 @@
         <div class="container">
             <div class="row centered_block">
                 <div class="col-lg-auto col-md-12">
-                    <img class="mov_ser_img" src="{{ content.poster.url }}" alt>
+                    <div class="position-relative container_image_single_page">
+                        <img class="mov_ser_img" src="{{ content.poster.url }}" alt>
+                        <div class="position_tags d-flex position-absolute">
+                            <div data-value="{{ content.slug }}" data-value-type="film"
+                                 class="svg_heart_container {{ content.slug }}_cls_favorite">
+                                {% favorite_movie content request 'Favorite' as favorite_bool %}
+                                {% if favorite_bool %}
+                                    <svg class="card_svg_style_single_page favourite_film"
+                                         version="1.1"
+                                         id="Capa_1"
+
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         width="45.743px" height="45.743px" viewBox="0 0 45.743 45.743"
+                                         xml:space="preserve">
+                                            <g>
+                                                <path d="M34.199,3.83c-3.944,0-7.428,1.98-9.51,4.997c0,0-0.703,1.052-1.818,1.052c-1.114,0-1.817-1.052-1.817-1.052
+                                                    c-2.083-3.017-5.565-4.997-9.51-4.997C5.168,3.83,0,8.998,0,15.376c0,1.506,0.296,2.939,0.82,4.258
+                                                    c3.234,10.042,17.698,21.848,22.051,22.279c4.354-0.431,18.816-12.237,22.052-22.279c0.524-1.318,0.82-2.752,0.82-4.258
+                                                    C45.743,8.998,40.575,3.83,34.199,3.83z"/>
+                                            </g>
+                                        </svg>
+                                {% else %}
+                                    <svg class="card_svg_style_single_page" version="1.1" id="Capa_1"
+
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         width="45.743px" height="45.743px" viewBox="0 0 45.743 45.743"
+                                         xml:space="preserve">
+                                            <g>
+                                                <path d="M34.199,3.83c-3.944,0-7.428,1.98-9.51,4.997c0,0-0.703,1.052-1.818,1.052c-1.114,0-1.817-1.052-1.817-1.052
+                                                    c-2.083-3.017-5.565-4.997-9.51-4.997C5.168,3.83,0,8.998,0,15.376c0,1.506,0.296,2.939,0.82,4.258
+                                                    c3.234,10.042,17.698,21.848,22.051,22.279c4.354-0.431,18.816-12.237,22.052-22.279c0.524-1.318,0.82-2.752,0.82-4.258
+                                                    C45.743,8.998,40.575,3.83,34.199,3.83z"/>
+                                            </g>
+                                        </svg>
+                                {% endif %}
+                            </div>
+                            <div data-value="{{ content.slug }}" data-value-type="film"
+                                 class="svg_bookmark_container {{ content.slug }}_cls_bookmark">
+                                {% favorite_movie content request 'Later' as book_mark %}
+                                {% if book_mark %}
+                                    <svg class=" card_svg_style_single_page later_film" version="1.1"
+                                         id="Capa_1"
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         width="459px" height="459px" viewBox="0 0 459 459"
+                                         style="enable-background:new 0 0 459 459;"
+                                         xml:space="preserve">
+                                                    <g>
+                                                        <g id="bookmark">
+                                                            <path d="M357,0H102C73.95,0,51,22.95,51,51v408l178.5-76.5L408,459V51C408,22.95,385.05,0,357,0z"/>
+                                                        </g>
+                                                    </g>
+                                                    </svg>
+                                {% else %}
+                                    <svg class=" card_svg_style_single_page" version="1.1" id="Capa_1"
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         width="459px" height="459px" viewBox="0 0 459 459"
+                                         style="enable-background:new 0 0 459 459;"
+                                         xml:space="preserve">
+                                                    <g>
+                                                        <g id="bookmark">
+                                                            <path d="M357,0H102C73.95,0,51,22.95,51,51v408l178.5-76.5L408,459V51C408,22.95,385.05,0,357,0z"/>
+                                                        </g>
+                                                    </g>
+                                                    </svg>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
                 <div class="col-lg-auto col-md-12">
                     <div class="left_block">
@@ -165,6 +240,79 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <h2 class="mov_rating_text" style="text-align: start">Users Review</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-10 order-md-1 col-sm-12 order-last">
+                    {% if movie_reviews %}
+                        <div id="users_review" style="margin-top: 40px">
+                            {% for review in movie_reviews %}
+                                <div class="border_style_form" style="margin-top: 20px">
+                                    <div class="user_info">
+                                        <a href="{% url 'profile_page' review.user.username %}">{{ review.user.username }}</a>
+                                        <h4 class="mov_rating_text">{{ review.created }}</h4>
+                                    </div>
+                                    <div class="user_review">
+                                        <div class="title_form_review_container">
+                                            <h4 class="mov_rating_text">{{ review.title }}</h4>
+                                            <h4 class="mov_rating_text">{{ review.review_type }}</h4>
+                                        </div>
+                                        <div class="text_form_review_container">
+                                            <p class="mov_rating_text">{{ review.text }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-md-2 order-md-1 col-sm-12 order-first" style="margin-top: 40px;">
+                    <div style="position: sticky; top: 100px">
+                        <h4 class="mov_rating_text">Total: {{ calculated.total }}</h4>
+                        <h4 class="mov_rating_text">Positive: {{ calculated.Positives.Positive }}</h4>
+                        <h4 class="mov_rating_text">Neutral: {{ calculated.Neutrals.Neutral }}</h4>
+                        <h4 class="mov_rating_text">Negative: {{ calculated.Negatives.Negative }}</h4>
+                    </div>
+
+                </div>
+            </div>
+            {% if request.user.is_authenticated and not have_review %}
+                <div id="write_review_user" class="row" style="margin-top: 30px">
+                    <div class="col-10">
+                        <h2 class="mov_rating_text" style="text-align: start">Write a review</h2>
+                        <form method="post" id="form_view_submit" name="{{ content.slug }}">
+                            <div class="border_style_form">
+                                <div class="user_info">
+                                    <a href="{% url 'profile_page' request.user.username %}">{{ request.user.username }}</a>
+                                </div>
+                                <div class="user_review">
+                                    <div class="custom-select">
+                                        <select id="mounth" aria-label>
+                                            <option value="hide">Review type</option>
+                                            <option value="january">Positive</option>
+                                            <option value="february">Neutral</option>
+                                            <option value="march">Negative</option>
+                                        </select>
+                                    </div>
+                                    <div class="title_form_review_container">
+                                        <input id="input_title" class="w-100" maxlength="10" required>
+                                    </div>
+                                    <div class="text_form_review_container">
+                                        <textarea id="textarea_form_review" class="text_area_review w-100"
+                                                  required></textarea>
+                                    </div>
+                                    <div class="button_form_review_container">
+                                        <button id="button_review_send" type="button"
+                                                class="disable_btn btn_from_review">Send
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            {% endif %}
         </div>
 
     </section>
@@ -177,4 +325,9 @@
     <script src="{% static 'js/rating_color_changer.js' %}"></script>
     <script src="{% static 'js/ajax_rating_star_put.js' %}"></script>
     <script src="{% static 'js/ajax_delete_rating_user.js' %}"></script>
+    <script src="{% static 'js/select_menu_review.js' %}"></script>
+    <script src="{% static 'js/ajax_review_user.js' %}"></script>
+    <script src="{% static 'js/ajax_favoriteFilm.js' %}"></script>
+    <script src="{% static 'js/ajax_laterFilm.js' %}"></script>
+    <script src="{% static 'js/start_btn_on_single_page_movie_serial.js' %}"></script>
 {% endblock script %}

@@ -18,6 +18,10 @@ age_rating_system = [('0', '0'),
 favorite_later_cinema = [('Later', 'Later'),
                          ('Favorite', 'Favorite')]
 
+type_of_review = [('Positive', 'Positive'),
+                  ('Neutral', 'Neutral'),
+                  ('Negative', 'Negative')]
+
 
 class Genre(models.Model):
     name = models.CharField(max_length=200)
@@ -207,3 +211,19 @@ class UserRatingSerial(models.Model):
 
     def __str__(self):
         return f'{self.user.username} - {self.serial.serial_name} - {self.rating}'
+
+
+class UserReviewMovie(models.Model):
+    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
+                             default=None)
+    movie = models.ForeignKey('Movie', on_delete=models.CASCADE,
+                              default=None)
+    review_type = models.CharField(max_length=100,
+                                   choices=type_of_review)
+    title = models.CharField(max_length=100)
+    text = models.TextField(max_length=2500)
+    created = models.DateTimeField(auto_now_add=True,
+                                   null=True)
+
+    def __str__(self):
+        return f'{self.user.username} - {self.movie.title}'

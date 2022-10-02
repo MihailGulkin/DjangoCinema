@@ -25,7 +25,7 @@ const sendGenresData = () =>
                 resp.data.forEach(genre =>
                     $(dropdown_menu).append(`
                  <li class="nav_item_header"><a class="dropdown-item"
-                                                               href="/${genre.slug}">${genre.name}</a>
+                                                               href="/genre/${genre.slug}">${genre.name}</a>
                                 </li>
                 `)
                 )

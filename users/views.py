@@ -43,7 +43,9 @@ class LoginPageView(View):
             user = form.get_user()
             login(request, user)
             return JsonResponse(
-                {'url': f'{request.build_absolute_uri("/profile/")}'})
+                {
+                    'url': f'{request.build_absolute_uri(f"/profile/{request.user.username}")}'
+                })
         return JsonResponse({'errors': form.errors})
 
 

@@ -3,7 +3,8 @@ import logging
 from django.shortcuts import render
 from django.views import View
 from .models import (Movie, Genre, Director, Serial, ActionsWithMovie,
-                     ActionsWithSerial, UserRatingMovie, UserRatingSerial)
+                     ActionsWithSerial, UserRatingMovie, UserRatingSerial,
+                     UserReviewMovie)
 from web.service.shuffle_model import shuffle_model
 from django.core.paginator import Paginator
 from django.http import JsonResponse
@@ -11,6 +12,7 @@ from web.service.return_model_query import return_query
 from web.service.create_serial_film_model import \
     create_serial_film_model_response
 from web.service.response_film_serial_page import GetResponseMixin
+from web.service.calculate_review_percentage import CalculateReviewsTypeMixin
 
 
 class MainPageView(View):
@@ -65,16 +67,19 @@ class MainPageView(View):
         return [False for _ in range(len(page_n))]
 
 
-class MoviePageView(View, GetResponseMixin):
+class MoviePageView(View, GetResponseMixin, CalculateReviewsTypeMixin):
     template = 'web/movie_page.html'
     model_obj = Movie
+    model_view = UserReviewMovie
     rating = UserRatingMovie
     _type = 'film'
 
     def get(self, request, movie_name):
         model_obj = self.model_obj.objects.get(slug=movie_name)
+        _review = self.model_view.objects.filter(movie=model_obj)
         filter_rating = self.rating.objects.filter(movie=model_obj)
-        return self.get_response_film_serial(request, model_obj, filter_rating)
+        return self.get_response_film_serial(request, model_obj,
+                                             _review, filter_rating)
 
     def post(self, request, movie_name):
         model_obj = self.model_obj.objects.get(slug=movie_name)
@@ -200,3 +205,31 @@ class DeleteRatingUserView(View):
                                                     serial=serial_obj).first():
                 x.delete()
             return JsonResponse({})
+
+
+class SendReviewUser(View):
+    def post(self, request):
+        cinema_type, title, text_data, slug, review_type = (
+            request.POST['type'],
+            request.POST['title'],
+            request.POST['text_data'],
+            request.POST['slug'],
+            request.POST['review_type'])
+        movie_obj = Movie.objects.get(slug=slug)
+        new_review = UserReviewMovie.objects.create(
+            user=request.user,
+            movie=movie_obj,
+            review_type=review_type,
+            title=title,
+            text=text_data
+        )
+        # new_review = UserReviewMovie.objects.get(
+        #     movie=movie_obj
+        # )
+        return JsonResponse({'data': {
+            'user': request.user.username,
+            'review_type': new_review.review_type,
+            'title': new_review.title,
+            'text': new_review.text,
+            'created': new_review.created.strftime('%Y-%m-%d %H:%M')
+        }})

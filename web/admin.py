@@ -1,7 +1,8 @@
 from django.contrib import admin
 
 from .models import Genre, Director, Movie, Serial, Season, Episode, \
-    ActionsWithSerial, ActionsWithMovie, UserRatingMovie, UserRatingSerial
+    ActionsWithSerial, ActionsWithMovie, UserRatingMovie, UserRatingSerial, \
+    UserReviewMovie
 
 
 class ActionMovieAdmin(admin.ModelAdmin):
@@ -22,6 +23,7 @@ admin.site.register(Director)
 admin.site.register(Movie)
 admin.site.register(ActionsWithMovie, ActionMovieAdmin)
 admin.site.register(UserRatingMovie, UserRatingMovieAdmin)
+admin.site.register(UserReviewMovie)
 
 admin.site.register(ActionsWithSerial, ActionMovieAdmin)
 admin.site.register(UserRatingSerial, UserRatingSerialAdmin)
