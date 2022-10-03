@@ -44,7 +44,7 @@
                     </li>
                     {% for i in 2|for_range %}
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Home</a>
+                            <a class="nav-link" aria-current="page" href="{% url 'main_page' %}">Home</a>
                         </li>
                     {% endfor %}
                     {% if user.is_authenticated %}

@@ -240,15 +240,19 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <h2 class="mov_rating_text" style="text-align: start">Users Review</h2>
-            </div>
-            <div class="row">
-                <div class="col-md-10 order-md-1 col-sm-12 order-last">
-                    {% if movie_reviews %}
+            {% if movie_reviews %}
+
+                <div class="row">
+                    <h2 class="mov_rating_text" style="text-align: start">Users Review</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 order-md-1 col-sm-12 order-last">
                         <div id="users_review" style="margin-top: 40px">
+
                             {% for review in movie_reviews %}
-                                <div class="border_style_form" style="margin-top: 20px">
+                                <div data-type="{{ review.review_type }}"
+                                     class="border_style_form user_review_container"
+                                     style="margin-top: 20px">
                                     <div class="user_info">
                                         <a href="{% url 'profile_page' review.user.username %}">{{ review.user.username }}</a>
                                         <h4 class="mov_rating_text">{{ review.created }}</h4>
@@ -264,19 +268,26 @@
                                     </div>
                                 </div>
                             {% endfor %}
+
                         </div>
-                    {% endif %}
-                </div>
-                <div class="col-md-2 order-md-1 col-sm-12 order-first" style="margin-top: 40px;">
-                    <div style="position: sticky; top: 100px">
-                        <h4 class="mov_rating_text">Total: {{ calculated.total }}</h4>
-                        <h4 class="mov_rating_text">Positive: {{ calculated.Positives.Positive }}</h4>
-                        <h4 class="mov_rating_text">Neutral: {{ calculated.Neutrals.Neutral }}</h4>
-                        <h4 class="mov_rating_text">Negative: {{ calculated.Negatives.Negative }}</h4>
                     </div>
 
+                    <div class="col-md-2 order-md-1 col-sm-12 order-first" style="margin-top: 40px;">
+                        <div style="position: sticky; top: 100px">
+                            <h4 data-type="Total" class="mov_rating_text rating_bar_select_cls">
+                                Total: {{ calculated.total }}</h4>
+                            <h4 data-type="Positive" class="mov_rating_text rating_bar_select_cls">
+                                Positive: {{ calculated.Positives.Positive }}</h4>
+                            <h4 data-type="Neutral" class="mov_rating_text rating_bar_select_cls">
+                                Neutral: {{ calculated.Neutrals.Neutral }}</h4>
+                            <h4 data-type="Negative" class="mov_rating_text rating_bar_select_cls">
+                                Negative: {{ calculated.Negatives.Negative }}</h4>
+                        </div>
+                    </div>
+
+
                 </div>
-            </div>
+            {% endif %}
             {% if request.user.is_authenticated and not have_review %}
                 <div id="write_review_user" class="row" style="margin-top: 30px">
                     <div class="col-10">
@@ -330,4 +341,5 @@
     <script src="{% static 'js/ajax_favoriteFilm.js' %}"></script>
     <script src="{% static 'js/ajax_laterFilm.js' %}"></script>
     <script src="{% static 'js/start_btn_on_single_page_movie_serial.js' %}"></script>
+    <script src="{% static 'js/filtering_data_review.js' %}"></script>
 {% endblock script %}

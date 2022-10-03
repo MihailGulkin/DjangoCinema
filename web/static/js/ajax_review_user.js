@@ -29,7 +29,7 @@ const sendReviewData = (review_type, slug) =>
         {
             const review_users_block = $('#users_review')
             review_users_block.append(`
-                <div class="border_style_form" style="margin-top: 20px">
+                <div data-type="${res.data.review_type}" class="border_style_form user_review_container" style="margin-top: 20px">
                                     <div class="user_info">
                                         <a href="/profile/${res.data.user}">${res.data.user}</a>
                                         <h4 class="mov_rating_text">${ res.data.created }</h4>

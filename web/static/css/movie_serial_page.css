@@ -419,3 +419,9 @@
 {
     display: none;
 }
+
+
+.rating_bar_select_cls
+{
+    cursor: pointer;
+}
