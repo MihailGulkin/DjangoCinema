@@ -1,5 +1,3 @@
-import logging
-
 from django.shortcuts import render
 from django.views import View
 from .models import (Movie, Genre, Director, Serial, ActionsWithMovie,
@@ -11,8 +9,9 @@ from django.http import JsonResponse
 from web.service.return_model_query import return_query
 from web.service.create_serial_film_model import \
     create_serial_film_model_response
-from web.service.response_film_serial_page import GetResponseMixin
-from web.service.calculate_review_percentage import CalculateReviewsTypeMixin
+from web.service.mixins.response_film_serial_page import GetResponseMixin
+from web.service.mixins.calculate_review_percentage import \
+    CalculateReviewsTypeMixin
 
 
 class MainPageView(View):
@@ -207,7 +206,9 @@ class DeleteRatingUserView(View):
             return JsonResponse({})
 
 
-class SendReviewUser(View):
+class SendReviewUser(View, CalculateReviewsTypeMixin):
+    model_view = UserReviewMovie
+
     def post(self, request):
         cinema_type, title, text_data, slug, review_type = (
             request.POST['type'],
@@ -215,7 +216,11 @@ class SendReviewUser(View):
             request.POST['text_data'],
             request.POST['slug'],
             request.POST['review_type'])
+
         movie_obj = Movie.objects.get(slug=slug)
+
+        _bool = UserReviewMovie.objects.filter(movie=movie_obj).exists()
+
         new_review = UserReviewMovie.objects.create(
             user=request.user,
             movie=movie_obj,
@@ -223,13 +228,13 @@ class SendReviewUser(View):
             title=title,
             text=text_data
         )
-        # new_review = UserReviewMovie.objects.get(
-        #     movie=movie_obj
-        # )
+
         return JsonResponse({'data': {
             'user': request.user.username,
             'review_type': new_review.review_type,
             'title': new_review.title,
             'text': new_review.text,
+            'bool': _bool,
+            'calculated': self.calculate_review(movie_obj),
             'created': new_review.created.strftime('%Y-%m-%d %H:%M')
         }})
