@@ -69,13 +69,13 @@ class MainPageView(View):
 class MoviePageView(View, GetResponseMixin, CalculateReviewsTypeMixin):
     template = 'web/movie_page.html'
     model_obj = Movie
-    model_view = UserReviewMovie
+    model_review = UserReviewMovie
     rating = UserRatingMovie
     _type = 'film'
 
     def get(self, request, movie_name):
         model_obj = self.model_obj.objects.get(slug=movie_name)
-        _review = self.model_view.objects.filter(movie=model_obj)
+        _review = self.model_review.objects.filter(movie=model_obj)
         filter_rating = self.rating.objects.filter(movie=model_obj)
         return self.get_response_film_serial(request, model_obj,
                                              _review, filter_rating)
@@ -236,5 +236,5 @@ class SendReviewUser(View, CalculateReviewsTypeMixin):
             'text': new_review.text,
             'bool': _bool,
             'calculated': self.calculate_review(movie_obj),
-            'created': new_review.created.strftime('%Y-%m-%d %H:%M')
+            'created': new_review.created.strftime('%#d %B %Y at %#H:%#M')
         }})

@@ -4,7 +4,7 @@ from django.db.models import QuerySet
 class CalculateReviewsTypeMixin:
     def calculate_review(self, film_obj):
         result_dict = {}
-        reviews_obj: QuerySet = self.model_view.objects.filter(
+        reviews_obj: QuerySet = self.model_review.objects.filter(
             movie=film_obj)
         result_dict['total'] = reviews_obj.__len__()
         total = result_dict['total']
