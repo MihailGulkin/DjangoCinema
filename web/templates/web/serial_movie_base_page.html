@@ -24,73 +24,8 @@
                     <div class="position-relative container_image_single_page">
                         <img class="mov_ser_img" src="{{ content.poster.url }}" alt>
                         <div class="position_tags d-flex position-absolute">
-                            <div data-value="{{ content.slug }}" data-value-type="film"
-                                 class="svg_heart_container {{ content.slug }}_cls_favorite">
-                                {% favorite_movie content request 'Favorite' as favorite_bool %}
-                                {% if favorite_bool %}
-                                    <svg class="card_svg_style_single_page favourite_film"
-                                         version="1.1"
-                                         id="Capa_1"
-
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                         width="45.743px" height="45.743px" viewBox="0 0 45.743 45.743"
-                                         xml:space="preserve">
-                                            <g>
-                                                <path d="M34.199,3.83c-3.944,0-7.428,1.98-9.51,4.997c0,0-0.703,1.052-1.818,1.052c-1.114,0-1.817-1.052-1.817-1.052
-                                                    c-2.083-3.017-5.565-4.997-9.51-4.997C5.168,3.83,0,8.998,0,15.376c0,1.506,0.296,2.939,0.82,4.258
-                                                    c3.234,10.042,17.698,21.848,22.051,22.279c4.354-0.431,18.816-12.237,22.052-22.279c0.524-1.318,0.82-2.752,0.82-4.258
-                                                    C45.743,8.998,40.575,3.83,34.199,3.83z"/>
-                                            </g>
-                                        </svg>
-                                {% else %}
-                                    <svg class="card_svg_style_single_page" version="1.1" id="Capa_1"
-
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                         width="45.743px" height="45.743px" viewBox="0 0 45.743 45.743"
-                                         xml:space="preserve">
-                                            <g>
-                                                <path d="M34.199,3.83c-3.944,0-7.428,1.98-9.51,4.997c0,0-0.703,1.052-1.818,1.052c-1.114,0-1.817-1.052-1.817-1.052
-                                                    c-2.083-3.017-5.565-4.997-9.51-4.997C5.168,3.83,0,8.998,0,15.376c0,1.506,0.296,2.939,0.82,4.258
-                                                    c3.234,10.042,17.698,21.848,22.051,22.279c4.354-0.431,18.816-12.237,22.052-22.279c0.524-1.318,0.82-2.752,0.82-4.258
-                                                    C45.743,8.998,40.575,3.83,34.199,3.83z"/>
-                                            </g>
-                                        </svg>
-                                {% endif %}
-                            </div>
-                            <div data-value="{{ content.slug }}" data-value-type="film"
-                                 class="svg_bookmark_container {{ content.slug }}_cls_bookmark">
-                                {% favorite_movie content request 'Later' as book_mark %}
-                                {% if book_mark %}
-                                    <svg class=" card_svg_style_single_page later_film" version="1.1"
-                                         id="Capa_1"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                         width="459px" height="459px" viewBox="0 0 459 459"
-                                         style="enable-background:new 0 0 459 459;"
-                                         xml:space="preserve">
-                                                    <g>
-                                                        <g id="bookmark">
-                                                            <path d="M357,0H102C73.95,0,51,22.95,51,51v408l178.5-76.5L408,459V51C408,22.95,385.05,0,357,0z"/>
-                                                        </g>
-                                                    </g>
-                                                    </svg>
-                                {% else %}
-                                    <svg class=" card_svg_style_single_page" version="1.1" id="Capa_1"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                         width="459px" height="459px" viewBox="0 0 459 459"
-                                         style="enable-background:new 0 0 459 459;"
-                                         xml:space="preserve">
-                                                    <g>
-                                                        <g id="bookmark">
-                                                            <path d="M357,0H102C73.95,0,51,22.95,51,51v408l178.5-76.5L408,459V51C408,22.95,385.05,0,357,0z"/>
-                                                        </g>
-                                                    </g>
-                                                    </svg>
-                                {% endif %}
-                            </div>
+                            {% block active_element_tmp %}
+                            {% endblock active_element_tmp %}
                         </div>
                     </div>
 
@@ -135,30 +70,14 @@
                                     </div>
                                 </li>
                                 <li class="d-flex about_film_block_container_li">
-                                    <div class="about_film_attribute"><h4>Time</h4></div>
-                                    {% if content.title %}
-                                        <div class="about_film_attribute_content">
-                                            <h4>
-                                                {{ content.time_minute }}
-                                                / {{ content.time_minute | hours_convertor }}
-                                            </h4>
-                                        </div>
-                                    {% else %}
-                                        <div class="about_film_attribute_content">
-                                            <h4>{{ content.time_minute }}</h4>
-                                        </div>
-                                    {% endif %}
+                                    <div class="about_film_attribute">
+                                        <h4>Time</h4>
+                                    </div>
+                                    {% block time_minute %}
+                                    {% endblock time_minute %}
                                 </li>
-                                {% if not content.title %}
-                                    <li class="d-flex about_film_block_container_li">
-                                        <div class="about_film_attribute">
-                                            <h4>Seasons</h4>
-                                        </div>
-                                        <div class="about_film_attribute_content">
-                                            <h4>{{ content.seasons.count }}</h4>
-                                        </div>
-                                    </li>
-                                {% endif %}
+                                {% block serial_seasonse %}
+                                {% endblock serial_seasonse %}
                                 <li class="d-flex about_film_block_container_li">
                                     <div class="about_film_attribute">
                                         <h4>Age</h4>
@@ -240,33 +159,31 @@
                     </div>
                 </div>
             </div>
-            {% if movie_reviews %}
-                <div class="row">
-                    <h2 class="mov_rating_text review_style_header">Users Review</h2>
+            {% if cinema_reviews %}
+                <div class="row m-20px">
+                    <h2 class="mov_rating_text text-start m-0">Users Review</h2>
                 </div>
                 <div class="row">
                     <div class="col-md-10 order-md-1 col-sm-12 order-last">
-                        <div id="users_review" style="margin-top: 40px">
-
-                            {% for review in movie_reviews %}
+                        <div id="users_review" class="m-20px">
+                            {% for review in cinema_reviews %}
                                 <div data-type="{{ review.review_type }}"
-                                     class="border_style_form user_review_container {{ review.review_type }}"
-                                     style="margin-top: 20px">
-                                    <div class="user_info d-flex">
+                                     class="border_style_form user_review_container {{ review.review_type|lower }}_border m-20px">
+                                    <div class="{{ review.review_type|lower }}_user_bottom user_info d-flex">
                                         <div>
                                             <a href="{% url 'profile_page' review.user.username %}">{{ review.user.username }}</a>
                                         </div>
-                                        <div class="" style="margin-left: auto">
-                                            <p class="mov_rating_text">{{ review.created |date:'j F o \a\t H:i'}}</p>
+                                        <div class="created_review_date">
+                                            <p class="mov_rating_text">{{ review.created |date:'j F o \a\t H:i' }}</p>
                                         </div>
                                     </div>
-                                    <div class="user_review">
-                                        <div class="title_form_review_container">
-                                            <h4 class="mov_rating_text">{{ review.title }}</h4>
-                                            <h4 class="mov_rating_text">{{ review.review_type }}</h4>
+                                    <div class="user_review title_form_review_container">
+                                        <h4 class="mov_rating_text text-start">{{ review.title }}</h4>
+                                        <div class="content-block-text">
+                                            <p class="mov_rating_text text-start">{{ review.text }}</p>
                                         </div>
-                                        <div class="text_form_review_container">
-                                            <p class="mov_rating_text">{{ review.text }}</p>
+                                        <div class="show-all-container">
+                                            <button class="show-all">Show all review</button>
                                         </div>
                                     </div>
                                 </div>
@@ -275,27 +192,41 @@
                         </div>
                     </div>
 
-                    <div class="col-md-2 order-md-1 col-sm-12 order-first" style="margin-top: 40px;">
-                        <div style="position: sticky; top: 100px">
+                    <div class="col-md-2 order-md-1 col-sm-12 order-first m-20px">
+                        <div id="review_type_block">
 
-                            <div data-type="Total" style="text-align: start" class="mov_rating_text rating_bar_select_cls">
-                                <h5>{{ calculated.total }}</h5>
-                                <h4>Total</h4>
+                            <div data-type="Total"
+                                 class="rating_bar_select_total rating_bar_select_cls active_rating_bar_block">
+                                <h1>{{ calculated.total }}</h1>
+                                <h4 class="total_text">Total</h4>
                             </div>
+
                             {% if calculated.Positives %}
-                                <h4 data-type="Positive" class="mov_rating_text rating_bar_select_cls">
-                                    Positive: {{ calculated.Positives.Positive }}
-                                </h4>
+                                <div data-type="Positive" class=" rating_bar_select_cls">
+                                    <div class="d-flex align-content-center align-items-end">
+                                        <h1 class="m-0 positive_rating_bar">{{ calculated.Positives.Positive }}</h1>
+                                        <h6 class="percent_style">{{ calculated.Positives.total }}%</h6>
+                                    </div>
+                                    <h4 class="text-start">Positives</h4>
+                                </div>
                             {% endif %}
                             {% if calculated.Neutrals %}
-                                <h4 data-type="Neutral" class="mov_rating_text rating_bar_select_cls">
-                                    Neutral: {{ calculated.Neutrals.Neutral }}
-                                </h4>
+                                <div data-type="Neutral" class=" rating_bar_select_cls">
+                                    <div class="d-flex align-content-center align-items-end">
+                                        <h1 class="m-0 neutral_rating_bar">{{ calculated.Neutrals.Neutral }}</h1>
+                                        <h6 class="percent_style">{{ calculated.Neutrals.total }}%</h6>
+                                    </div>
+                                    <h4 class="text-start">Neutrals</h4>
+                                </div>
                             {% endif %}
                             {% if calculated.Negatives %}
-                                <h4 data-type="Negative" class="mov_rating_text rating_bar_select_cls">
-                                    Negative: {{ calculated.Negatives.Negative }}
-                                </h4>
+                                <div data-type="Negative" class=" rating_bar_select_cls">
+                                    <div class="d-flex align-content-center align-items-end">
+                                        <h1 class="m-0 negative_rating_bar">{{ calculated.Negatives.Negative }}</h1>
+                                        <h6 class="percent_style">{{ calculated.Negatives.total }}%</h6>
+                                    </div>
+                                    <h4 class="text-start">Negatives</h4>
+                                </div>
                             {% endif %}
                         </div>
                     </div>
@@ -303,33 +234,34 @@
             {% endif %}
             {% if request.user.is_authenticated and not have_review %}
                 <div id="write_review_user" class="row block_review_write">
-                    <div class="col-10">
-                        <h2 class="mov_rating_text review_style_header">Write a review</h2>
+                    <div class="col-12">
+                        <h2 class="mov_rating_text text-start">Write a review</h2>
                         <form method="post" id="form_view_submit" name="{{ content.slug }}">
-                            <div class="border_style_form">
-                                <div class="user_info">
+                            <div class="border_style_form_send_review">
+                                <div class="user_info_send_review user_info">
                                     <a href="{% url 'profile_page' request.user.username %}">{{ request.user.username }}</a>
                                 </div>
                                 <div class="user_review">
                                     <div class="custom-select">
-                                        <select id="mounth" aria-label>
+                                        <select>
                                             <option value="hide">Review type</option>
-                                            <option value="january">Positive</option>
-                                            <option value="february">Neutral</option>
-                                            <option value="march">Negative</option>
+                                            <option>Positive</option>
+                                            <option>Neutral</option>
+                                            <option>Negative</option>
                                         </select>
                                     </div>
                                     <div class="title_form_review_container">
-                                        <input placeholder="Title" id="input_title" class="w-100" maxlength="10" required>
+                                        <input placeholder="Title" id="input_title" class="w-100" maxlength="10"
+                                               required>
                                     </div>
                                     <div class="text_form_review_container">
-                                        <textarea placeholder="Text" id="textarea_form_review" class="text_area_review w-100"
+                                        <textarea placeholder="Text" id="textarea_form_review"
+                                                  class="text_area_review w-100"
                                                   required></textarea>
                                     </div>
                                     <div class="button_form_review_container">
-                                        <button id="button_review_send" type="button"
-                                                class="disable_btn btn_from_review">Send
-                                        </button>
+                                        {% block btn_send_review %}
+                                        {% endblock btn_send_review %}
                                     </div>
                                 </div>
                             </div>
@@ -344,15 +276,18 @@
 
 
 {% block script %}
-    <script src="{% static 'js/star_fill.js' %}"></script>
-    <script src="{% static 'js/change_p_text_size.js' %}"></script>
-    <script src="{% static 'js/rating_color_changer.js' %}"></script>
     <script src="{% static 'js/ajax_rating_star_put.js' %}"></script>
     <script src="{% static 'js/ajax_delete_rating_user.js' %}"></script>
-    <script src="{% static 'js/select_menu_review.js' %}"></script>
     <script src="{% static 'js/ajax_review_user.js' %}"></script>
     <script src="{% static 'js/ajax_favoriteFilm.js' %}"></script>
     <script src="{% static 'js/ajax_laterFilm.js' %}"></script>
-    <script src="{% static 'js/start_btn_on_single_page_movie_serial.js' %}"></script>
+
+    <script src="{% static 'js/star_fill.js' %}"></script>
+    <script src="{% static 'js/change_p_text_size.js' %}"></script>
+    <script src="{% static 'js/rating_color_changer.js' %}"></script>
+
+    <script src="{% static 'js/select_menu_review.js' %}"></script>
+    <script src="{% static 'js/start_ajax_on_single_page_movie_serial.js' %}"></script>
     <script src="{% static 'js/filtering_data_review.js' %}"></script>
+    <script src="{% static 'js/btn_open_full_text.js' %}"></script>
 {% endblock script %}

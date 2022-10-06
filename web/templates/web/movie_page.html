@@ -1,4 +1,75 @@
 {% extends 'web/serial_movie_base_page.html' %}
+{% load check_favorite %}
+{% load minute_to_hours_convertor %}
+{% block active_element_tmp %}
+    <div data-value="{{ content.slug }}" data-value-type="film"
+         class="svg_heart_container {{ content.slug }}_cls_favorite">
+        {% favorite_movie content request 'Favorite' as favorite_bool %}
+        {% if favorite_bool %}
+            <svg class="card_svg_style_single_page favourite_film"
+                 version="1.1"
+                 id="Capa_1"
+
+                 xmlns="http://www.w3.org/2000/svg"
+                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 width="45.743px" height="45.743px" viewBox="0 0 45.743 45.743"
+                 xml:space="preserve">
+                                            <g>
+                                                <path d="M34.199,3.83c-3.944,0-7.428,1.98-9.51,4.997c0,0-0.703,1.052-1.818,1.052c-1.114,0-1.817-1.052-1.817-1.052
+                                                    c-2.083-3.017-5.565-4.997-9.51-4.997C5.168,3.83,0,8.998,0,15.376c0,1.506,0.296,2.939,0.82,4.258
+                                                    c3.234,10.042,17.698,21.848,22.051,22.279c4.354-0.431,18.816-12.237,22.052-22.279c0.524-1.318,0.82-2.752,0.82-4.258
+                                                    C45.743,8.998,40.575,3.83,34.199,3.83z"/>
+                                            </g>
+                                        </svg>
+        {% else %}
+            <svg class="card_svg_style_single_page" version="1.1" id="Capa_1"
+
+                 xmlns="http://www.w3.org/2000/svg"
+                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 width="45.743px" height="45.743px" viewBox="0 0 45.743 45.743"
+                 xml:space="preserve">
+                                            <g>
+                                                <path d="M34.199,3.83c-3.944,0-7.428,1.98-9.51,4.997c0,0-0.703,1.052-1.818,1.052c-1.114,0-1.817-1.052-1.817-1.052
+                                                    c-2.083-3.017-5.565-4.997-9.51-4.997C5.168,3.83,0,8.998,0,15.376c0,1.506,0.296,2.939,0.82,4.258
+                                                    c3.234,10.042,17.698,21.848,22.051,22.279c4.354-0.431,18.816-12.237,22.052-22.279c0.524-1.318,0.82-2.752,0.82-4.258
+                                                    C45.743,8.998,40.575,3.83,34.199,3.83z"/>
+                                            </g>
+                                        </svg>
+        {% endif %}
+    </div>
+    <div data-value="{{ content.slug }}" data-value-type="film"
+         class="svg_bookmark_container {{ content.slug }}_cls_bookmark">
+        {% favorite_movie content request 'Later' as book_mark %}
+        {% if book_mark %}
+            <svg class=" card_svg_style_single_page later_film" version="1.1"
+                 id="Capa_1"
+                 xmlns="http://www.w3.org/2000/svg"
+                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 width="459px" height="459px" viewBox="0 0 459 459"
+                 style="enable-background:new 0 0 459 459;"
+                 xml:space="preserve">
+                                                    <g>
+                                                        <g id="bookmark">
+                                                            <path d="M357,0H102C73.95,0,51,22.95,51,51v408l178.5-76.5L408,459V51C408,22.95,385.05,0,357,0z"/>
+                                                        </g>
+                                                    </g>
+                                                    </svg>
+        {% else %}
+            <svg class=" card_svg_style_single_page" version="1.1" id="Capa_1"
+                 xmlns="http://www.w3.org/2000/svg"
+                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 width="459px" height="459px" viewBox="0 0 459 459"
+                 style="enable-background:new 0 0 459 459;"
+                 xml:space="preserve">
+                                                    <g>
+                                                        <g id="bookmark">
+                                                            <path d="M357,0H102C73.95,0,51,22.95,51,51v408l178.5-76.5L408,459V51C408,22.95,385.05,0,357,0z"/>
+                                                        </g>
+                                                    </g>
+                                                    </svg>
+        {% endif %}
+    </div>
+{% endblock active_element_tmp %}
 {% block name_film_serial %}
     <h1 class="mov_ser_text title_margin_btm">{{ content.title }}</h1>
     <h3 class="mov_ser_text">About Film</h3>
@@ -7,3 +78,16 @@
     <a name="{{ content.title }}" id="delete_user_rating" data-type="film"
        class="font_class_style_rating mov_rating_text" href="">Delete</a>
 {% endblock data_type_serial_film %}
+{% block time_minute %}
+    <div class="about_film_attribute_content">
+        <h4>
+            {{ content.time_minute }}
+            / {{ content.time_minute | hours_convertor }}
+        </h4>
+    </div>
+{% endblock time_minute %}
+{% block btn_send_review %}
+    <button data-cinema-type="film" id="button_review_send" type="button"
+            class="disable_btn btn_from_review">Send
+    </button>
+{% endblock btn_send_review %}

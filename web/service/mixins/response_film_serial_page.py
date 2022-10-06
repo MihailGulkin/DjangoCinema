@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.utils import timezone
 
+
 class GetResponseMixin:
     def get_response_film_serial(self, request, model_obj, model_review,
                                  filter_model):
@@ -11,10 +12,10 @@ class GetResponseMixin:
                            'movie_reviews': model_review,
                            'have_review': True,
                            'rating': model_obj.IMDb_RATING,
-                           'calculated': self.calculate_review(model_obj)})
+                           'calculated': self.calculate_review(model_review)})
         return render(request, self.template,
                       {'content': model_obj,
-                       'movie_reviews': model_review,
+                       'cinema_reviews': model_review,
                        'have_review': model_review.filter(
                            user=request.user).exists(),
                        'rating':
@@ -23,7 +24,7 @@ class GetResponseMixin:
                            if filter_model.filter(
                                user=request.user).exists()
                            else model_obj.IMDb_RATING,
-                       'calculated': self.calculate_review(model_obj)
+                       'calculated': self.calculate_review(model_review)
                        }
                       )
 
