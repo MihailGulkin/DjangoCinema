@@ -3,16 +3,12 @@
 {% load check_favorite %}
 {% load forx %}
 {% load minute_to_hours_convertor %}
+{% load check_like_dis %}
 {% block title_style %}
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/movie_serial_page.css' %}">
-    <title>
-        {% if content.title %}
-            {{ content.title }}
-        {% else %}
-            {{ content.serial_name }}
-        {% endif %}
-    </title>
+    {% block title_film_serial %}
+    {% endblock title_film_serial %}
 {% endblock title_style %}
 
 {% block content %}
@@ -185,6 +181,8 @@
                                         <div class="show-all-container">
                                             <button class="show-all">Show all review</button>
                                         </div>
+                                        {% block like_dis_section %}
+                                        {% endblock like_dis_section %}
                                     </div>
                                 </div>
                             {% endfor %}
@@ -232,14 +230,18 @@
                     </div>
                 </div>
             {% endif %}
-            {% if request.user.is_authenticated and not have_review %}
+            {% if not have_review %}
                 <div id="write_review_user" class="row block_review_write">
                     <div class="col-12">
                         <h2 class="mov_rating_text text-start">Write a review</h2>
                         <form method="post" id="form_view_submit" name="{{ content.slug }}">
                             <div class="border_style_form_send_review">
                                 <div class="user_info_send_review user_info">
-                                    <a href="{% url 'profile_page' request.user.username %}">{{ request.user.username }}</a>
+                                    {% if request.user.is_authenticated %}
+                                        <a href="{% url 'profile_page' request.user.username %}">{{ request.user.username }}</a>
+                                    {% else %}
+                                        <a href="{% url 'register_page' %}">New User</a>
+                                    {% endif %}
                                 </div>
                                 <div class="user_review">
                                     <div class="custom-select">
@@ -276,13 +278,15 @@
 
 
 {% block script %}
+    <script src="{% static 'js/star_fill.js' %}"></script>
+
     <script src="{% static 'js/ajax_rating_star_put.js' %}"></script>
     <script src="{% static 'js/ajax_delete_rating_user.js' %}"></script>
     <script src="{% static 'js/ajax_review_user.js' %}"></script>
     <script src="{% static 'js/ajax_favoriteFilm.js' %}"></script>
     <script src="{% static 'js/ajax_laterFilm.js' %}"></script>
+    <script src="{% static 'js/ajax_like_dislike_set.js' %}"></script>
 
-    <script src="{% static 'js/star_fill.js' %}"></script>
     <script src="{% static 'js/change_p_text_size.js' %}"></script>
     <script src="{% static 'js/rating_color_changer.js' %}"></script>
 

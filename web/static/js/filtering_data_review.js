@@ -28,15 +28,6 @@ function filtering_data_review_func()
         }
     }
 
-    function open_all_reviews()
-    {
-        for (let ele of $('.user_review_container'))
-        {
-            $(ele).css('display', '')
-        }
-
-
-    }
 
     function hide_all_reviews(reviews_type)
     {
@@ -50,4 +41,15 @@ function filtering_data_review_func()
         }
     }
 }
+
 filtering_data_review_func()
+
+function open_all_reviews()
+{
+    for (let ele of $('.user_review_container'))
+    {
+        $(ele).css('display', '')
+    }
+
+
+}

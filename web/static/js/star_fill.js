@@ -1,11 +1,10 @@
 class Fill_Star
 {
-    name = 23;
     constructor()
     {
         this.svg_star_marks = $('.svg_star_mark')
         this.star_arr = $('.one_star_container')
-        this.number = this._get_two_numbers($('.mov_rating_text').attr('name'))
+        this.number = this._get_two_numbers($('#true_rating_cinema').attr('name'))
     }
 
     star_fill_change()

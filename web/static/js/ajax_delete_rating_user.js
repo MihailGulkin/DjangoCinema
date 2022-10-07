@@ -29,7 +29,11 @@ function ajax_delete_rating()
             success: (res) =>
             {
                 $('#user_rating').html('')
-                colors.number = colors._get_two_numbers($('.mov_rating_text').attr('name'))
+
+                const rating = $('#true_rating_cinema')
+                rating.attr('name', `${rating.text()}`)
+
+                colors.number = colors._get_two_numbers(rating.attr('name'))
                 colors.star_fill_change()
 
             },

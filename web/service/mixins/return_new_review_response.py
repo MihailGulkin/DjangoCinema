@@ -27,6 +27,7 @@ class GetNewUserReviewMixin():
         return JsonResponse({'data': {
             'user': self.request.user.username,
             'review_type': new_review.review_type,
+            'pk': new_review.pk,
             'title': new_review.title,
             'text': new_review.text,
             'bool': _bool,

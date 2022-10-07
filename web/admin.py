@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from .models import Genre, Director, Movie, Serial, Season, Episode, \
     ActionsWithSerial, ActionsWithMovie, UserRatingMovie, UserRatingSerial, \
-    UserReviewMovie, UserReviewSerial
+    UserReviewMovie, UserReviewSerial, UsersReviewLikeDislikeMovie
 
 
 class ActionMovieAdmin(admin.ModelAdmin):
@@ -32,6 +32,7 @@ admin.site.register(Movie)
 admin.site.register(ActionsWithMovie, ActionMovieAdmin)
 admin.site.register(UserRatingMovie, UserRatingMovieAdmin)
 admin.site.register(UserReviewMovie, UserReviewMovieAdmin)
+admin.site.register(UsersReviewLikeDislikeMovie)
 
 admin.site.register(ActionsWithSerial, ActionMovieAdmin)
 admin.site.register(UserRatingSerial, UserRatingSerialAdmin)

@@ -1,7 +1,7 @@
 from django.urls import path, include
 from .views import MainPageView, MoviePageView, SerialPageView, \
     SearchAjaxView, GenrePageView, FavoriteView, GenresNavView, LaterView, \
-    DeleteRatingUserView, SendReviewUser
+    DeleteRatingUserView, SendReviewUserView, UserLikeDislikeReviewView
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views.generic.base import RedirectView
 from django.contrib.auth.views import LogoutView
@@ -17,7 +17,9 @@ urlpatterns = [
          name='genre_page'),
 
     # ajaxed path for only post view
-    path('review_user_send', SendReviewUser.as_view(), name="review_user"),
+    path('user_review_like_dislike', UserLikeDislikeReviewView.as_view(),
+         name="like_dislike_review"),
+    path('review_user_send', SendReviewUserView.as_view(), name="review_user"),
     path('delete_user_rating', DeleteRatingUserView.as_view(),
          name='delete_user_rating'),
     path('later_film', LaterView.as_view(), name='later_click'),

@@ -16,7 +16,6 @@ class CalculateReviewsTypeMixin:
                 temp = result_dict[f'{ele.review_type}s'][ele.review_type]
                 result_dict[f'{ele.review_type}s'][
                     'total'] = self.__fraction_part_check(temp=temp)
-        print(result_dict)
         return result_dict
 
     def __fraction_part_check(self, temp=1):

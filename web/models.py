@@ -1,5 +1,3 @@
-import datetime
-
 from django.db import models
 
 mpa_rating_system = [('G', 'G'),
@@ -21,6 +19,9 @@ favorite_later_cinema = [('Later', 'Later'),
 type_of_review = [('Positive', 'Positive'),
                   ('Neutral', 'Neutral'),
                   ('Negative', 'Negative')]
+
+like_dislike_review = [('Like', 'Like'),
+                       ('Dislike', 'Dislike')]
 
 
 class Genre(models.Model):
@@ -210,7 +211,8 @@ class UserRatingSerial(models.Model):
                                    null=True)
 
     def __str__(self):
-        return f'{self.user.username} - {self.serial.serial_name} - {self.rating}'
+        return f'{self.user.username} - {self.serial.serial_name} - ' \
+               f'{self.rating}'
 
 
 class UserReviewMovie(models.Model):
@@ -226,7 +228,8 @@ class UserReviewMovie(models.Model):
                                    null=True)
 
     def __str__(self):
-        return f'{self.user.username} - {self.movie.title} - {self.review_type}'
+        return f'{self.user.username} - {self.movie.title} - ' \
+               f'{self.review_type} - {self.pk}'
 
 
 class UserReviewSerial(models.Model):
@@ -242,4 +245,33 @@ class UserReviewSerial(models.Model):
                                    null=True)
 
     def __str__(self):
-        return f'{self.user.username} - {self.serial.serial_name} - {self.review_type}'
+        return f'{self.user.username} - {self.serial.serial_name} - ' \
+               f'{self.review_type} - {self.pk}'
+
+
+class UsersReviewLikeDislikeMovie(models.Model):
+    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
+                             default=None)
+
+    review = models.ForeignKey('UserReviewMovie', on_delete=models.CASCADE,
+                               default=None)
+    like_dislike = models.CharField(max_length=100,
+                                    choices=like_dislike_review)
+
+    def __str__(self):
+        return f'{self.user.username} - {self.review.movie.title} - ' \
+               f'{self.like_dislike} - {self.pk}'
+
+
+class UsersReviewLikeDislikeSerial(models.Model):
+    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
+                             default=None)
+
+    review = models.ForeignKey('UserReviewSerial', on_delete=models.CASCADE,
+                               default=None)
+    like_dislike = models.CharField(max_length=100,
+                                    choices=like_dislike_review)
+
+    def __str__(self):
+        return f'{self.user.username} - {self.review.serial.serial_name} - ' \
+               f'{self.like_dislike} - {self.pk}'

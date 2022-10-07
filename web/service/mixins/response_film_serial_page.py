@@ -9,8 +9,8 @@ class GetResponseMixin:
         if not request.user.is_authenticated:
             return render(request, self.template,
                           {'content': model_obj,
-                           'movie_reviews': model_review,
-                           'have_review': True,
+                           'cinema_reviews': model_review,
+                           'have_review': False,
                            'rating': model_obj.IMDb_RATING,
                            'calculated': self.calculate_review(model_review)})
         return render(request, self.template,

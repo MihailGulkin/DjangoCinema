@@ -2,17 +2,20 @@ from django.shortcuts import render
 from django.views import View
 from .models import (Movie, Genre, Director, Serial, ActionsWithMovie,
                      ActionsWithSerial, UserRatingMovie, UserRatingSerial,
-                     UserReviewMovie, UserReviewSerial)
+                     UserReviewMovie, UserReviewSerial,
+                     UsersReviewLikeDislikeMovie, UsersReviewLikeDislikeSerial)
 from web.service.shuffle_model import shuffle_model
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from web.service.return_model_query import return_query
 from web.service.create_serial_film_model import \
     create_serial_film_model_response
+
 from web.service.mixins.response_film_serial_page import GetResponseMixin
 from web.service.mixins.calculate_review_percentage import \
     CalculateReviewsTypeMixin
 from web.service.mixins.return_new_review_response import GetNewUserReviewMixin
+from web.service.mixins.like_dislike_response import GetUsersLikeDis
 
 
 class MainPageView(View):
@@ -210,10 +213,15 @@ class DeleteRatingUserView(View):
             return JsonResponse({})
 
 
-class SendReviewUser(View, CalculateReviewsTypeMixin, GetNewUserReviewMixin):
+class SendReviewUserView(View, CalculateReviewsTypeMixin,
+                         GetNewUserReviewMixin):
     model_review = UserReviewMovie
 
     def post(self, request):
+        if not request.user.is_authenticated:
+            return JsonResponse(
+                {'url': f'{request.build_absolute_uri("register/")}'}
+            )
         self.cinema_type, self.title, self.text_data, self.slug, self.review_type = (
             request.POST['type'],
             request.POST['title'],
@@ -229,3 +237,26 @@ class SendReviewUser(View, CalculateReviewsTypeMixin, GetNewUserReviewMixin):
         return self.new_review_response(_obj, UserReviewSerial,
                                         UserReviewSerial.objects.filter(
                                             serial=_obj))
+
+
+class UserLikeDislikeReviewView(View, GetUsersLikeDis):
+    def post(self, request):
+        if not request.user.is_authenticated:
+            return JsonResponse(
+                {'url': f'{request.build_absolute_uri("register/")}'}
+            )
+
+        self.user, self.like_dislike, self.pk, self.cinema_type = (
+            request.user, request.POST['value'],
+            request.POST['pk'],
+            request.POST['cinema_type']
+        )
+        if self.cinema_type == 'film':
+            return self._return_like_dis_response(
+                UserReviewMovie,
+                UsersReviewLikeDislikeMovie
+            )
+        return self._return_like_dis_response(
+            UserReviewSerial,
+            UsersReviewLikeDislikeSerial
+        )
