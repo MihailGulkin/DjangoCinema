@@ -13,6 +13,9 @@ function form_validation_check()
                 $('#error_pwd').remove()
                 $('#error_all').remove()
 
+                $('#error_verify').remove()
+                $('#verified_msg').remove()
+
                 if (res.errors)
                 {
 
@@ -31,6 +34,14 @@ function form_validation_check()
                     if (res.errors.__all__ !== undefined)
                     {
                         $(pwd).after(`<h4 class="error_field" id="error_all">${res.errors.__all__}</h4>
+                         `)
+                    }
+                    if (res.errors.verify !== undefined)
+                    {
+                        $(pwd).after(`<h4 class="error_field" id="error_verify">Please verify your account to continue 
+                                      <a href="${res.errors.verify_url}">Link to verify</a>
+                                      <br>If you have not received email, please check spam.
+                                      </h4>
                          `)
                     }
 

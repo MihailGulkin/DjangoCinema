@@ -1,9 +1,12 @@
 from django.urls import path
-from .views import RegistrationPageView, LoginPageView, ProfilePageView
+from .views import RegistrationPageView, LoginPageView, ProfilePageView, \
+    VerifyAccountView
 
 urlpatterns = [
     path('register/', RegistrationPageView.as_view(), name='register_page'),
     path('login/', LoginPageView.as_view(), name='login_page'),
-    path('profile/<slug:username>', ProfilePageView.as_view(), name='profile_page'),
-
+    path('profile/<slug:username>', ProfilePageView.as_view(),
+         name='profile_page'),
+    path('verify/<slug:username>', VerifyAccountView.as_view(),
+         name='verify_acc')
 ]

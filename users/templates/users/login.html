@@ -4,16 +4,22 @@
 {% block form %}
     <form name="login_form" method="post" class="form_post">
         {% csrf_token %}
+
         <a class="login_icon" href="{% url 'main_page' %}">
             <img src="{% static 'image/LOGO.gif' %}" alt>
         </a>
+        {% if verify_flag %}
+            <div class="field_group">
+                <h4 id="verified_msg" class="text-start verified_acc">Account Verified</h4>
+            </div>
+        {% endif %}
         <div class="field_group">
             {{ user_form.username|add_class:'form_input form_input_log'|append_attr:'placeholder:Email'|append_attr:'id=email_log'|append_attr:'data-value=true'|append_attr:'autocomplete=nope' }}
         </div>
         <div class="field_group">
             {{ user_form.password|add_class:'form_input form_input_log'|append_attr:'placeholder:Password'|append_attr:'id=pwd_log'|append_attr:'data-value=true'|append_attr:'autocomplete=nope' }}
         </div>
-        <button class="sign_login_btn " id="login_btn" type="button">Send</button>
+        <button class="sign_login_btn " id="login_btn" type="button">Sign In</button>
     </form>
 {% endblock form %}
 {% block script %}

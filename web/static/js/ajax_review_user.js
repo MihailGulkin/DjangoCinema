@@ -151,7 +151,6 @@ function ajax_review_user_func()
 
                 $(write_review_block).remove()
                 open_all_reviews()
-                btn_text_open_active()
                 filtering_data_review_func()
                 ajax_like_dislike_set_func()
 

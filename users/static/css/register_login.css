@@ -112,3 +112,10 @@
     font-size: 14px;
     font-weight: 400;
 }
+.verified_acc
+{
+    font-size: 17px;
+    font-weight: 500;
+    color: #3593ff;
+    padding: 0 10px;
+}
