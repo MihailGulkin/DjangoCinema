@@ -372,7 +372,7 @@
                                             <ul class="card_list_big">
                                                 <li class="card_list_li">Release Date : {{ movie.release_date }}</li>
                                                 <li class="card_list_li">
-                                                    Director: <a class="card_director" href="">{{ movie.director }}</a>
+                                                    Director: <a class="card_director" href="{% url 'director_page' movie.director.slug_field %}">{{ movie.director }}</a>
                                                 </li>
                                             </ul>
                                             <p class="card_content_title_h5 card_content_p">

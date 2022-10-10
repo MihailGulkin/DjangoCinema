@@ -1,4 +1,66 @@
 {% extends 'web/base.html' %}
+{% load static %}
+{% load calculate_director %}
+
 {% block title_style %}
-    <title>Director</title>
-{% endblock title_style%}
+    <title>{{ director.name }}</title>
+    <link rel="stylesheet" href="{% static 'css/director.css' %}">
+    <link rel="stylesheet" href="{% static 'css/movie_serial_page.css' %}">
+{% endblock title_style %}
+{% block content %}
+    <section class="director_section">
+        <div class="container">
+            <div class="row centered_block">
+                <div class="col-lg-auto col-md-12">
+                    <div class="position-relative container_image_single_page">
+                        <img class="mov_ser_img" src="{{ director.poster.url }}" alt>
+                    </div>
+                </div>
+                <div class="col-lg-auto col-md-12">
+                    <div class="left_block">
+                        <div class="name_film_block">
+                            <h1 class="mov_ser_text title_margin_btm">{{ director.name }}</h1>
+                            <h3 class="mov_ser_text">About Person</h3>
+                        </div>
+                        <div class="about_film_block">
+                            <ul class="px-0 ">
+                                <li class="d-flex about_film_block_container_li">
+                                    <div class="about_film_attribute">
+                                        <h4>Born date</h4>
+                                    </div>
+                                    <div class="about_film_attribute_content">
+                                        <h4>{{ director.born_date|date:"Y-m-d" }}, <span
+                                                class="director_year">{{ director.born_date|age_calculate }} Years</span>
+                                        </h4>
+                                    </div>
+                                </li>
+                                <li class="d-flex about_film_block_container_li">
+                                    <div class="about_film_attribute">
+                                        <h4>Genre</h4>
+                                    </div>
+                                    <div class="about_film_attribute_content">
+                                        <h4>{{ director.genres.all|join:", " }}</h4>
+                                    </div>
+                                </li>
+                                <li class="d-flex about_film_block_container_li">
+                                    <div class="about_film_attribute">
+                                        <h4>Born place</h4>
+                                    </div>
+                                    <div class="about_film_attribute_content">
+                                        <h4>{{ director.born_place }}</h4>
+                                    </div>
+                                </li>
+                                <li class="d-flex about_film_block_container_li">
+                                    <div class="about_film_attribute"><h4>Height</h4></div>
+                                    <div class="about_film_attribute_content">
+                                        <h4><span class="director_year">{{ director.growth|convert_visualize}} M</span></h4>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

@@ -184,9 +184,11 @@ class DirectorPageView(View):
     director_model = Director
 
     def get(self, request, director_name):
-        director_obj = self.director_model.objects.get(name=director_name)
+        director_obj = self.director_model.objects.get(
+            slug_field=director_name)
         return render(request, self.template,
-                      {'director_name': director_name})
+                      {'director': director_obj}
+                      )
 
 
 # ajax web view only
