@@ -1,7 +1,7 @@
 {% extends 'web/serial_movie_base_page.html' %}
 {% load check_favorite %}
 {% load check_like_dis %}
-
+{% load calculate_user_review %}
 {% block title_film_serial %}
     <title>{{ content.serial_name }}</title>
 {% endblock title_film_serial %}
@@ -187,6 +187,9 @@
         {% endif %}
     </div>
 {% endblock like_dis_section %}
+{% block calculate_review_user %}
+    <h6 class="mov_rating_text">{{ review.user|calculate_review_user_serial }} Reviews</h6>
+{% endblock calculate_review_user %}
 {% block btn_send_review %}
     <button data-cinema-type="serial" id="button_review_send" type="button"
             class="disable_btn btn_from_review">Publish review

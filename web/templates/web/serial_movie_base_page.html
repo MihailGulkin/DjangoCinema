@@ -167,13 +167,15 @@
                                      class="border_style_form user_review_container {{ review.review_type|lower }}_border m-20px">
                                     <div class="{{ review.review_type|lower }}_user_bottom user_info d-flex">
                                         <div>
-                                            <a href="{% url 'profile_page' review.user.username %}">{{ review.user.username }}</a>
+                                            <a class="mov_rating_text" href="{% url 'profile_page' review.user.username %}">{{ review.user.username }}</a>
+                                            {% block calculate_review_user %}
+                                            {% endblock calculate_review_user %}
                                         </div>
                                         <div class="created_review_date">
                                             <p class="mov_rating_text">{{ review.created |date:'j F o \a\t H:i' }}</p>
                                         </div>
                                     </div>
-                                    <div class="user_review title_form_review_container">
+                                    <div class="user_review title_form_review_container justify-content-start">
                                         <h4 class="mov_rating_text text-start">{{ review.title }}</h4>
                                         <div class="content-block-text">
                                             <p class="mov_rating_text text-start">{{ review.text }}</p>
@@ -238,7 +240,7 @@
                             <div class="border_style_form_send_review">
                                 <div class="user_info_send_review user_info">
                                     {% if request.user.is_authenticated %}
-                                        <a href="{% url 'profile_page' request.user.username %}">{{ request.user.username }}</a>
+                                        <a class="mov_rating_text" href="{% url 'profile_page' request.user.username %}">{{ request.user.username }}</a>
                                     {% else %}
                                         <a href="{% url 'register_page' %}">New User</a>
                                     {% endif %}
