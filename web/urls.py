@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from .views import MainPageView, MoviePageView, SerialPageView, \
     SearchAjaxView, GenrePageView, FavoriteView, GenresNavView, LaterView, \
     DeleteRatingUserView, SendReviewUserView, UserLikeDislikeReviewView

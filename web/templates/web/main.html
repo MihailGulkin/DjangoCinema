@@ -233,131 +233,131 @@
                                             </svg>
 
                                             <span class="navbar_rating_hover">
-                                            <span class="card_rating">
-                                                <svg class="card_svg_star" version="1.1" id="Capa_1"
-                                                     xmlns="http://www.w3.org/2000/svg"
-                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                     x="0px"
-                                                     y="0px"
-                                                     width="36.09px" height="36.09px" viewBox="0 0 36.09 36.09"
-                                                     style="enable-background:new 0 0 36.09 36.09;"
-                                                     xml:space="preserve"
-                                                >
-    <g>
-        <path d="M36.042,13.909c-0.123-0.377-0.456-0.646-0.85-0.688l-11.549-1.172L18.96,1.43c-0.16-0.36-0.519-0.596-0.915-0.596
-            s-0.755,0.234-0.915,0.598L12.446,12.05L0.899,13.221c-0.394,0.04-0.728,0.312-0.85,0.688c-0.123,0.377-0.011,0.791,0.285,1.055
-            l8.652,7.738L6.533,34.045c-0.083,0.387,0.069,0.787,0.39,1.02c0.175,0.127,0.381,0.191,0.588,0.191
-            c0.173,0,0.347-0.045,0.503-0.137l10.032-5.84l10.03,5.84c0.342,0.197,0.77,0.178,1.091-0.059c0.32-0.229,0.474-0.633,0.391-1.02
-            l-2.453-11.344l8.653-7.737C36.052,14.699,36.165,14.285,36.042,13.909z M25.336,21.598c-0.268,0.24-0.387,0.605-0.311,0.957
-            l2.097,9.695l-8.574-4.99c-0.311-0.182-0.695-0.182-1.006,0l-8.576,4.99l2.097-9.695c0.076-0.352-0.043-0.717-0.311-0.957
-            l-7.396-6.613l9.87-1.002c0.358-0.035,0.668-0.264,0.814-0.592l4.004-9.077l4.003,9.077c0.146,0.328,0.456,0.557,0.814,0.592
-            l9.87,1.002L25.336,21.598z"/>
-    </g>
+                                                <span class="card_rating">
+                                                    <svg class="card_svg_star" version="1.1" id="Capa_1"
+                                                         xmlns="http://www.w3.org/2000/svg"
+                                                         xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                         x="0px"
+                                                         y="0px"
+                                                         width="36.09px" height="36.09px" viewBox="0 0 36.09 36.09"
+                                                         style="enable-background:new 0 0 36.09 36.09;"
+                                                         xml:space="preserve"
+                                                    >
+        <g>
+            <path d="M36.042,13.909c-0.123-0.377-0.456-0.646-0.85-0.688l-11.549-1.172L18.96,1.43c-0.16-0.36-0.519-0.596-0.915-0.596
+                s-0.755,0.234-0.915,0.598L12.446,12.05L0.899,13.221c-0.394,0.04-0.728,0.312-0.85,0.688c-0.123,0.377-0.011,0.791,0.285,1.055
+                l8.652,7.738L6.533,34.045c-0.083,0.387,0.069,0.787,0.39,1.02c0.175,0.127,0.381,0.191,0.588,0.191
+                c0.173,0,0.347-0.045,0.503-0.137l10.032-5.84l10.03,5.84c0.342,0.197,0.77,0.178,1.091-0.059c0.32-0.229,0.474-0.633,0.391-1.02
+                l-2.453-11.344l8.653-7.737C36.052,14.699,36.165,14.285,36.042,13.909z M25.336,21.598c-0.268,0.24-0.387,0.605-0.311,0.957
+                l2.097,9.695l-8.574-4.99c-0.311-0.182-0.695-0.182-1.006,0l-8.576,4.99l2.097-9.695c0.076-0.352-0.043-0.717-0.311-0.957
+                l-7.396-6.613l9.87-1.002c0.358-0.035,0.668-0.264,0.814-0.592l4.004-9.077l4.003,9.077c0.146,0.328,0.456,0.557,0.814,0.592
+                l9.87,1.002L25.336,21.598z"/>
+        </g>
+                                                        <g>
+        </g>
+                                                        <g>
+        </g>
+                                                        <g>
+        </g>
+                                                        <g>
+        </g>
+                                                        <g>
+        </g>
+                                                        <g>
+        </g>
+                                                        <g>
+        </g>
+                                                        <g>
+        </g>
+                                                        <g>
+        </g>
+                                                        <g>
+        </g>
+                                                        <g>
+        </g>
+                                                        <g>
+        </g>
+                                                        <g>
+        </g>
+                                                        <g>
+        </g>
+                                                        <g>
+        </g>
+        </svg>
+                                                    {{ movie.IMDb_RATING }}
+                                                </span>
+                                                <div data-value="{{ movie.slug }}" data-value-type="film"
+                                                     class="svg_heart_container {{ movie.slug }}_cls_favorite">
+                                                    {% favorite_movie movie request 'Favorite' as favorite_bool %}
+                                                    {% if favorite_bool %}
+                                                        <svg class="card_svg_actions_with_film favourite_film"
+                                                             version="1.1"
+                                                             id="Capa_1"
+
+                                                             xmlns="http://www.w3.org/2000/svg"
+                                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                             width="45.743px" height="45.743px" viewBox="0 0 45.743 45.743"
+                                                             xml:space="preserve">
                                                     <g>
-    </g>
+                                                        <path d="M34.199,3.83c-3.944,0-7.428,1.98-9.51,4.997c0,0-0.703,1.052-1.818,1.052c-1.114,0-1.817-1.052-1.817-1.052
+                                                            c-2.083-3.017-5.565-4.997-9.51-4.997C5.168,3.83,0,8.998,0,15.376c0,1.506,0.296,2.939,0.82,4.258
+                                                            c3.234,10.042,17.698,21.848,22.051,22.279c4.354-0.431,18.816-12.237,22.052-22.279c0.524-1.318,0.82-2.752,0.82-4.258
+                                                            C45.743,8.998,40.575,3.83,34.199,3.83z"/>
+                                                    </g>
+                                                </svg>
+                                                    {% else %}
+                                                        <svg class="card_svg_actions_with_film" version="1.1" id="Capa_1"
+
+                                                             xmlns="http://www.w3.org/2000/svg"
+                                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                             width="45.743px" height="45.743px" viewBox="0 0 45.743 45.743"
+                                                             xml:space="preserve">
                                                     <g>
-    </g>
-                                                    <g>
-    </g>
-                                                    <g>
-    </g>
-                                                    <g>
-    </g>
-                                                    <g>
-    </g>
-                                                    <g>
-    </g>
-                                                    <g>
-    </g>
-                                                    <g>
-    </g>
-                                                    <g>
-    </g>
-                                                    <g>
-    </g>
-                                                    <g>
-    </g>
-                                                    <g>
-    </g>
-                                                    <g>
-    </g>
-                                                    <g>
-    </g>
-    </svg>
-                                                {{ movie.IMDb_RATING }}
+                                                        <path d="M34.199,3.83c-3.944,0-7.428,1.98-9.51,4.997c0,0-0.703,1.052-1.818,1.052c-1.114,0-1.817-1.052-1.817-1.052
+                                                            c-2.083-3.017-5.565-4.997-9.51-4.997C5.168,3.83,0,8.998,0,15.376c0,1.506,0.296,2.939,0.82,4.258
+                                                            c3.234,10.042,17.698,21.848,22.051,22.279c4.354-0.431,18.816-12.237,22.052-22.279c0.524-1.318,0.82-2.752,0.82-4.258
+                                                            C45.743,8.998,40.575,3.83,34.199,3.83z"/>
+                                                    </g>
+                                                </svg>
+                                                    {% endif %}
+                                                </div>
+                                                <div data-value="{{ movie.slug }}" data-value-type="film"
+                                                     class="svg_bookmark_container {{ movie.slug }}_cls_bookmark">
+                                                    {% favorite_movie movie request 'Later' as book_mark %}
+                                                    {% if book_mark %}
+                                                        <svg class="card_svg_actions_with_film later_film" version="1.1"
+                                                             id="Capa_1"
+                                                             xmlns="http://www.w3.org/2000/svg"
+                                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                             width="459px" height="459px" viewBox="0 0 459 459"
+                                                             style="enable-background:new 0 0 459 459;"
+                                                             xml:space="preserve">
+                                                        <g>
+                                                            <g id="bookmark">
+                                                                <path d="M357,0H102C73.95,0,51,22.95,51,51v408l178.5-76.5L408,459V51C408,22.95,385.05,0,357,0z"/>
+                                                            </g>
+                                                        </g>
+                                                        </svg>
+                                                    {% else %}
+                                                        <svg class="card_svg_actions_with_film" version="1.1" id="Capa_1"
+                                                             xmlns="http://www.w3.org/2000/svg"
+                                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                             width="459px" height="459px" viewBox="0 0 459 459"
+                                                             style="enable-background:new 0 0 459 459;"
+                                                             xml:space="preserve">
+                                                        <g>
+                                                            <g id="bookmark">
+                                                                <path d="M357,0H102C73.95,0,51,22.95,51,51v408l178.5-76.5L408,459V51C408,22.95,385.05,0,357,0z"/>
+                                                            </g>
+                                                        </g>
+                                                        </svg>
+                                                    {% endif %}
+                                                </div>
                                             </span>
-                                            <div data-value="{{ movie.slug }}" data-value-type="film"
-                                                 class="svg_heart_container {{ movie.slug }}_cls_favorite">
-                                                {% favorite_movie movie request 'Favorite' as favorite_bool %}
-                                                {% if favorite_bool %}
-                                                    <svg class="card_svg_actions_with_film favourite_film"
-                                                         version="1.1"
-                                                         id="Capa_1"
-
-                                                         xmlns="http://www.w3.org/2000/svg"
-                                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                                         width="45.743px" height="45.743px" viewBox="0 0 45.743 45.743"
-                                                         xml:space="preserve">
-                                                <g>
-                                                    <path d="M34.199,3.83c-3.944,0-7.428,1.98-9.51,4.997c0,0-0.703,1.052-1.818,1.052c-1.114,0-1.817-1.052-1.817-1.052
-                                                        c-2.083-3.017-5.565-4.997-9.51-4.997C5.168,3.83,0,8.998,0,15.376c0,1.506,0.296,2.939,0.82,4.258
-                                                        c3.234,10.042,17.698,21.848,22.051,22.279c4.354-0.431,18.816-12.237,22.052-22.279c0.524-1.318,0.82-2.752,0.82-4.258
-                                                        C45.743,8.998,40.575,3.83,34.199,3.83z"/>
-                                                </g>
-                                            </svg>
-                                                {% else %}
-                                                    <svg class="card_svg_actions_with_film" version="1.1" id="Capa_1"
-
-                                                         xmlns="http://www.w3.org/2000/svg"
-                                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                                         width="45.743px" height="45.743px" viewBox="0 0 45.743 45.743"
-                                                         xml:space="preserve">
-                                                <g>
-                                                    <path d="M34.199,3.83c-3.944,0-7.428,1.98-9.51,4.997c0,0-0.703,1.052-1.818,1.052c-1.114,0-1.817-1.052-1.817-1.052
-                                                        c-2.083-3.017-5.565-4.997-9.51-4.997C5.168,3.83,0,8.998,0,15.376c0,1.506,0.296,2.939,0.82,4.258
-                                                        c3.234,10.042,17.698,21.848,22.051,22.279c4.354-0.431,18.816-12.237,22.052-22.279c0.524-1.318,0.82-2.752,0.82-4.258
-                                                        C45.743,8.998,40.575,3.83,34.199,3.83z"/>
-                                                </g>
-                                            </svg>
-                                                {% endif %}
-                                            </div>
-                                            <div data-value="{{ movie.slug }}" data-value-type="film"
-                                                 class="svg_bookmark_container {{ movie.slug }}_cls_bookmark">
-                                                {% favorite_movie movie request 'Later' as book_mark %}
-                                                {% if book_mark %}
-                                                    <svg class="card_svg_actions_with_film later_film" version="1.1"
-                                                         id="Capa_1"
-                                                         xmlns="http://www.w3.org/2000/svg"
-                                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                                         width="459px" height="459px" viewBox="0 0 459 459"
-                                                         style="enable-background:new 0 0 459 459;"
-                                                         xml:space="preserve">
-                                                    <g>
-                                                        <g id="bookmark">
-                                                            <path d="M357,0H102C73.95,0,51,22.95,51,51v408l178.5-76.5L408,459V51C408,22.95,385.05,0,357,0z"/>
-                                                        </g>
-                                                    </g>
-                                                    </svg>
-                                                {% else %}
-                                                    <svg class="card_svg_actions_with_film" version="1.1" id="Capa_1"
-                                                         xmlns="http://www.w3.org/2000/svg"
-                                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                                         width="459px" height="459px" viewBox="0 0 459 459"
-                                                         style="enable-background:new 0 0 459 459;"
-                                                         xml:space="preserve">
-                                                    <g>
-                                                        <g id="bookmark">
-                                                            <path d="M357,0H102C73.95,0,51,22.95,51,51v408l178.5-76.5L408,459V51C408,22.95,385.05,0,357,0z"/>
-                                                        </g>
-                                                    </g>
-                                                    </svg>
-                                                {% endif %}
-                                            </div>
-                                        </span>
                                         </a>
                                         <div class="card_content">
-                                            <a class="card_title_word_wrap card_title_wrap"
-                                               href="{% url 'movie_page' movie.slug %}">{{ movie.title }}</a>
+                                            <h3 class="card_title_word_wrap card_title_wrap"><a
+                                               href="{% url 'movie_page' movie.slug %}">{{ movie.title }}</a></h3>
                                             <h5 class="card_content_title_h5">Genres</h5>
                                             <ul class="card_list_big card_test_some flex-row">
                                                 {% for genre in movie.genre.all %}

@@ -6,6 +6,8 @@ function ajax_start()
 {
     $('.page_number').click(function (event)
     {
+            console.log('dsf')
+
         event.preventDefault();
         let page_n = $(this).attr('href');
 
@@ -31,8 +33,8 @@ function ajax_start()
                     $('#movie_list_container_card').append(`
                             <div class="col-12 col-md-6 col-xl-4">
                                 <div class="card сard_big">
-                                    <a href="movie/${val.slug}/" class="card_cover">
-                                         <img class="card_img" src="media/${val.poster}" alt="">
+                                    <a href="/movie/${val.slug}/" class="card_cover">
+                                            <img class="card_img" src="/media/${val.poster}" alt="">
                                             <svg class="card_svg_play" version="1.0" xmlns="http://www.w3.org/2000/svg"
                                          width="512.000000pt" height="512.000000pt"
                                          viewBox="0 0 512.000000 512.000000"
@@ -117,7 +119,6 @@ function ajax_start()
                                                 </span>
                                                 <div data-value="${val.slug}" data-value-type="film" class="svg_heart_container ${val.slug}_cls_favorite">
                                                     ${generate_html_svg_heart(resp.favorite[i])}
-                                   
                                                 </div>
                                                 <div data-value="${val.slug}" data-value-type="film" class="svg_bookmark_container ${val.slug}_cls_bookmark">
                                                     ${generate_html_svg_book(resp.later[i])}
@@ -126,7 +127,7 @@ function ajax_start()
                                             </span>
                                         </a>
                                     <div class="card_content">
-                                        <h3 class="card_title_word_wrap card_title_wrap"><a href="movie/${val.slug}/">${val.title}</a></h3>
+                                        <h3 class="card_title_word_wrap card_title_wrap"><a href="/movie/${val.slug}/">${val.title}</a></h3>
                                         <h5 class="card_content_title_h5">Genres</h5>
                                         <ul class="card_list_big card_test_some flex-row">
                                                     ${generate_html_li(resp.film_genres, val)}

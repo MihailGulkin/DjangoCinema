@@ -35,10 +35,15 @@ class Genre(models.Model):
 
 class Director(models.Model):
     name = models.CharField(max_length=200)
+
     created = models.DateTimeField(auto_now_add=True)
     poster = models.ImageField(upload_to='Directors/')
     born_place = models.CharField(max_length=100)
-    born_date = models.CharField(max_length=100)
+    born_date = models.DateTimeField()
+    growth = models.CharField(max_length=100, default=None, null=True)
+    genres = models.ManyToManyField('Genre', default=None)
+
+    slug_field = models.SlugField(unique=True, null=True)
 
     def __str__(self):
         return self.name

@@ -16,19 +16,22 @@ from web.service.mixins.calculate_review_percentage import \
     CalculateReviewsTypeMixin
 from web.service.mixins.return_new_review_response import GetNewUserReviewMixin
 from web.service.mixins.like_dislike_response import GetUsersLikeDis
+from web.service.mixins.favorite_later_movie import CheckFavLaterMovieMixin
+
+TOTAL_PAGES = 9
 
 
-class MainPageView(View):
+class MainPageView(View, CheckFavLaterMovieMixin):
     template = 'web/main.html'
 
     movie_model = Movie
     serial = Serial.objects.get(pk=1)
 
     directors = [director.name for director in Director.objects.all()]
-    film_genres = [{movie.title: [genre.name for genre in movie.genre.all()]}
+    film_genres = [{movie.title: [genre.name for genre in Genre.objects.all()]}
                    for movie in movie_model.objects.all()]
 
-    paginator = Paginator(movie_model.objects.all(), 9)
+    paginator = Paginator(movie_model.objects.all(), TOTAL_PAGES)
     first_page = paginator.page(1).object_list
     page_range = paginator.page_range
 
@@ -53,21 +56,16 @@ class MainPageView(View):
                              'favorite': self._favorite_later_movie(
                                  request,
                                  page_n,
-                                 'Favorite'
+                                 'Favorite',
+                                 self.paginator
                              ),
                              'later': self._favorite_later_movie(
                                  request,
                                  page_n,
-                                 'Later')})
-
-    def _favorite_later_movie(self, request, page_n, choose):
-        if request.user.is_authenticated:
-            return [ActionsWithMovie.objects.filter(
-                cinema_type=film,
-                user=request.user,
-                choose_favorite_later=choose).exists()
-                    for film in self.paginator.page(page_n).object_list]
-        return [False for _ in range(len(page_n))]
+                                 'Later',
+                                 self.paginator
+                             )}
+                            )
 
 
 class MoviePageView(View, GetResponseMixin, CalculateReviewsTypeMixin):
@@ -126,11 +124,69 @@ class SerialPageView(View, GetResponseMixin, CalculateReviewsTypeMixin):
         return rating_obj
 
 
-class GenrePageView(View):
+class GenrePageView(View, CheckFavLaterMovieMixin):
     template = 'web/genre.html'
+    genre_model = Genre
+    movie_model = Movie
+
+    directors = [director.name for director in Director.objects.all()]
+    film_genres = [{movie.title: [genre.name for genre in movie.genre.all()]}
+                   for movie in movie_model.objects.all()]
 
     def get(self, request, genre_name):
-        return render(request, self.template)
+        genre_object = self.genre_model.objects.get(slug=genre_name)
+        movie_flt = self.movie_model.objects.filter(genre=genre_object)
+
+        paginator = Paginator(movie_flt, TOTAL_PAGES)
+
+        first_page = paginator.page(1).object_list
+        page_range = paginator.page_range
+
+        total_pages = len(page_range)
+
+        return render(request, self.template,
+                      {'genre_name': genre_object.name,
+                       'first_page': first_page,
+                       'page_range': range(1, 4) if total_pages >= 3 else
+                       range(1, total_pages + 1),
+                       'total_pages': total_pages
+                       })
+
+    def post(self, request, genre_name):
+        genre_object = self.genre_model.objects.get(slug=genre_name)
+        movie_flt = self.movie_model.objects.filter(genre=genre_object)
+
+        paginator = Paginator(movie_flt, TOTAL_PAGES)
+
+        page_n = request.POST.get('page_n', None)
+
+        results = list(
+            paginator.page(page_n).object_list.values())
+
+        return JsonResponse({"results": results,
+                             'directors': self.directors,
+                             'film_genres': self.film_genres,
+                             'favorite': self._favorite_later_movie(
+                                 request,
+                                 page_n,
+                                 'Favorite',
+                                 paginator
+                             ),
+                             'later': self._favorite_later_movie(
+                                 request,
+                                 page_n,
+                                 'Later',
+                                 paginator)})
+
+
+class DirectorPageView(View):
+    template = 'web/director.html'
+    director_model = Director
+
+    def get(self, request, director_name):
+        director_obj = self.director_model.objects.get(name=director_name)
+        return render(request, self.template,
+                      {'director_name': director_name})
 
 
 # ajax web view only
@@ -222,12 +278,14 @@ class SendReviewUserView(View, CalculateReviewsTypeMixin,
             return JsonResponse(
                 {'url': f'{request.build_absolute_uri("register/")}'}
             )
+
         self.cinema_type, self.title, self.text_data, self.slug, self.review_type = (
             request.POST['type'],
             request.POST['title'],
             request.POST['text_data'],
             request.POST['slug'],
             request.POST['review_type'])
+
         if self.cinema_type == 'film':
             _obj = Movie.objects.get(slug=self.slug)
             return self.new_review_response(_obj, UserReviewMovie,
