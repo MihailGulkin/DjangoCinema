@@ -77,8 +77,8 @@ class VerifyAccountView(View):
 
     def get(self, request, username):
         user = self.user_model.objects.get(
-                username=username
-            )
+            username=username
+        )
         if user.is_verified:
             return redirect('main_page')
 
@@ -99,4 +99,7 @@ class ProfilePageView(View):
     template = 'users/profile.html'
 
     def get(self, request, username):
-        return render(request, self.template)
+        user_obj = CustomUser.objects.get(username=username)
+        return render(request, self.template, {
+            'user_obj': user_obj,
+        })

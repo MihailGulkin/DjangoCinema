@@ -1,0 +1,46 @@
+.profile_section
+{
+    margin-top: 100px;
+}
+
+.profile_container
+{
+    background: linear-gradient(90deg, rgba(28, 26, 45, 1) 29%, rgba(30, 28, 56, 1) 50%, rgba(41, 37, 85, 1) 88%);
+}
+
+.profile_container
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #151f30;
+    padding: 0 30px;
+    border-radius: 16px;
+    position: relative;
+}
+.nav_li_style
+{
+    margin-right: 10px;
+    margin-bottom: 1px;
+}
+.nav_tabs_section_style
+{
+    color: rgb(197, 195, 193);
+    text-align: center;
+    padding-bottom: 7px;
+}
+.nav_li_style .active
+{
+    background-color: transparent !important;
+    border-bottom: 2px solid #3584CA !important;
+    cursor: default;
+    color: #3584CA !important;
+}
+.nav_li_style > a
+{
+    padding: 10px 0;
+    border: none !important;
+    transition: .5s;
+    border-bottom: 2px solid transparent !important;
+}
