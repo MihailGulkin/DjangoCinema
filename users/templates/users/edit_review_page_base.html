@@ -1,0 +1,56 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block title_style %}
+    <link rel="stylesheet" href="{% static 'css/edit_review.css' %}">
+    <link rel=" stylesheet" href="{% static 'css/movie_serial_page.css' %}">
+{% endblock title_style %}
+{% block content %}
+    <section class="edit_review_section">
+        <div class="container">
+            <div class="row">
+                <div id="write_review_user" class="row block_review_write">
+                    <div class="col-12">
+                        <h2 class="mov_rating_text text-start">Edit review</h2>
+                        <form method="post" id="form_view_submit">
+                            {% csrf_token %}
+                            <div class="border_style_form_send_review">
+                                <div class="user_info_send_review user_info">
+                                    <a class="mov_rating_text"
+                                       href="{% url 'profile_page' request.user.username %}">{{ request.user.username }}</a>
+                                </div>
+                                <div class="user_review">
+                                    <div class="custom-select">
+                                        <select>
+                                            <option value="hide">Review type</option>
+                                            <option>Positive</option>
+                                            <option>Neutral</option>
+                                            <option>Negative</option>
+                                        </select>
+                                    </div>
+                                    <div class="title_form_review_container">
+                                        <input placeholder="Title" id="input_title" class="w-100" maxlength="10"
+                                               value="{{ review_obj.title }}" required>
+                                    </div>
+                                    <div class="text_form_review_container">
+                                        <textarea placeholder="Text" id="textarea_form_review"
+                                                  class="text_area_review w-100"
+                                                  required>{{ review_obj.text }}</textarea>
+                                    </div>
+                                    <div class="button_form_review_container">
+                                        <button data-cinema-type="film" id="button_review_send" type="button"
+                                                class="disable_btn btn_from_review">Edit review
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+{% block script %}
+    <script src="{% static 'js/select_menu_review.js' %}"></script>
+    <script src="{% static 'js/ajax_edit_review_page.js' %}"></script>
+{% endblock script %}

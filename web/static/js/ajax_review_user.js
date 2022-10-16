@@ -47,6 +47,7 @@ function ajax_review_user_func()
                 if(res.url)
                 {
                     window.location = res.url
+                    return
                 }
                 const write_review_block = $('#write_review_user')
                 if (!res.data.bool)

@@ -11,25 +11,47 @@
 .profile_container
 {
     display: flex;
-    flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
-    background-color: #151f30;
+    align-items: center;
     padding: 0 30px;
     border-radius: 16px;
     position: relative;
 }
+
+.profile_username_container
+{
+    color: rgb(197, 195, 193);
+    display: flex;
+    align-self: center;
+    margin-right: 20px;
+    font-family: 'Rubik', sans-serif;
+
+}
+
+.profile_username_container > h4
+{
+    margin: 0;
+}
+
+.nav__items_ul
+{
+    margin-right: auto;
+}
+
 .nav_li_style
 {
     margin-right: 10px;
     margin-bottom: 1px;
 }
+
 .nav_tabs_section_style
 {
+    font-family: 'Rubik', sans-serif;
     color: rgb(197, 195, 193);
     text-align: center;
     padding-bottom: 7px;
 }
+
 .nav_li_style .active
 {
     background-color: transparent !important;
@@ -37,10 +59,239 @@
     cursor: default;
     color: #3584CA !important;
 }
+
 .nav_li_style > a
 {
     padding: 10px 0;
     border: none !important;
     transition: .5s;
     border-bottom: 2px solid transparent !important;
+}
+
+.a_logout_style
+{
+    width: 100px;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.a_logout_style > span
+{
+    color: rgb(197, 195, 193);
+    margin-right: 10px;
+}
+
+.a_logout_style:hover > span
+{
+    color: #3584CA;
+    transition: .5s;
+}
+
+.svg_out
+{
+    fill: #3584CA;
+    width: 20px;
+    height: 20px;
+}
+
+/*.fade*/
+/*{*/
+/*    transition: opacity 0.4s linear;*/
+/*}*/
+
+.bg_container_tab
+{
+    background: linear-gradient(90deg, rgba(28, 26, 45, 1) 29%, rgba(30, 28, 56, 1) 50%, rgba(41, 37, 85, 1) 88%);
+    /*padding: 0 30px;*/
+    border-radius: 16px;
+}
+
+.empty_field
+{
+    color: rgb(197, 195, 193);
+    text-align: center;
+    font-size: 26px;
+    padding: 10px 30px;
+}
+
+.table__content_rating
+{
+    width: 100%;
+}
+
+.svg_movie
+{
+    width: 24px;
+    height: 24px;
+    fill: #3584CA;
+    padding-right: 5px;
+}
+
+.prev_tab_content_name
+{
+    padding: 20px 30px;
+
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(62, 52, 112);
+}
+
+.prev_tab_content_name > h3
+{
+    color: rgb(197, 195, 193);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    margin-bottom: 0;
+    font-family: 'Rubik', sans-serif;
+}
+
+.prev_tab_content_col_name
+{
+    border-bottom: 1px solid rgb(62, 52, 112);
+    padding: 10px 30px;
+    width: 100%;
+}
+
+.prev_tab_content_col_name tr th:first-child
+{
+    padding: 10px 0;
+    padding-left: 30px;
+}
+
+.prev_tab_content_col_name tr th:last-child
+{
+    padding-right: 10px;
+}
+
+.prev_h3_
+{
+    color: rgb(197, 195, 193);
+    font-size: 16px;
+    margin-bottom: 0;
+    font-weight: 400;
+}
+
+.font_size_18
+{
+    font-size: 18px;
+}
+
+.main_content_title
+{
+    margin: 10px 0;
+}
+
+.main_content_rating
+{
+    margin: 10px 0;
+}
+
+.main_content_title
+{
+    padding-left: 30px;
+}
+
+.main_content_title > a
+{
+    color: rgb(197, 195, 193);
+    font-size: 18px;
+}
+
+.main_content_title > a:hover
+{
+    transition: .5s;
+    color: #3584CA;
+}
+
+.main_content_rating > h3
+{
+    font-size: 18px;
+    padding-right: 15px;
+}
+
+.star_rating
+{
+    height: 20px;
+    width: 20px;
+    fill: #3584CA;
+}
+
+.delete_film_serial
+{
+    height: 25px;
+    width: 25px;
+    fill: #a11418;
+    opacity: 1;
+    cursor: pointer;
+}
+.delete_film_serial:hover
+{
+    transition: .5s;
+    fill: #ff0008;
+}
+
+.edit_svg
+{
+    height: 25px;
+    width: 25px;
+    fill: #3584CA;
+}
+.edit_svg:hover
+{
+    transition: .5s;
+    fill: #006eff;
+}
+.input_btn_styles
+{
+    width: 25% !important;
+}
+
+@media all and (max-width: 991px)
+{
+    .nav__items_ul > li
+    {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .profile_container
+    {
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+    }
+
+    .nav_li_style
+    {
+        display: flex;
+        justify-content: center;
+    }
+
+    .nav_li_style > a
+    {
+        width: fit-content !important;
+    }
+
+    .profile_username_container
+    {
+        margin-top: 10px;
+        margin-right: 0;
+    }
+
+    .a_logout_style
+    {
+        margin-bottom: 10px;
+    }
+
+    .nav__items_ul
+    {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
 }
