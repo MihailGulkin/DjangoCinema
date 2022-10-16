@@ -44,7 +44,7 @@ function ajax_review_user_func()
 
             success: (res) =>
             {
-                if(res.url)
+                if (res.url)
                 {
                     window.location = res.url
                     return
@@ -92,7 +92,8 @@ function ajax_review_user_func()
                                      class="border_style_form user_review_container ${res.data.review_type.toLowerCase()}_border m-20px">
                                     <div class="${res.data.review_type.toLowerCase()}_user_bottom user_info d-flex">
                                         <div>
-                                            <a href="/profile/${res.data.user}">${res.data.user}</a>
+                                            <a class="mov_rating_text" href="/profile/${res.data.user}">${res.data.user}</a>
+                                            <h6 class="mov_rating_text text-start">${res.data.count_review} Reviews</h6>
                                         </div>
                                         <div class="created_review_date">
                                             <p class="mov_rating_text">${res.data.created}</p>
@@ -106,8 +107,8 @@ function ajax_review_user_func()
                                         <div class="show-all-container">
                                             <button class="show-all">Show all review</button>
                                         </div>
-                                        <div id="like_dislike_btn_container" data-type="serial" class="d-flex" data-id="${ res.data.pk }">
-                                            <button id="like_${ res.data.pk }_btn" data-value="Like" type="button"
+                                        <div id="like_dislike_btn_container" data-type="${review_type}" class="d-flex" data-id="${res.data.pk}">
+                                            <button id="like_${res.data.pk}_btn" data-value="Like" type="button"
                                                     class="like_dislike_btn m-left">
                                                 <svg class="like_dislike_svg like_svg"
                                                      version="1.1" id="Capa_1"
@@ -126,7 +127,7 @@ function ajax_review_user_func()
                                                 Useful
                                                 <span class="number_btn_like_dis">0</span>
                                             </button>
-                                            <button id="dislike_${ res.data.pk }_btn" data-value="Dislike"
+                                            <button id="dislike_${res.data.pk}_btn" data-value="Dislike"
                                                 type="button"
                                                 class="like_dislike_btn">
                                                 <svg class="like_dislike_svg dislike_svg" version="1.1" id="Capa_1"

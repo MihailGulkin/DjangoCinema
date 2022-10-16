@@ -104,7 +104,10 @@ class ProfilePageView(View):
     template = 'users/profile.html'
 
     def get(self, request, username):
-        user_obj = CustomUser.objects.get(username=username)
+        user_obj = CustomUser.objects.filter(username=username)
+        if not user_obj.exists():
+            return redirect('main_page')
+        user_obj = user_obj.first()
         user_films = UserRatingMovie.objects.filter(user=user_obj)
         user_serial = UserRatingSerial.objects.filter(user=user_obj)
 

@@ -26,6 +26,7 @@ class GetNewUserReviewMixin():
 
         return JsonResponse({'data': {
             'user': self.request.user.username,
+            'count_review': review_model.objects.filter(user=self.request.user).count(),
             'review_type': new_review.review_type,
             'pk': new_review.pk,
             'title': new_review.title,

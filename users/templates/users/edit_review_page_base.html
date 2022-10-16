@@ -28,11 +28,11 @@
                                         </select>
                                     </div>
                                     <div class="title_form_review_container">
-                                        <input placeholder="Title" id="input_title" class="w-100" maxlength="10"
+                                        <input placeholder="Title" id="input_title" class="w-100" maxlength="20"
                                                value="{{ review_obj.title }}" required>
                                     </div>
                                     <div class="text_form_review_container">
-                                        <textarea placeholder="Text" id="textarea_form_review"
+                                        <textarea maxlength="10000" placeholder="Text" id="textarea_form_review"
                                                   class="text_area_review w-100"
                                                   required>{{ review_obj.text }}</textarea>
                                     </div>
