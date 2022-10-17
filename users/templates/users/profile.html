@@ -1,5 +1,6 @@
 {% extends 'web/base.html' %}
 {% load static %}
+{% load add_css_color %}
 {% block title_style %}
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <link rel="stylesheet" href="{% static 'css/movie_serial_page.css' %}">
@@ -600,7 +601,7 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <h3 class="prev_h3_ font_size_18">{{ film.review_type }}</h3>
+                                                    <h3 class="prev_h3_ font_size_18 {{ film.review_type|add_css_color }}">{{ film.review_type }}</h3>
                                                 </td>
                                                 {% if flag_auth %}
                                                     <td>
@@ -692,7 +693,7 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <h3 class="prev_h3_ font_size_18">{{ serial.review_type }}</h3>
+                                                    <h3 class="prev_h3_ font_size_18 {{ serial.review_type|add_css_color }}">{{ serial.review_type }}</h3>
                                                 </td>
                                                 {% if flag_auth %}
                                                     <td>

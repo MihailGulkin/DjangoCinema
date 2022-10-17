@@ -24,6 +24,7 @@ like_dislike_review = [('Like', 'Like'),
                        ('Dislike', 'Dislike')]
 
 
+
 class Genre(models.Model):
     name = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)

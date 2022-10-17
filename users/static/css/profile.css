@@ -251,7 +251,18 @@
 {
     width: 25% !important;
 }
-
+.blue_color_review_type
+{
+    color: rgb(47, 128, 237) !important;
+}
+.gray_color_review_type
+{
+    color: rgb(169, 176, 176) !important;
+}
+.red_color_review_type
+{
+    color: rgb(161, 20, 24) !important;
+}
 @media all and (max-width: 991px)
 {
     .nav__items_ul > li
