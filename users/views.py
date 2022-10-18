@@ -164,6 +164,8 @@ class ProfilePageView(View):
         })
 
 
+# Ajax web View only
+
 class DeleteFilmSerialRatingView(View, DeleteProfileDataMixin):
     """
     Full AJAX CBV to delete film and serial rating in profile.

@@ -1,15 +1,15 @@
 from itertools import zip_longest
+from itertools import chain
 
 
-def return_query(*args, number_element=5):
-    result_list = []
-    for ele_1, ele_2 in zip_longest(*args):
-        if len(result_list) >= number_element:
-            return result_list
-        if ele_1:
-            result_list.append(ele_1)
-        if ele_2:
-            result_list.append(ele_2)
-    return result_list
-
-
+def return_query(film_list, serial_list, number_element=5):
+    """
+    Return que list with movie/serial/etc
+    Used in search
+    :param film_list:
+    :param serial_list:
+    :param number_element:
+    :return:
+    """
+    return list(ele for ele in chain(*zip_longest(film_list, serial_list))
+                if ele is not None)[:number_element]

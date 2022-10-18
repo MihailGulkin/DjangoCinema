@@ -6,6 +6,13 @@ register = template.Library()
 
 @register.simple_tag(name='favorite_movie')
 def favorite_movie(movie, request, chooses):
+    """
+    Return is favorite movie
+    :param movie:
+    :param request:
+    :param chooses:
+    :return:
+    """
     if request.user.is_authenticated:
         return ActionsWithMovie.objects.filter(cinema_type=movie,
                                                user=request.user,
@@ -15,6 +22,13 @@ def favorite_movie(movie, request, chooses):
 
 @register.simple_tag(name='favorite_serial')
 def favorite_serial(serial, request, chooses):
+    """
+    Return is favorite serial
+    :param movie:
+    :param request:
+    :param chooses:
+    :return:
+    """
     if request.user.is_authenticated:
         return ActionsWithSerial.objects.filter(cinema_type=serial,
                                                 user=request.user,

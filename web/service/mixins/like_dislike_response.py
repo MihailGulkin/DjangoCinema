@@ -2,6 +2,9 @@ from django.http import JsonResponse
 
 
 class GetUsersLikeDis:
+    """
+    Contains general method to not duplicate code in LikeDislikeView.
+    """
     def _return_like_dis_response(self, _review_model, like_dis_model):
         review_obj = _review_model.objects.get(pk=self.pk)
 

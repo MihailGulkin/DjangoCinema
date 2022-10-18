@@ -24,8 +24,10 @@ like_dislike_review = [('Like', 'Like'),
                        ('Dislike', 'Dislike')]
 
 
-
 class Genre(models.Model):
+    """
+    Genre model, contains all genres to use in Movie and Serial model's
+    """
     name = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(unique=True, null=True, )
@@ -35,6 +37,9 @@ class Genre(models.Model):
 
 
 class Director(models.Model):
+    """
+    Director model, contains all directors to use in Movie and Serial model's
+    """
     name = models.CharField(max_length=200)
 
     created = models.DateTimeField(auto_now_add=True)
@@ -51,6 +56,9 @@ class Director(models.Model):
 
 
 class Movie(models.Model):
+    """
+    Movie model, contains movie director, genre, poster and etc.
+    """
     title = models.CharField(max_length=200)
 
     director = models.ForeignKey('Director', on_delete=models.CASCADE,
@@ -92,6 +100,9 @@ class Movie(models.Model):
 
 
 class Serial(models.Model):
+    """
+    Serial model, contains serial director, genre, poster, seasons and etc.
+    """
     serial_name = models.CharField(max_length=200)
 
     director = models.ForeignKey('Director', on_delete=models.CASCADE,
@@ -136,8 +147,10 @@ class Serial(models.Model):
         return self._meta.model_name
 
 
-# Season - Serial
 class Season(models.Model):
+    """
+    Seasons model, contains many to many field on episode model
+    """
     season_name = models.CharField(max_length=50, default='S01 - Serial Name')
     Episodes = models.ManyToManyField('Episode', default=None)
     number_episodes = models.PositiveIntegerField(default=1)
@@ -152,6 +165,9 @@ class Season(models.Model):
 
 # Episode - Serial
 class Episode(models.Model):
+    """
+    Episode model, contains ForeignKey on season
+    """
     chose_season = models.ForeignKey('Season', on_delete=models.CASCADE,
                                      default=None, null=True, blank=True)
 
@@ -165,6 +181,9 @@ class Episode(models.Model):
 
 
 class ActionsWithMovie(models.Model):
+    """
+    Model to note movie. User can choose: favorite or later.
+    """
     user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
                              default=None)
     cinema_type = models.ForeignKey('Movie', on_delete=models.CASCADE,
@@ -180,6 +199,9 @@ class ActionsWithMovie(models.Model):
 
 
 class ActionsWithSerial(models.Model):
+    """
+    Model to note serial. User can choose: favorite or later.
+    """
     user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
                              default=None)
     cinema_type = models.ForeignKey('Serial', on_delete=models.CASCADE,
@@ -195,6 +217,9 @@ class ActionsWithSerial(models.Model):
 
 
 class UserRatingMovie(models.Model):
+    """
+    Model to contains user movie rating
+    """
     user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
                              default=None)
     movie = models.ForeignKey('Movie', on_delete=models.CASCADE,
@@ -208,6 +233,9 @@ class UserRatingMovie(models.Model):
 
 
 class UserRatingSerial(models.Model):
+    """
+    Model to contains user serial rating
+    """
     user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
                              default=None)
     serial = models.ForeignKey('Serial', on_delete=models.CASCADE,
@@ -222,6 +250,9 @@ class UserRatingSerial(models.Model):
 
 
 class UserReviewMovie(models.Model):
+    """
+    Contains user movies review. Have ForeignKey on Movie model
+    """
     user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
                              default=None)
     movie = models.ForeignKey('Movie', on_delete=models.CASCADE,
@@ -239,6 +270,9 @@ class UserReviewMovie(models.Model):
 
 
 class UserReviewSerial(models.Model):
+    """
+    Contains user serials review. Have ForeignKey on Serial model
+    """
     user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
                              default=None)
     serial = models.ForeignKey('Serial', on_delete=models.CASCADE,
@@ -256,6 +290,10 @@ class UserReviewSerial(models.Model):
 
 
 class UsersReviewLikeDislikeMovie(models.Model):
+    """
+    Contains like/dislike under movie reviews.
+    Have ForeignKey on UserReviewMovie and CustomUser
+    """
     user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
                              default=None)
 
@@ -270,6 +308,10 @@ class UsersReviewLikeDislikeMovie(models.Model):
 
 
 class UsersReviewLikeDislikeSerial(models.Model):
+    """
+    Contains like/dislike under Serial reviews.
+    Have ForeignKey on UserReviewSerial and CustomUser
+    """
     user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE,
                              default=None)
 

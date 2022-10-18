@@ -5,6 +5,11 @@ register = template.Library()
 
 @register.filter(name='add_css_color')
 def add_css_color(review_type):
+    """
+    Return color css class
+    :param review_type:
+    :return:
+    """
     color = {'Positive': 'blue_color_review_type',
              'Neutral': 'gray_color_review_type',
              'Negative': 'red_color_review_type'}

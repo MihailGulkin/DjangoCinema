@@ -2,6 +2,9 @@ from django.http import JsonResponse
 
 
 class GetNewUserReviewMixin():
+    """
+    Get new review response. Used in film/serial ajax review view.
+    """
     def new_review_response(self, cinema_model, review_model,
                             _review_flt):
 

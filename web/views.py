@@ -23,6 +23,9 @@ TOTAL_PAGES = 9
 
 
 class MainPageView(View, CheckFavLaterMovieMixin):
+    """
+    Home page View. Used Django Paginator.
+    """
     template = 'web/main.html'
 
     movie_model = Movie
@@ -73,6 +76,10 @@ class MainPageView(View, CheckFavLaterMovieMixin):
 
 
 class MoviePageView(View, GetResponseMixin, CalculateReviewsTypeMixin):
+    """
+    Movie Page View with GET and POST method. POST method
+    create user rating under movie
+    """
     template = 'web/movie_page.html'
     model_obj = Movie
     model_review = UserReviewMovie
@@ -101,6 +108,10 @@ class MoviePageView(View, GetResponseMixin, CalculateReviewsTypeMixin):
 
 
 class SerialPageView(View, GetResponseMixin, CalculateReviewsTypeMixin):
+    """
+    Serial Page View with GET and POST method. POST method
+    create user rating under serial
+    """
     template = 'web/serial_page.html'
     model_obj = Serial
     rating = UserRatingSerial
@@ -129,6 +140,9 @@ class SerialPageView(View, GetResponseMixin, CalculateReviewsTypeMixin):
 
 
 class GenrePageView(View, CheckFavLaterMovieMixin):
+    """
+    Genre page with GET and POST method. Used Django Paginator.
+    """
     template = 'web/genre.html'
     genre_model = Genre
     movie_model = Movie
@@ -187,6 +201,9 @@ class GenrePageView(View, CheckFavLaterMovieMixin):
 
 
 class DirectorPageView(View):
+    """
+    Director page with only GET method.
+    """
     template = 'web/director.html'
     director_model = Director
 
@@ -198,8 +215,11 @@ class DirectorPageView(View):
                       )
 
 
-# ajax web view only
+# Ajax web View only
 class SearchAjaxView(View):
+    """
+    View for search on navbar
+    """
     def post(self, request):
         if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
 
@@ -210,14 +230,17 @@ class SearchAjaxView(View):
 
             if (len(query_film) or len(query_se)) and len(query):
                 return JsonResponse(
-                    {'data': return_query(list(query_se.values()),
-                                          list(query_film.values()),
+                    {'data': return_query(list(query_film.values()),
+                                          list(query_se.values()),
                                           number_element=3)})
             return JsonResponse({'data': 'No result :('})
         return JsonResponse({})
 
 
 class GenresNavView(View):
+    """
+    Genre View on navbar
+    """
     genres_model = Genre.objects.all()
 
     def post(self, request):
@@ -226,7 +249,9 @@ class GenresNavView(View):
 
 
 class FavoriteView(View):
-
+    """
+    View for add movie/serial to favorite category
+    """
     def post(self, request):
         if not request.user.is_authenticated:
             return JsonResponse(
@@ -245,6 +270,9 @@ class FavoriteView(View):
 
 
 class LaterView(View):
+    """
+    View to add movie/serial to Later category
+    """
     def post(self, request):
         if not request.user.is_authenticated:
             return JsonResponse(
@@ -263,6 +291,9 @@ class LaterView(View):
 
 
 class DeleteRatingUserView(View):
+    """
+    View to delete user rating under movie/serial
+    """
     def post(self, request):
         if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
             if request.POST['type'] == 'film':
@@ -280,6 +311,9 @@ class DeleteRatingUserView(View):
 
 class SendReviewUserView(View, CalculateReviewsTypeMixin,
                          GetNewUserReviewMixin):
+    """
+    View to send user review in movie/serial page.
+    """
     model_review = UserReviewMovie
 
     def post(self, request):
@@ -307,6 +341,9 @@ class SendReviewUserView(View, CalculateReviewsTypeMixin,
 
 
 class UserLikeDislikeReviewView(View, GetUsersLikeDis):
+    """
+    View to set like/dislike under user review in movie/serial page
+    """
     def post(self, request):
         if not request.user.is_authenticated:
             return JsonResponse(

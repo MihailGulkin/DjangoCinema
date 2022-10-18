@@ -4,6 +4,9 @@ from django.utils import timezone
 
 
 class GetResponseMixin:
+    """
+    View have get and post method to use in Movie/Serial.
+    """
     def get_response_film_serial(self, request, model_obj, model_review,
                                  filter_model):
         if not request.user.is_authenticated:

@@ -1,7 +1,9 @@
-from django.db.models import QuerySet
-
-
 class CalculateReviewsTypeMixin:
+    """
+    Mixin to calculate total review.
+    Calculate number of positive, neutral and negative review.
+    Return dict result.
+    """
     def calculate_review(self, reviews_obj):
         result_dict = {'total': reviews_obj.__len__()}
         self.total = result_dict['total']
@@ -20,5 +22,5 @@ class CalculateReviewsTypeMixin:
 
     def __fraction_part_check(self, temp=1):
         return f'{(temp / self.total * 100):.2f}' \
-               if (temp / self.total * 100) % 1 != 0 \
-               else f'{(temp / self.total * 100):.0f}'
+            if (temp / self.total * 100) % 1 != 0 \
+            else f'{(temp / self.total * 100):.0f}'
