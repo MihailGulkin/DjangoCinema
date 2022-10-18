@@ -512,7 +512,7 @@
                     </div>
                     <div class="col-12">
                         <div class="owl-carousel owl-theme" id="serial_slider">
-                            {% for i in  10|for_range %}
+                            {% for serial in  serials %}
                                 <div class="card">
                                     <a href="{% url 'serial_page' serial.slug %}" class="card_cover">
                                         <img class="card_img" src="{{ serial.poster.url }}" alt="">

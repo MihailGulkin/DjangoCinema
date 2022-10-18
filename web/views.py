@@ -25,9 +25,11 @@ class MainPageView(View, CheckFavLaterMovieMixin):
     template = 'web/main.html'
 
     movie_model = Movie
-    serial = Serial.objects.get(pk=1)
+    serials = Serial.objects.all()
 
     directors = [director.name for director in Director.objects.all()]
+    directors_href = [director.slug_field for director in
+                      Director.objects.all()]
     film_genres = [{movie.title: [genre.name for genre in Genre.objects.all()]}
                    for movie in movie_model.objects.all()]
 
@@ -43,7 +45,7 @@ class MainPageView(View, CheckFavLaterMovieMixin):
                        'first_page': self.first_page,
                        'page_range': range(1, 4),
                        'total_pages': len(self.page_range),
-                       'serial': self.serial})
+                       'serials': self.serials})
 
     def post(self, request):
         page_n = request.POST.get('page_n', None)
@@ -52,6 +54,7 @@ class MainPageView(View, CheckFavLaterMovieMixin):
 
         return JsonResponse({"results": results,
                              'directors': self.directors,
+                             'directors_href': self.directors_href,
                              'film_genres': self.film_genres,
                              'favorite': self._favorite_later_movie(
                                  request,
@@ -130,6 +133,8 @@ class GenrePageView(View, CheckFavLaterMovieMixin):
     movie_model = Movie
 
     directors = [director.name for director in Director.objects.all()]
+    directors_href = [director.slug_field for director in Director.objects.all()]
+
     film_genres = [{movie.title: [genre.name for genre in movie.genre.all()]}
                    for movie in movie_model.objects.all()]
 
@@ -165,6 +170,7 @@ class GenrePageView(View, CheckFavLaterMovieMixin):
 
         return JsonResponse({"results": results,
                              'directors': self.directors,
+                             'directors_href': self.directors_href,
                              'film_genres': self.film_genres,
                              'favorite': self._favorite_later_movie(
                                  request,

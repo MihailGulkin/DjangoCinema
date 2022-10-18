@@ -6,7 +6,6 @@ function ajax_start()
 {
     $('.page_number').click(function (event)
     {
-            console.log('dsf')
 
         event.preventDefault();
         let page_n = $(this).attr('href');
@@ -27,7 +26,7 @@ function ajax_start()
                 arrow_changer(page_n)
 
                 $('#movie_list_container_card').html('')
-
+                console.log(resp)
                 $.each(resp.results, function (i, val)
                 {
                     $('#movie_list_container_card').append(`
@@ -134,7 +133,7 @@ function ajax_start()
                                         <ul class="card_list_big">
                                             <li class="card_list_li">Release Date : ${val.release_date}</li>
                                             <li class="card_list_li">
-                                                Director: <a class="card_director" href="">${resp.directors[val.director_id - 1]}</a>
+                                                Director: <a class="card_director" href="/director/${resp.directors_href[val.director_id - 1]}">${resp.directors[val.director_id - 1]}</a>
                                             </li>
                                         </ul>
                                         <p class="card_content_title_h5 card_content_p">
