@@ -1,4 +1,7 @@
-function form_validation_check()
+`
+Ajax to dynamically check user input 
+`
+function form_validation_check_reg()
 {
     const sendRegData = () =>
     {
@@ -12,6 +15,7 @@ function form_validation_check()
                 $('#error_username').remove()
                 $('#error_email').remove()
                 $('#error_pwd2').remove()
+                $('#error_username_all').remove()
 
                 $(username).attr('data-value', true)
                 $(email).attr('data-value', true)
@@ -20,6 +24,13 @@ function form_validation_check()
                 if (res.errors.username !== undefined)
                 {
                     $(username).after(`<h4 class="error_field" id="error_username">${res.errors.username}</h4>
+                         `)
+                    $(username).attr('data-value', false)
+
+                }
+                if (res.errors.__all__ !== undefined)
+                {
+                    $(username).after(`<h4 class="error_field" id="error_username_all">${res.errors.__all__}</h4>
                          `)
                     $(username).attr('data-value', false)
 
@@ -113,5 +124,5 @@ function form_validation_check()
     }
 }
 
-form_validation_check()
+form_validation_check_reg()
 

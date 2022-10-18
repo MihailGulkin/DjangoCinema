@@ -740,13 +740,13 @@
                             <div class="row">
                                 <div class="col-12">
                                     <form class="justify-content-center
-                                    align-items-center align-content-center d-flex flex-column">
+                                    align-items-center align-content-center d-flex flex-column" onkeypress="return event.keyCode != 13;">
                                         {% csrf_token %}
                                         <input type="text" name="username" autofocus="" autocapitalize="none"
                                                autocomplete="username"
                                                maxlength="64"
                                                id="username_log"
-                                               value="{{ user_obj.username }}" class="form_input input_btn_styles"
+                                               value="{{ user_obj.username }}" class="input_profile_username form_input input_btn_styles"
                                                required="">
                                         <button class="sign_login_btn input_btn_styles" id="change_btn" type="button">
                                             Change

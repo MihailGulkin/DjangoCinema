@@ -1,24 +1,30 @@
-import logging
+from re import fullmatch
 
-from django.shortcuts import render, redirect
 from django.views import View
-from .forms import CustomUserForm
 from django.http import JsonResponse
-from .service.delete_requiered_field import delete_field
-from django.contrib.auth.forms import AuthenticationForm
+from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login
+from django.contrib.auth.forms import AuthenticationForm
+
+from .models import CustomUser
+from .forms import CustomUserForm
+
+from web.models import UserRatingMovie, UserRatingSerial, ActionsWithMovie, \
+    ActionsWithSerial, UserReviewSerial, UserReviewMovie, Movie, Serial
+
+from .service.delete_requiered_field import delete_field
 from .service.send_email_ import send_first_verify_email, \
     send_already_verified_email
 from .service.verify import verify_user
-from .models import CustomUser
-from web.models import UserRatingMovie, UserRatingSerial, ActionsWithMovie, \
-    ActionsWithSerial, UserReviewSerial, UserReviewMovie, Movie, Serial
 from .service.mixins.delete_profile_data import DeleteProfileDataMixin
-from django.utils import timezone
 from .service.mixins.edit_review_base import EditReviewBaseMixin
 
 
 class RegistrationPageView(View):
+    """
+    Registration CBV with GET and POST method, with send e-mail function
+    and validation form.
+    """
     template = 'users/register.html'
     user_form = CustomUserForm
 
@@ -46,6 +52,9 @@ class RegistrationPageView(View):
 
 
 class LoginPageView(View):
+    """
+    Login CBV with GET and POST method with validation form.
+    """
     template = 'users/login.html'
     user_form = AuthenticationForm
 
@@ -76,6 +85,9 @@ class LoginPageView(View):
 
 
 class VerifyAccountView(View):
+    """
+    CBV with GET method, to handle verify url.
+    """
     user_model = CustomUser
     template = 'users/login.html'
     user_form = AuthenticationForm
@@ -101,6 +113,9 @@ class VerifyAccountView(View):
 
 
 class ProfilePageView(View):
+    """
+    Profile CBV for only GET method to return models data.
+    """
     template = 'users/profile.html'
 
     def get(self, request, username):
@@ -150,6 +165,10 @@ class ProfilePageView(View):
 
 
 class DeleteFilmSerialRatingView(View, DeleteProfileDataMixin):
+    """
+    Full AJAX CBV to delete film and serial rating in profile.
+    """
+
     def post(self, request):
         if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
             rating_serials = UserRatingSerial.objects.filter(user=request.user)
@@ -157,13 +176,13 @@ class DeleteFilmSerialRatingView(View, DeleteProfileDataMixin):
             slug = request.POST['slug']
 
             if request.POST['type'] == 'film':
-                return self._delete_profile_data_film(
+                return self._delete_profile_data_film_serial(
                     rating_films.get(
                         movie=self._return_movie_obj(slug)
                     ),
                     rating_films
                 )
-            return self._delete_profile_data_serial(rating_serials.get(
+            return self._delete_profile_data_film_serial(rating_serials.get(
                 serial=self._return_serial_obj(slug)
             ),
                 rating_serials
@@ -171,6 +190,10 @@ class DeleteFilmSerialRatingView(View, DeleteProfileDataMixin):
 
 
 class DeleteFilmSerialFavoriteView(View, DeleteProfileDataMixin):
+    """
+    Full AJAX CBV to delete film and serial from favorite.
+    """
+
     def post(self, request):
         if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
             favorite_films = ActionsWithMovie.objects.filter(
@@ -184,13 +207,13 @@ class DeleteFilmSerialFavoriteView(View, DeleteProfileDataMixin):
             slug = request.POST['slug']
 
             if request.POST['type'] == 'film':
-                return self._delete_profile_data_film(
+                return self._delete_profile_data_film_serial(
                     favorite_films.get(
                         cinema_type=self._return_movie_obj(slug)
                     ),
                     favorite_films
                 )
-            return self._delete_profile_data_serial(favorite_serials.get(
+            return self._delete_profile_data_film_serial(favorite_serials.get(
                 cinema_type=self._return_serial_obj(slug)
             ),
                 favorite_serials
@@ -198,6 +221,10 @@ class DeleteFilmSerialFavoriteView(View, DeleteProfileDataMixin):
 
 
 class DeleteFilmSerialLaterView(View, DeleteProfileDataMixin):
+    """
+    Full AJAX CBV to delete film and serial from later.
+    """
+
     def post(self, request):
         if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
             later_films = ActionsWithMovie.objects.filter(
@@ -211,13 +238,13 @@ class DeleteFilmSerialLaterView(View, DeleteProfileDataMixin):
             slug = request.POST['slug']
 
             if request.POST['type'] == 'film':
-                return self._delete_profile_data_film(
+                return self._delete_profile_data_film_serial(
                     later_films.get(
                         cinema_type=self._return_movie_obj(slug)
                     ),
                     later_films
                 )
-            return self._delete_profile_data_serial(later_serials.get(
+            return self._delete_profile_data_film_serial(later_serials.get(
                 cinema_type=self._return_serial_obj(slug)
             ),
                 later_serials
@@ -225,6 +252,10 @@ class DeleteFilmSerialLaterView(View, DeleteProfileDataMixin):
 
 
 class DeleteFilmSerialReviewView(View, DeleteProfileDataMixin):
+    """
+    Full AJAX CBV to delete film and serial user review in profile.
+    """
+
     def post(self, request):
         if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
             review_films = UserReviewMovie.objects.filter(
@@ -236,13 +267,13 @@ class DeleteFilmSerialReviewView(View, DeleteProfileDataMixin):
             slug = request.POST['slug']
 
             if request.POST['type'] == 'film':
-                return self._delete_profile_data_film(
+                return self._delete_profile_data_film_serial(
                     review_films.get(
                         movie=self._return_movie_obj(slug)
                     ),
                     review_films
                 )
-            return self._delete_profile_data_serial(
+            return self._delete_profile_data_film_serial(
                 review_serials.get(
                     serial=self._return_serial_obj(slug)
                 ),
@@ -251,13 +282,22 @@ class DeleteFilmSerialReviewView(View, DeleteProfileDataMixin):
 
 
 class ChangeUsernameView(View):
+    """
+    Full AJAX CBV to change username in settings tab in profile.
+    """
+
     def post(self, request):
         if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
             username = request.POST['username']
             if CustomUser.objects.filter(
-                    username=username).exists() and request.user.username != username:
+                    username=username).exists() and \
+                    request.user.username != username:
                 return JsonResponse(
                     {'data': {'error': 'Username already exist'}})
+            if not fullmatch(r'[A-Za-z\d]*', username):
+                return JsonResponse(
+                    {'data': {'error': 'Only letters and numeric'}}
+                )
             if request.user.username == username:
                 return JsonResponse({'data': {}})
             user_obj = CustomUser.objects.get(username=request.user.username)
@@ -269,6 +309,10 @@ class ChangeUsernameView(View):
 
 
 class EditReviewFilmView(View, EditReviewBaseMixin):
+    """
+    CBV to edit user film review with POST-AJAX and GET method.
+    """
+
     def get(self, request, film_slug, username):
         film_obj = Movie.objects.filter(slug=film_slug).first()
         review_obj = UserReviewMovie.objects.filter(movie=film_obj)
@@ -284,6 +328,10 @@ class EditReviewFilmView(View, EditReviewBaseMixin):
 
 
 class EditReviewSerialView(View, EditReviewBaseMixin):
+    """
+    CBV to edit user serial review with POST-AJAX and GET method.
+    """
+
     def get(self, request, serial_slug, username):
         serial_obj = Serial.objects.filter(slug=serial_slug).first()
         review_obj = UserReviewSerial.objects.filter(

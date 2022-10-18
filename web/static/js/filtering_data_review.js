@@ -1,3 +1,6 @@
+`
+Add filter in filtering btn in film/serial page
+`
 function filtering_data_review_func()
 {
     const elems = $('.rating_bar_select_cls')

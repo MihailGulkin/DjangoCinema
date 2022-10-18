@@ -1,11 +1,24 @@
 from .models import CustomUser
 from django.contrib.auth.forms import UserCreationForm
+from django import forms
 
 
 class CustomUserForm(UserCreationForm):
+    """
+    User creation form with overloading clean method to check valid username
+    and clean_password2 method to check only ascii letters password
+    """
     class Meta:
         model = CustomUser
         fields = ['email', 'username', 'password1', 'password2']
+
+    def clean(self):
+        username = self.cleaned_data.get('username')
+        if self._check_ascii(username if username else ''):
+            raise forms.ValidationError(
+                'Sorry, only ascii characters'
+            )
+        return self.cleaned_data
 
     def clean_password2(self):
         super(CustomUserForm, self).clean_password2()

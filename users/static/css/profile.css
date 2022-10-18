@@ -263,6 +263,10 @@
 {
     color: rgb(161, 20, 24) !important;
 }
+.input_profile_username
+{
+    margin-top: 10px;
+}
 @media all and (max-width: 991px)
 {
     .nav__items_ul > li

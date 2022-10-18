@@ -1,3 +1,6 @@
+`
+Ajax function to delete review film/serial
+`
 function delete_serial_film_review()
 {
     const elems = $('.review_film_cls')

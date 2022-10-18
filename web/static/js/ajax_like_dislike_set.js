@@ -1,3 +1,6 @@
+`
+Ajax like dislike review button
+`
 function ajax_like_dislike_set_func()
 {
     const csrf = $('[name="csrfmiddlewaretoken"]')[0].value

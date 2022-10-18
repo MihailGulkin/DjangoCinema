@@ -1,3 +1,6 @@
+`
+Activate some ajax function
+`
 ajax_favoriteFilm()
 ajax_lateFilm()
 ajax_review_user_func()

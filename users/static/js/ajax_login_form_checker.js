@@ -1,4 +1,7 @@
-function form_validation_check()
+`
+Ajax to check user input in login form
+`
+function form_validation_check_login()
 {
     const sendLoginData = () =>
     {
@@ -91,5 +94,5 @@ function form_validation_check()
     }
 }
 
-form_validation_check()
+form_validation_check_login()
 

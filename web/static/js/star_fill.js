@@ -1,3 +1,6 @@
+`
+Class for certain fill star
+`
 class Fill_Star
 {
     constructor()

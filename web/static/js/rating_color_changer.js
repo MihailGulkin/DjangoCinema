@@ -1,3 +1,6 @@
+`
+Change color on user rating
+`
 function rating_color_change()
 {
     const select = $('.rating_cinema_color')

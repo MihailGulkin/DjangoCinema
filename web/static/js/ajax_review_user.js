@@ -1,3 +1,6 @@
+`
+Ajax send user review in film/serial page
+`
 function ajax_review_user_func()
 {
     const ele = $('#button_review_send')

@@ -1,3 +1,6 @@
+`
+Active owl carousel slider for movie and serial
+`
 $("#movie_slider").owlCarousel(
     {
         loop: true,

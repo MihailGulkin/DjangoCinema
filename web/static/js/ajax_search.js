@@ -1,3 +1,6 @@
+`
+Ajax to search film/serial on navbar
+`
 function start_query_search()
 {
     const sendSearchData = (query) =>

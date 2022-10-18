@@ -1,3 +1,6 @@
+`
+Ajax function to delete later film/serial
+`
 function delete_serial_film_later()
 {
     const elems = $('.later_film_cls')

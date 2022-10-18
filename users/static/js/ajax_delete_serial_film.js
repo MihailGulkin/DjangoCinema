@@ -1,3 +1,6 @@
+`
+Ajax function to delete film/serial rating in profile
+`
 function delete_serial_film()
 {
     const elems = $('.film_serial_cls')

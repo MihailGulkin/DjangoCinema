@@ -1,3 +1,6 @@
+`
+Ajax function to delete favorite film/serial
+`
 function delete_serial_film_favorite()
 {
     const elems = $('.favorite_film_cls')

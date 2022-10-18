@@ -5,6 +5,10 @@ from django.http import JsonResponse
 
 
 class EditReviewBaseMixin:
+    """
+    Mixin for Film and Serial CBV review edit. Return GET response
+    and POST response and save new review
+    """
     template = 'users/edit_review_page_base.html'
 
     def _return_get_response(self, request, username, review_model):
@@ -18,7 +22,6 @@ class EditReviewBaseMixin:
         return redirect('main_page')
 
     def _return_post_response(self, request, username, review_model):
-
         user_obj = CustomUser.objects.filter(username=username).first()
 
         title, text, review_type = (

@@ -1,3 +1,6 @@
+`
+Change rating size to similarly star size
+`
 function change_p_size()
 {
     set_rating_font_size()

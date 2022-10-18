@@ -1,22 +1,23 @@
-from django.shortcuts import render
 from django.views import View
+from django.http import JsonResponse
+from django.shortcuts import render
+from django.core.paginator import Paginator
+
 from .models import (Movie, Genre, Director, Serial, ActionsWithMovie,
                      ActionsWithSerial, UserRatingMovie, UserRatingSerial,
                      UserReviewMovie, UserReviewSerial,
                      UsersReviewLikeDislikeMovie, UsersReviewLikeDislikeSerial)
-from web.service.shuffle_model import shuffle_model
-from django.core.paginator import Paginator
-from django.http import JsonResponse
-from web.service.return_model_query import return_query
-from web.service.create_serial_film_model import \
-    create_serial_film_model_response
 
-from web.service.mixins.response_film_serial_page import GetResponseMixin
-from web.service.mixins.calculate_review_percentage import \
+from .service.shuffle_model import shuffle_model
+from .service.return_model_query import return_query
+from .service.create_serial_film_model import \
+    create_serial_film_model_response
+from .service.mixins.response_film_serial_page import GetResponseMixin
+from .service.mixins.calculate_review_percentage import \
     CalculateReviewsTypeMixin
-from web.service.mixins.return_new_review_response import GetNewUserReviewMixin
-from web.service.mixins.like_dislike_response import GetUsersLikeDis
-from web.service.mixins.favorite_later_movie import CheckFavLaterMovieMixin
+from .service.mixins.return_new_review_response import GetNewUserReviewMixin
+from .service.mixins.like_dislike_response import GetUsersLikeDis
+from .service.mixins.favorite_later_movie import CheckFavLaterMovieMixin
 
 TOTAL_PAGES = 9
 

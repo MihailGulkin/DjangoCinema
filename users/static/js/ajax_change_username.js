@@ -1,3 +1,6 @@
+`
+Ajax function to change username in profile
+`
 function ajax_change_username_func()
 {
     const ele = $('#change_btn')

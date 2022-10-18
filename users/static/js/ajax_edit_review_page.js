@@ -1,3 +1,6 @@
+`
+Ajax to edit user review
+`
 function ajax_edit_review_user_func()
 {
     const ele = $('#button_review_send')
@@ -42,7 +45,7 @@ function ajax_edit_review_user_func()
 
             success: (res) =>
             {
-                if(res.url)
+                if (res.url)
                 {
                     window.location = res.url
                 }
@@ -54,4 +57,5 @@ function ajax_edit_review_user_func()
     }
 
 }
+
 ajax_edit_review_user_func()

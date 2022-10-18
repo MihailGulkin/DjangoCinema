@@ -3,13 +3,17 @@ from web.models import Movie, Serial
 
 
 class DeleteProfileDataMixin:
-    def _delete_profile_data_film(self, delete_model_obj, films_model):
-        delete_model_obj.delete()
-        return self.__return_json_data(films_model)
+    """
+    Mixin for Delete model entry in movie/serial rating, later
+    and favorite actions
+    """
 
-    def _delete_profile_data_serial(self, delete_model_obj, serials_model):
+    def _delete_profile_data_film_serial(
+            self,
+            delete_model_obj,
+            films_serials_model):
         delete_model_obj.delete()
-        return self.__return_json_data(serials_model)
+        return self.__return_json_data(films_serials_model)
 
     def __return_json_data(self, model):
         return JsonResponse({'data': {

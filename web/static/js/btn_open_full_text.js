@@ -1,3 +1,6 @@
+`
+Function to close big text review and add open text btn
+`
 function btn_text_open_active()
 {
     $(".content-block-text").each(function ()

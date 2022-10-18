@@ -1,4 +1,3 @@
-// one_star_container
 `
 Ajax rating put film/serial
 `
@@ -8,7 +7,7 @@ function ajax_rating_put()
     const elems = $('.one_star_container')
     for (let ele of elems)
     {
-        $(ele).on('click', function (event)
+        $(ele).on('click', function ()
         {
             const relative_url = window.location.href.substring(window.location.origin.length)
             const user_rating = $(ele).attr('name')

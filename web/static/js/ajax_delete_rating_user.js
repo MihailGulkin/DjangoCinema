@@ -1,6 +1,5 @@
-// one_star_container
 `
-Delete User Rating
+Delete user Rating button click
 `
 
 function ajax_delete_rating()

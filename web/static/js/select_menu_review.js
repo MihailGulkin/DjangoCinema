@@ -1,3 +1,6 @@
+`
+Styles select menu in review form
+`
 function select_menu()
 {
        $('select').each(function ()
