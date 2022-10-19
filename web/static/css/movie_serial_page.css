@@ -128,11 +128,13 @@
 {
     padding: 3px 4px;
 }
+
 .href_style_film
 {
     color: #3593ff;
     font-size: 24px;
 }
+
 .rating_bar
 {
     margin-top: 50px;
@@ -714,6 +716,15 @@
     fill: #a11418 !important;
 }
 
+#delete_user_rating
+{
+    opacity: .5;
+}
+#delete_user_rating:hover
+{
+    opacity: 1;
+}
+
 @media all and (min-width: 768px)
 {
 
@@ -722,11 +733,12 @@
         margin-left: auto;
     }
 }
+
 @media all and (max-width: 768px)
 {
- #like_dislike_btn_container
- {
-     margin-top: 20px;
- }
+    #like_dislike_btn_container
+    {
+        margin-top: 20px;
+    }
 
 }

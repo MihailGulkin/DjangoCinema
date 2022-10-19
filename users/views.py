@@ -12,9 +12,9 @@ from .forms import CustomUserForm
 from web.models import UserRatingMovie, UserRatingSerial, ActionsWithMovie, \
     ActionsWithSerial, UserReviewSerial, UserReviewMovie, Movie, Serial
 
+from users.tasks import send_first_verify_email, send_already_verified_email
+
 from .service.delete_requiered_field import delete_field
-from .service.send_email_ import send_first_verify_email, \
-    send_already_verified_email
 from .service.verify import verify_user
 from .service.mixins.delete_profile_data import DeleteProfileDataMixin
 from .service.mixins.edit_review_base import EditReviewBaseMixin
@@ -42,8 +42,8 @@ class RegistrationPageView(View):
         if form.is_valid():
             form.save()
             logout(request)
-            send_first_verify_email(
-                request,
+            send_first_verify_email.delay(
+                request.build_absolute_uri('/'),
                 request.POST['username'],
                 request.POST['email']
             )
@@ -99,7 +99,7 @@ class VerifyAccountView(View):
         if user.is_verified:
             return redirect('main_page')
 
-        send_already_verified_email(
+        send_already_verified_email.delay(
             username,
             user.email
         )
